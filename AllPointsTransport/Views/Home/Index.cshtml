@@ -1,24 +1,80 @@
-﻿<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS, and JavaScript.</p>
-    <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>ASP.NET Web API is a framework that makes it easy to build HTTP services that reach
-        a broad range of clients, including browsers and mobile devices. ASP.NET Web API
-        is an ideal platform for building RESTful applications on the .NET Framework.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301870">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301871">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301872">Learn more &raquo;</a></p>
-    </div>
+﻿<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        <span class="fa fa-camera-retro"></span> Work Orders and Billing
+                    </h3>
+                </div>
+                <div class="panel-body fixed-panel">
+                    <div class="row">
+                        <div class="col-xs-12 col-md-12 text-center">
+                            <a href="#" class="btn btn-danger btn-lg" role="button" onclick="location.href='@Url.Action("Index", "Drivers")'"><span class="glyphicon glyphicon-list-alt"></span> <br />Work Orders</a>
+                            <a href="#" class="btn btn-warning btn-lg" role="button" onclick="location.href='@Url.Action("Index", "Drivers")'"><span class="glyphicon glyphicon-bookmark"></span> <br />Billing Preview</a>
+                            <a href="#" class="btn btn-default btn-lg" role="button" onclick="location.href='@Url.Action("Index", "Drivers")'"><span class="glyphicon glyphicon-signal"></span> <br />Paperwork</a>
+                            <a href="#" class="btn btn-success btn-lg" role="button" onclick="location.href='@Url.Action("Index", "Drivers")'"><span class="glyphicon glyphicon-comment"></span> <br />E-mail Paperwork</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        <span class="glyphicon glyphicon-bullhorn"></span> Dispatch
+                    </h3>
+                </div>
+                <div class="panel-body fixed-panel">
+                    <div class="row">
+                        <div class="col-xs-12 col-md-12 text-center">
+                            <a href="#" class="btn btn-info btn-lg" role="button" onclick="location.href='@Url.Action("Index", "Drivers")'"><span class="glyphicon glyphicon-list-alt"></span> <br />Dispatch</a>
+                            <a href="#" class="btn btn-primary btn-lg" role="button" onclick="location.href='@Url.Action("Index", "Drivers")'"><span class="glyphicon glyphicon-bookmark"></span> <br />Weekly Goals</a>
+                            <a href="#" class="btn btn-primary btn-lg" role="button" onclick="location.href='@Url.Action("Index", "Drivers")'"><span class="glyphicon glyphicon-signal"></span> <br />Task Management</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        <span class="glyphicon glyphicon-user"></span> Contacts and Drivers
+                    </h3>
+                </div>
+                <div class="panel-body fixed-panel">
+                    <div class="row">
+                        <div class="col-xs-12 col-md-12 text-center">
+                            <a href="#" class="btn btn-danger btn-lg" role="button" onclick="location.href='@Url.Action("Index", "Drivers")'"><span class="glyphicon glyphicon-list-alt"></span> <br />Contacts</a>
+                            <a href="#" class="btn btn-primary btn-lg" role="button" onclick="location.href='@Url.Action("Index", "Drivers")'"><span class="glyphicon glyphicon-bookmark"></span> <br />Trucks</a>
+                            <a href="#" class="btn btn-primary btn-lg" role="button" onclick="location.href='@Url.Action("Index", "Drivers")'"><span class="glyphicon glyphicon-signal"></span> <br />Drivers</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        <span class="glyphicon glyphicon-piggy-bank"></span> Pay and Commission
+                    </h3>
+                </div>
+                <div class="panel-body fixed-panel">
+                    <div class="row">
+                        <div class="col-xs-12 col-md-12 text-center">
+                            <a href="#" class="btn btn-danger btn-lg" role="button" onclick="location.href='@Url.Action("Index", "Drivers")'"><span class="glyphicon glyphicon-list-alt"></span> <br />Truck Pay</a>
+                            <a href="#" class="btn btn-primary btn-lg" role="button" onclick="location.href='@Url.Action("Index", "Drivers")'"><span class="glyphicon glyphicon-bookmark"></span> <br />Employee Driver Pay</a>
+                            <a href="#" class="btn btn-primary btn-lg" role="button" onclick="location.href='@Url.Action("Index", "Drivers")'"><span class="glyphicon glyphicon-signal"></span> <br />3rd Party Commission</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> 
 </div>
