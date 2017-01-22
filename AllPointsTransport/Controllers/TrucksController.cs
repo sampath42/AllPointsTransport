@@ -11,35 +11,35 @@ using AllPointsTransport.Models;
 
 namespace AllPointsTransport.Controllers
 {
-    public class DriversController : Controller
+    public class TrucksController : Controller
     {
-        private AllPointsTransportEntities db = new AllPointsTransportEntities();
 
-        // GET: Drivers
+        // GET: Trucks
         public ActionResult Index()
         {
             return View();
         }
 
-        AllPointsTransport.Models.AllPointsTransportEntities db1 = new AllPointsTransport.Models.AllPointsTransportEntities();
+
+        AllPointsTransport.Models.AllPointsTransportEntities db = new AllPointsTransport.Models.AllPointsTransportEntities();
 
         [ValidateInput(false)]
-        public ActionResult DriverPartial()
+        public ActionResult TruckViewPartial()
         {
-            var model = db1.Drivers;
-            return PartialView("_DriverPartial", model.ToList());
+            var model = db.Trucks;
+            return PartialView("_TruckViewPartial", model.ToList());
         }
 
         [HttpPost, ValidateInput(false)]
-        public ActionResult DriverPartialAddNew([ModelBinder(typeof(DevExpressEditorsBinder))] AllPointsTransport.Models.Driver item)
+        public ActionResult TruckViewPartialAddNew(AllPointsTransport.Models.Truck item)
         {
-            var model = db1.Drivers;
+            var model = db.Trucks;
             if (ModelState.IsValid)
             {
                 try
                 {
                     model.Add(item);
-                    db1.SaveChanges();
+                    db.SaveChanges();
                 }
                 catch (Exception e)
                 {
@@ -48,22 +48,21 @@ namespace AllPointsTransport.Controllers
             }
             else
                 ViewData["EditError"] = "Please, correct all errors.";
-            return PartialView("_DriverPartial", model.ToList());
+            return PartialView("_TruckViewPartial", model.ToList());
         }
-
         [HttpPost, ValidateInput(false)]
-        public ActionResult DriverPartialUpdate([ModelBinder(typeof(DevExpressEditorsBinder))] AllPointsTransport.Models.Driver item)
+        public ActionResult TruckViewPartialUpdate(AllPointsTransport.Models.Truck item)
         {
-            var model = db1.Drivers;
+            var model = db.Trucks;
             if (ModelState.IsValid)
             {
                 try
                 {
-                    var modelItem = model.FirstOrDefault(it => it.DriverID == item.DriverID);
+                    var modelItem = model.FirstOrDefault(it => it.ID == item.ID);
                     if (modelItem != null)
                     {
                         this.UpdateModel(modelItem);
-                        db1.SaveChanges();
+                        db.SaveChanges();
                     }
                 }
                 catch (Exception e)
@@ -73,28 +72,27 @@ namespace AllPointsTransport.Controllers
             }
             else
                 ViewData["EditError"] = "Please, correct all errors.";
-            return PartialView("_DriverPartial", model.ToList());
+            return PartialView("_TruckViewPartial", model.ToList());
         }
-
         [HttpPost, ValidateInput(false)]
-        public ActionResult DriverPartialDelete(System.Int32 DriverID)
+        public ActionResult TruckViewPartialDelete(System.Int32 ID)
         {
-            var model = db1.Drivers;
-            if (DriverID >= 0)
+            var model = db.Trucks;
+            if (ID >= 0)
             {
                 try
                 {
-                    var item = model.FirstOrDefault(it => it.DriverID == DriverID);
+                    var item = model.FirstOrDefault(it => it.ID == ID);
                     if (item != null)
                         model.Remove(item);
-                    db1.SaveChanges();
+                    db.SaveChanges();
                 }
                 catch (Exception e)
                 {
                     ViewData["EditError"] = e.Message;
                 }
             }
-            return PartialView("_DriverPartial", model.ToList());
+            return PartialView("_TruckViewPartial", model.ToList());
         }
     }
 }

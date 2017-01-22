@@ -72,6 +72,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Security" />
     <Reference Include="System.Web.Entity" />
@@ -221,77 +222,89 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ContactsController.cs" />
     <Compile Include="Controllers\DriversController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\TrucksController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="Controllers\WorkOrdersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\APTModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>APTModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\APTModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>APTModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\APTModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>APTModel.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Models\Contact.cs">
-      <DependentUpon>DriverModel.tt</DependentUpon>
+      <DependentUpon>APTModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Driver.cs">
-      <DependentUpon>DriverModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DriverModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DriverModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DriverModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DriverModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DriverModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DriverModel.edmx</DependentUpon>
+      <DependentUpon>APTModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DriverPay.cs">
-      <DependentUpon>DriverModel.tt</DependentUpon>
+      <DependentUpon>APTModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Employee.cs">
-      <DependentUpon>DriverModel.tt</DependentUpon>
+      <DependentUpon>APTModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Payroll.cs">
-      <DependentUpon>DriverModel.tt</DependentUpon>
+      <DependentUpon>APTModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\RowColor.cs">
-      <DependentUpon>DriverModel.tt</DependentUpon>
+      <DependentUpon>APTModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\RowColorsDriver.cs">
-      <DependentUpon>DriverModel.tt</DependentUpon>
+      <DependentUpon>APTModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Schedule.cs">
-      <DependentUpon>DriverModel.tt</DependentUpon>
+      <DependentUpon>APTModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Setting.cs">
-      <DependentUpon>DriverModel.tt</DependentUpon>
+      <DependentUpon>APTModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>APTModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_helpdiagrams_Result.cs">
+      <DependentUpon>APTModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sysdiagram.cs">
+      <DependentUpon>APTModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TaskManagement.cs">
-      <DependentUpon>DriverModel.tt</DependentUpon>
+      <DependentUpon>APTModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TemplatesDriverPay.cs">
-      <DependentUpon>DriverModel.tt</DependentUpon>
+      <DependentUpon>APTModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TemplatesWO.cs">
-      <DependentUpon>DriverModel.tt</DependentUpon>
+      <DependentUpon>APTModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TemplatesWOLineItem.cs">
-      <DependentUpon>DriverModel.tt</DependentUpon>
+      <DependentUpon>APTModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Truck.cs">
-      <DependentUpon>DriverModel.tt</DependentUpon>
+      <DependentUpon>APTModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\WOLineItem.cs">
-      <DependentUpon>DriverModel.tt</DependentUpon>
+      <DependentUpon>APTModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\WorkOrder.cs">
-      <DependentUpon>DriverModel.tt</DependentUpon>
+      <DependentUpon>APTModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
@@ -310,16 +323,6 @@
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Models\DriverModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DriverModel.edmx</DependentUpon>
-      <LastGenOutput>DriverModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\DriverModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DriverModel.edmx</DependentUpon>
-      <LastGenOutput>DriverModel.cs</LastGenOutput>
-    </Content>
     <Content Include="Areas\HelpPage\Views\Web.config" />
     <Content Include="Areas\HelpPage\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\ResourceModel.cshtml" />
@@ -339,12 +342,17 @@
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\CollectionModelDescription.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ApiGroup.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
-    <EntityDeploy Include="Models\DriverModel.edmx">
+    <EntityDeploy Include="Models\APTModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>DriverModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>APTModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\DriverModel.edmx.diagram">
-      <DependentUpon>DriverModel.edmx</DependentUpon>
+    <Content Include="Models\APTModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>APTModel.Context.cs</LastGenOutput>
+      <DependentUpon>APTModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\APTModel.edmx.diagram">
+      <DependentUpon>APTModel.edmx</DependentUpon>
     </Content>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -360,6 +368,11 @@
     <Content Include="fonts\fontawesome-webfont.ttf" />
     <Content Include="fonts\fontawesome-webfont.eot" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
+    <Content Include="Models\APTModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>APTModel.cs</LastGenOutput>
+      <DependentUpon>APTModel.edmx</DependentUpon>
+    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
@@ -393,11 +406,17 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Drivers\Create.cshtml" />
-    <Content Include="Views\Drivers\Delete.cshtml" />
-    <Content Include="Views\Drivers\Details.cshtml" />
-    <Content Include="Views\Drivers\Edit.cshtml" />
     <Content Include="Views\Drivers\Index.cshtml" />
+    <Content Include="Views\Drivers\_DriverPartial.cshtml" />
+    <Content Include="Views\Trucks\Index.cshtml" />
+    <Content Include="Views\Trucks\_TruckViewPartial.cshtml" />
+    <Content Include="Views\WorkOrders\Index.cshtml" />
+    <Content Include="Views\WorkOrders\_WorkOrderViewPartial.cshtml" />
+    <Content Include="Views\Contacts\Create.cshtml" />
+    <Content Include="Views\Contacts\Delete.cshtml" />
+    <Content Include="Views\Contacts\Details.cshtml" />
+    <Content Include="Views\Contacts\Edit.cshtml" />
+    <Content Include="Views\Contacts\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,101 @@
+@{
+    var grid = Html.DevExpress().GridView(settings => {
+        settings.Name = "GridView";
+        settings.CallbackRouteValues = new { Controller = "WorkOrders", Action = "WorkOrderViewPartial" };
+
+        settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "WorkOrders", Action = "WorkOrderViewPartialAddNew" };
+        settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "WorkOrders", Action = "WorkOrderViewPartialUpdate" };
+        settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "WorkOrders", Action = "WorkOrderViewPartialDelete" };
+        settings.SettingsEditing.Mode = GridViewEditingMode.EditFormAndDisplayRow;
+        settings.SettingsBehavior.ConfirmDelete = true;
+
+        settings.CommandColumn.Visible = true;
+        settings.CommandColumn.ShowNewButton = true;
+        settings.CommandColumn.ShowDeleteButton = true;
+        settings.CommandColumn.ShowEditButton = true;
+
+        settings.KeyFieldName = "ID";
+
+        settings.SettingsPager.Visible = true;
+        settings.Settings.ShowGroupPanel = true;
+        settings.Settings.ShowFilterRow = true;
+        settings.SettingsBehavior.AllowSelectByRowClick = true;
+
+        settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.Off;
+        settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;
+        settings.SettingsAdaptivity.AdaptiveDetailColumnCount = 1;
+        settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = false;
+        settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 0;
+
+        settings.Styles.AlternatingRow.BackColor = System.Drawing.ColorTranslator.FromHtml("#ccc");
+
+        settings.Columns.Add("WorkOrderNo");
+        settings.Columns.Add("Completed");
+        settings.Columns.Add("Status");
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "InvoicedDate";
+            column.ColumnType = MVCxGridViewColumnType.DateEdit;
+            column.Settings.AutoFilterCondition = AutoFilterCondition.Equals;
+        });
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "DatePaid";
+            column.ColumnType = MVCxGridViewColumnType.DateEdit;
+            column.Settings.AutoFilterCondition = AutoFilterCondition.Equals;
+        });
+
+        settings.Columns.Add("Broker");
+        settings.Columns.Add("BillTo");
+        settings.Columns.Add("Container1");
+        settings.Columns.Add("Seal");
+        settings.Columns.Add("StreetTurn");
+        settings.Columns.Add("EquipmentSize");
+        settings.Columns.Add("Chassis");
+        settings.Columns.Add("EquipmentProvider");
+        settings.Columns.Add("ChassisProvider");
+        settings.Columns.Add("Booking");
+        settings.Columns.Add("MasterBOL");
+        settings.Columns.Add("Reference");
+        settings.Columns.Add("Pro");
+        settings.Columns.Add("ApptNumber");
+        settings.Columns.Add("Release");
+        settings.Columns.Add("Weight");
+        settings.Columns.Add("PieceCount");
+        settings.Columns.Add("Commodity");
+        settings.Columns.Add("PO");
+        settings.Columns.Add("EquipmentPickup");
+        settings.Columns.Add("EquipmentReturn");
+        settings.Columns.Add("Origin");
+        settings.Columns.Add("Destination");
+        settings.Columns.Add("TypeOfMove");
+        settings.Columns.Add("Duration");
+        settings.Columns.Add("StorageLFD");
+        settings.Columns.Add("PerDiemLFD");
+        settings.Columns.Add("Cutoff");
+        settings.Columns.Add("ApptTime");
+        settings.Columns.Add("Container2");
+        settings.Columns.Add("LocationHours");
+        settings.Columns.Add("OutgateReceipt");
+        settings.Columns.Add("IngateReceipt");
+        settings.Columns.Add("ReadyNotification");
+        settings.Columns.Add("NotesInvoice");
+        settings.Columns.Add("NotesPrivate");
+        settings.Columns.Add("ETA");
+        settings.Columns.Add("LinkedProNum");
+        settings.Columns.Add("InfoSymbol");
+        settings.Columns.Add("BilledAmount");
+        settings.Columns.Add("AcceptedByDispatch");
+        settings.Columns.Add("RejectedByDispatch");
+        settings.Columns.Add("POD1");
+        settings.Columns.Add("POD2");
+        settings.Columns.Add("BOL");
+        settings.Columns.Add("Uploaded");
+    });
+    if (ViewData["EditError"] != null){
+        grid.SetEditErrorText((string)ViewData["EditError"]);
+    }
+}
+@grid.Bind(Model).GetHtml()

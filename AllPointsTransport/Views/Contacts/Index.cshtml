@@ -1,0 +1,268 @@
+﻿@model IEnumerable<AllPointsTransport.Models.Contact>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Active)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Company)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BillTo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Broker)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EquipmentProvider)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ChassisProvider)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Location)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RailPort)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CYDepot)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DallasDY)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FtWorthDY)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Vendor)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Contact1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Phone1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Contact2)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Phone2)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email2)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Fax)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Address1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Address2)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.City)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.State)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Zip)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BillingCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CCType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CCNum)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CCExpiration)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CCSecurityCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CCCardholder)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CCBillingStreet)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CCBillingZip)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MC)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Notes)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TotalCredit)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateCreated)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreatedBy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastUpdated)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UpdatedBy)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Active)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Company)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BillTo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Broker)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EquipmentProvider)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ChassisProvider)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Location)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RailPort)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CYDepot)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DallasDY)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FtWorthDY)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Vendor)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Contact1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Phone1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Contact2)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Phone2)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email2)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Fax)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Address1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Address2)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.City)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.State)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Zip)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BillingCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CCType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CCNum)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CCExpiration)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CCSecurityCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CCCardholder)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CCBillingStreet)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CCBillingZip)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MC)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Notes)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TotalCredit)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateCreated)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreatedBy)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LastUpdated)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UpdatedBy)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ContactID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ContactID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ContactID })
+        </td>
+    </tr>
+}
+
+</table>

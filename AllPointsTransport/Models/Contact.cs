@@ -14,7 +14,7 @@ namespace AllPointsTransport.Models
     
     public partial class Contact
     {
-        public int ID { get; set; }
+        public int ContactID { get; set; }
         public Nullable<bool> Active { get; set; }
         public string Company { get; set; }
         public Nullable<bool> BillTo { get; set; }

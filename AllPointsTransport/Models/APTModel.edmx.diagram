@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="9c2b9e808d92493f802f0b3772e7ecb2" Name="Diagram1" ZoomLevel="66">
+        <EntityTypeShape EntityType="AllPointsTransportDataModel.Contact" PointX="4.75" PointY="14.75" Width="1.5" />
+        <EntityTypeShape EntityType="AllPointsTransportDataModel.Driver" PointX="14.75" PointY="0.75" Width="1.5" />
+        <EntityTypeShape EntityType="AllPointsTransportDataModel.Employee" PointX="12.75" PointY="6.75" Width="1.5" />
+        <EntityTypeShape EntityType="AllPointsTransportDataModel.RowColor" PointX="12.75" PointY="3.75" Width="1.5" />
+        <EntityTypeShape EntityType="AllPointsTransportDataModel.RowColorsDriver" PointX="12.75" PointY="0.75" Width="1.5" />
+        <EntityTypeShape EntityType="AllPointsTransportDataModel.Schedule" PointX="10.75" PointY="9.75" Width="1.5" />
+        <EntityTypeShape EntityType="AllPointsTransportDataModel.sysdiagram" PointX="10.75" PointY="6.75" Width="1.5" />
+        <EntityTypeShape EntityType="AllPointsTransportDataModel.TaskManagement" PointX="2.75" PointY="10.75" Width="1.5" />
+        <EntityTypeShape EntityType="AllPointsTransportDataModel.Truck" PointX="10.75" PointY="0.75" Width="1.5" />
+        <EntityTypeShape EntityType="AllPointsTransportDataModel.WorkOrder" PointX="8.75" PointY="0.75" Width="1.5" />
+        <EntityTypeShape EntityType="AllPointsTransportDataModel.DriverPay" PointX="6.75" PointY="3.75" Width="1.5" />
+        <EntityTypeShape EntityType="AllPointsTransportDataModel.Payroll" PointX="2.75" PointY="6.75" Width="1.5" />
+        <EntityTypeShape EntityType="AllPointsTransportDataModel.TemplatesDriverPay" PointX="0.75" PointY="5.75" Width="1.5" />
+        <EntityTypeShape EntityType="AllPointsTransportDataModel.TemplatesWO" PointX="4.75" PointY="0.75" Width="1.5" />
+        <EntityTypeShape EntityType="AllPointsTransportDataModel.TemplatesWOLineItem" PointX="2.75" PointY="0.75" Width="1.5" />
+        <EntityTypeShape EntityType="AllPointsTransportDataModel.WOLineItem" PointX="0.75" PointY="0.75" Width="1.5" />
+        <EntityTypeShape EntityType="AllPointsTransportDataModel.Setting" Width="1.5" PointX="7.375" PointY="14.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

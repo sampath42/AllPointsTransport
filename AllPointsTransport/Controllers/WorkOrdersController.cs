@@ -1,45 +1,39 @@
 ﻿using DevExpress.Web.Mvc;
 using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
 using System.Linq;
-using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using AllPointsTransport.Models;
 
 namespace AllPointsTransport.Controllers
 {
-    public class DriversController : Controller
+    public class WorkOrdersController : Controller
     {
-        private AllPointsTransportEntities db = new AllPointsTransportEntities();
-
-        // GET: Drivers
+        // GET: WorkOrder
         public ActionResult Index()
         {
             return View();
         }
 
-        AllPointsTransport.Models.AllPointsTransportEntities db1 = new AllPointsTransport.Models.AllPointsTransportEntities();
+        AllPointsTransport.Models.AllPointsTransportEntities db = new AllPointsTransport.Models.AllPointsTransportEntities();
 
         [ValidateInput(false)]
-        public ActionResult DriverPartial()
+        public ActionResult WorkOrderViewPartial()
         {
-            var model = db1.Drivers;
-            return PartialView("_DriverPartial", model.ToList());
+            var model = db.WorkOrders;
+            return PartialView("_WorkOrderViewPartial", model.ToList());
         }
 
         [HttpPost, ValidateInput(false)]
-        public ActionResult DriverPartialAddNew([ModelBinder(typeof(DevExpressEditorsBinder))] AllPointsTransport.Models.Driver item)
+        public ActionResult WorkOrderViewPartialAddNew(AllPointsTransport.Models.WorkOrder item)
         {
-            var model = db1.Drivers;
+            var model = db.WorkOrders;
             if (ModelState.IsValid)
             {
                 try
                 {
                     model.Add(item);
-                    db1.SaveChanges();
+                    db.SaveChanges();
                 }
                 catch (Exception e)
                 {
@@ -48,22 +42,21 @@ namespace AllPointsTransport.Controllers
             }
             else
                 ViewData["EditError"] = "Please, correct all errors.";
-            return PartialView("_DriverPartial", model.ToList());
+            return PartialView("_WorkOrderViewPartial", model.ToList());
         }
-
         [HttpPost, ValidateInput(false)]
-        public ActionResult DriverPartialUpdate([ModelBinder(typeof(DevExpressEditorsBinder))] AllPointsTransport.Models.Driver item)
+        public ActionResult WorkOrderViewPartialUpdate(AllPointsTransport.Models.WorkOrder item)
         {
-            var model = db1.Drivers;
+            var model = db.WorkOrders;
             if (ModelState.IsValid)
             {
                 try
                 {
-                    var modelItem = model.FirstOrDefault(it => it.DriverID == item.DriverID);
+                    var modelItem = model.FirstOrDefault(it => it.WorkOrderID == item.WorkOrderID);
                     if (modelItem != null)
                     {
                         this.UpdateModel(modelItem);
-                        db1.SaveChanges();
+                        db.SaveChanges();
                     }
                 }
                 catch (Exception e)
@@ -73,28 +66,27 @@ namespace AllPointsTransport.Controllers
             }
             else
                 ViewData["EditError"] = "Please, correct all errors.";
-            return PartialView("_DriverPartial", model.ToList());
+            return PartialView("_WorkOrderViewPartial", model.ToList());
         }
-
         [HttpPost, ValidateInput(false)]
-        public ActionResult DriverPartialDelete(System.Int32 DriverID)
+        public ActionResult WorkOrderViewPartialDelete(System.Int32 ID)
         {
-            var model = db1.Drivers;
-            if (DriverID >= 0)
+            var model = db.WorkOrders;
+            if (ID >= 0)
             {
                 try
                 {
-                    var item = model.FirstOrDefault(it => it.DriverID == DriverID);
+                    var item = model.FirstOrDefault(it => it.WorkOrderID == ID);
                     if (item != null)
                         model.Remove(item);
-                    db1.SaveChanges();
+                    db.SaveChanges();
                 }
                 catch (Exception e)
                 {
                     ViewData["EditError"] = e.Message;
                 }
             }
-            return PartialView("_DriverPartial", model.ToList());
+            return PartialView("_WorkOrderViewPartial", model.ToList());
         }
     }
 }
