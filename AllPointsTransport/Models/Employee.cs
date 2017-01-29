@@ -14,8 +14,7 @@ namespace AllPointsTransport.Models
     
     public partial class Employee
     {
-        public int EmployeeID { get; set; }
-        public string EmployeeNo { get; set; }
+        public System.Guid ID { get; set; }
         public Nullable<bool> Disabled { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }

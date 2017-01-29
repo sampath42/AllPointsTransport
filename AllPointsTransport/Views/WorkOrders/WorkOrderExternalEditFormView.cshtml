@@ -1,0 +1,554 @@
+﻿@model AllPointsTransport.Models.WorkOrder
+
+@{
+    ViewBag.Title = "Work Order - " + Model.WorkOrderNo.ToString();
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="container">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.WorkOrderID)
+
+        <fieldset>
+            <legend>Work Order</legend>
+        
+            <div class="form-group col-sm-4">
+                <label for="WorkOrderNo">WorkOrderNo</label>
+
+                @Html.DevExpress().TextBox(
+                    settings =>
+                    {
+                        settings.Name = "WorkOrderNo";
+                        settings.ControlStyle.CssClass = "form-control";
+                    }
+                ).Bind(Model.WorkOrderNo).GetHtml()
+            </div>
+
+            <div class="form-group col-sm-4">
+                <label for="Status">Status</label>
+
+                @Html.DevExpress().TextBox(
+                    settings =>
+                    {
+                        settings.Name = "Status";
+                        settings.ControlStyle.CssClass = "form-control";
+                    }
+                ).Bind(Model.Status).GetHtml()
+            </div>
+
+            <div class="form-group col-sm-4">
+                <label for="DatePaid">DatePaid</label>
+
+                @Html.DevExpress().TextBox(
+                    settings =>
+                    {
+                        settings.Name = "DatePaid";
+                        settings.ControlStyle.CssClass = "form-control";
+                    }
+                ).Bind(Model.DatePaid).GetHtml()
+            </div>
+
+            <div class="form-group col-sm-4">
+                <label for="Pro">Pro</label>
+
+                @Html.DevExpress().TextBox(
+                    settings =>
+                    {
+                        settings.Name = "Pro";
+                        settings.ControlStyle.CssClass = "form-control";
+                    }
+                ).Bind(Model.Pro).GetHtml()
+            </div>
+
+            <div class="form-group col-sm-4">
+                <label for="TypeOfMove">Type of Move</label>
+
+                @Html.DevExpress().TextBox(
+                    settings =>
+                    {
+                        settings.Name = "TypeOfMove";
+                        settings.ControlStyle.CssClass = "form-control";
+                    }
+                ).Bind(Model.TypeOfMove).GetHtml()
+            </div>
+
+            <div class="form-group col-sm-4">
+                <label for="LocationHours">Location Hours</label>
+
+                @Html.DevExpress().TextBox(
+                    settings =>
+                    {
+                        settings.Name = "LocationHours";
+                        settings.ControlStyle.CssClass = "form-control";
+                    }
+                ).Bind(Model.LocationHours).GetHtml()
+            </div>
+
+            <div class="form-group col-sm-4">
+                <label for="InvoicedDate">Date Invoiced</label>
+
+                @Html.DevExpress().DateEdit(
+                    settings =>
+                    {
+                        settings.Name = "InvoicedDate";
+                        settings.ControlStyle.CssClass = "form-control";
+                    }
+                ).Bind(Model.InvoicedDate).GetHtml()
+            </div>
+
+            <div class="form-group col-sm-4">
+                <label for="EquipmentProvider">EquipmentProvider</label>
+
+                @Html.DevExpress().TextBox(
+                    settings =>
+                    {
+                        settings.Name = "EquipmentProvider";
+                        settings.ControlStyle.CssClass = "form-control";
+                    }
+                ).Bind(Model.EquipmentProvider).GetHtml()
+            </div>
+
+            <div class="form-group col-sm-4">
+                <label for="ETA">ETA</label>
+
+                @Html.DevExpress().TextBox(
+                    settings =>
+                    {
+                        settings.Name = "ETA";
+                        settings.ControlStyle.CssClass = "form-control";
+                    }
+                ).Bind(Model.ETA).GetHtml()
+            </div>
+
+            <div class="form-group col-sm-4">
+                <label for="BillTo">BillTo</label>
+
+                @Html.DevExpress().TextBox(
+                    settings =>
+                    {
+                        settings.Name = "BillTo";
+                        settings.ControlStyle.CssClass = "form-control";
+                    }
+                ).Bind(Model.BillTo).GetHtml()
+            </div>
+
+            <div class="form-group col-sm-4">
+                <label for="EquipmentSize">EquipmentSize</label>
+
+                @Html.DevExpress().TextBox(
+                    settings =>
+                    {
+                        settings.Name = "EquipmentSize";
+                        settings.ControlStyle.CssClass = "form-control";
+                    }
+                ).Bind(Model.EquipmentSize).GetHtml()
+            </div>
+
+            <div class="form-group col-sm-4">
+                <label for="StorageLFD">StorageLFD</label>
+
+                @Html.DevExpress().TextBox(
+                    settings =>
+                    {
+                        settings.Name = "StorageLFD";
+                        settings.ControlStyle.CssClass = "form-control";
+                    }
+                ).Bind(Model.StorageLFD).GetHtml()
+            </div>
+
+            <div class="form-group col-sm-4">
+                <label for="Broker">Broker</label>
+
+                @Html.DevExpress().TextBox(
+                    settings =>
+                    {
+                        settings.Name = "Broker";
+                        settings.ControlStyle.CssClass = "form-control";
+                    }
+                ).Bind(Model.Broker).GetHtml()
+            </div>
+
+            <div class="form-group col-sm-4">
+                <label for="ChassisProvider">ChassisProvider</label>
+
+                @Html.DevExpress().TextBox(
+                    settings =>
+                    {
+                        settings.Name = "ChassisProvider";
+                        settings.ControlStyle.CssClass = "form-control";
+                    }
+                ).Bind(Model.ChassisProvider).GetHtml()
+            </div>
+
+            <div class="form-group col-sm-4">
+                <label for="PerDiemLFD">PerDiemLFD</label>
+
+                @Html.DevExpress().TextBox(
+                    settings =>
+                    {
+                        settings.Name = "Per Diem LFD";
+                        settings.ControlStyle.CssClass = "form-control";
+                    }
+                ).Bind(Model.PerDiemLFD).GetHtml()
+            </div>
+
+            <div class="form-group col-sm-4">
+                <label for="Reference">Customer Reference</label>
+
+                @Html.DevExpress().TextBox(
+                    settings =>
+                    {
+                        settings.Name = "Reference";
+                        settings.ControlStyle.CssClass = "form-control";
+                    }
+                ).Bind(Model.Reference).GetHtml()
+            </div>
+
+            <div class="form-group col-sm-4">
+                <label for="EquipmentPickup">Equipment Pickup</label>
+
+                @Html.DevExpress().TextBox(
+                    settings =>
+                    {
+                        settings.Name = "EquipmentPickup";
+                        settings.ControlStyle.CssClass = "form-control";
+                    }
+                ).Bind(Model.EquipmentPickup).GetHtml()
+            </div>
+
+            <div class="form-group col-sm-4">
+                <label for="Cutoff">Cutoff</label>
+
+                @Html.DevExpress().TextBox(
+                    settings =>
+                    {
+                        settings.Name = "Cutoff";
+                        settings.ControlStyle.CssClass = "form-control";
+                    }
+                ).Bind(Model.Cutoff).GetHtml()
+            </div>
+
+            <div class="form-group col-sm-4">
+                <label for="PO">PO</label>
+
+                @Html.DevExpress().TextBox(
+                    settings =>
+                    {
+                        settings.Name = "PO";
+                        settings.ControlStyle.CssClass = "form-control";
+                    }
+                ).Bind(Model.PO).GetHtml()
+            </div>
+
+            <div class="form-group col-sm-4">
+                <label for="EquipmentReturn">EquipmentReturn</label>
+
+                @Html.DevExpress().TextBox(
+                    settings =>
+                    {
+                        settings.Name = "EquipmentReturn";
+                        settings.ControlStyle.CssClass = "form-control";
+                    }
+                ).Bind(Model.EquipmentReturn).GetHtml()
+            </div>
+
+            <div class="form-group col-sm-4">
+                <label for="OutgateReceipt">OutgateReceipt</label>
+
+                @Html.DevExpress().TextBox(
+                    settings =>
+                    {
+                        settings.Name = "OutgateReceipt";
+                        settings.ControlStyle.CssClass = "form-control";
+                    }
+                ).Bind(Model.OutgateReceipt).GetHtml()
+            </div>
+
+            <div class="form-group col-sm-4">
+                <label for="ApptNumber">ApptNumber</label>
+
+                @Html.DevExpress().TextBox(
+                    settings =>
+                    {
+                        settings.Name = "ApptNumber";
+                        settings.ControlStyle.CssClass = "form-control";
+                    }
+                ).Bind(Model.ApptNumber).GetHtml()
+            </div>
+
+            <div class="form-group col-sm-4">
+                <label for="Release">Release</label>
+
+                @Html.DevExpress().TextBox(
+                    settings =>
+                    {
+                        settings.Name = "Release";
+                        settings.ControlStyle.CssClass = "form-control";
+                    }
+                ).Bind(Model.Release).GetHtml()
+            </div>
+
+            <div class="form-group col-sm-4">
+                <label for="IngateReceipt">IngateReceipt</label>
+
+                @Html.DevExpress().TextBox(
+                    settings =>
+                    {
+                        settings.Name = "IngateReceipt";
+                        settings.ControlStyle.CssClass = "form-control";
+                    }
+                ).Bind(Model.IngateReceipt).GetHtml()
+            </div>
+
+            <div class="form-group col-sm-4">
+                <label for="Container1">Container1</label>
+
+                @Html.DevExpress().TextBox(
+                    settings =>
+                    {
+                        settings.Name = "Container1";
+                        settings.ControlStyle.CssClass = "form-control";
+                    }
+                ).Bind(Model.Container1).GetHtml()
+            </div>
+
+            <div class="form-group col-sm-4">
+                <label for="Booking">Booking</label>
+
+                @Html.DevExpress().TextBox(
+                    settings =>
+                    {
+                        settings.Name = "Booking";
+                        settings.ControlStyle.CssClass = "form-control";
+                    }
+                ).Bind(Model.Booking).GetHtml()
+            </div>
+
+            <div class="form-group col-sm-4">
+                <label for="ReadyNotification">ReadyNotification</label>
+
+                @Html.DevExpress().TextBox(
+                    settings =>
+                    {
+                        settings.Name = "ReadyNotification";
+                        settings.ControlStyle.CssClass = "form-control";
+                    }
+                ).Bind(Model.ReadyNotification).GetHtml()
+            </div>
+
+            <div class="form-group col-sm-4">
+                <label for="Chassis">Chassis</label>
+
+                @Html.DevExpress().TextBox(
+                    settings =>
+                    {
+                        settings.Name = "Chassis";
+                        settings.ControlStyle.CssClass = "form-control";
+                    }
+                ).Bind(Model.Chassis).GetHtml()
+            </div>
+
+            <div class="form-group col-sm-4">
+                <label for="BOL">BOL</label>
+
+                @Html.DevExpress().TextBox(
+                    settings =>
+                    {
+                        settings.Name = "BOL";
+                        settings.ControlStyle.CssClass = "form-control";
+                    }
+                ).Bind(Model.BOL).GetHtml()
+            </div>
+
+            <div class="form-group col-sm-4">
+                <label for="NotesPrivate">NotesPrivate</label>
+
+                @Html.DevExpress().TextBox(
+                    settings =>
+                    {
+                        settings.Name = "NotesPrivate";
+                        settings.ControlStyle.CssClass = "form-control";
+                    }
+                ).Bind(Model.NotesPrivate).GetHtml()
+            </div>
+
+            <div class="form-group col-sm-4">
+                <label for="StreetTurn">StreetTurn</label>
+
+                @Html.DevExpress().TextBox(
+                    settings =>
+                    {
+                        settings.Name = "StreetTurn";
+                        settings.ControlStyle.CssClass = "form-control";
+                    }
+                ).Bind(Model.StreetTurn).GetHtml()
+            </div>
+
+            <div class="form-group col-sm-4">
+                <label for="Seal">Seal</label>
+
+                @Html.DevExpress().TextBox(
+                    settings =>
+                    {
+                        settings.Name = "Seal";
+                        settings.ControlStyle.CssClass = "form-control";
+                    }
+                ).Bind(Model.Seal).GetHtml()
+            </div>
+
+            <div class="form-group col-sm-4">
+                <label for="NotesInvoice">NotesInvoice</label>
+
+                @Html.DevExpress().TextBox(
+                    settings =>
+                    {
+                        settings.Name = "NotesInvoice";
+                        settings.ControlStyle.CssClass = "form-control";
+                    }
+                ).Bind(Model.NotesInvoice).GetHtml()
+            </div>
+
+            <div class="form-group col-sm-4">
+                <label for="LinkedProNum">LinkedProNum</label>
+
+                @Html.DevExpress().TextBox(
+                    settings =>
+                    {
+                        settings.Name = "LinkedProNum";
+                        settings.ControlStyle.CssClass = "form-control";
+                    }
+                ).Bind(Model.LinkedProNum).GetHtml()
+            </div>
+
+            <div class="form-group col-sm-4">
+                <label for="Weight">Weight</label>
+
+                @Html.DevExpress().TextBox(
+                    settings =>
+                    {
+                        settings.Name = "Weight";
+                        settings.ControlStyle.CssClass = "form-control";
+                    }
+                ).Bind(Model.Weight).GetHtml()
+            </div>
+
+            <div class="form-group col-sm-4">
+                <label for="Duration">Duration</label>
+
+                @Html.DevExpress().TextBox(
+                    settings =>
+                    {
+                        settings.Name = "Duration";
+                        settings.ControlStyle.CssClass = "form-control";
+                    }
+                ).Bind(Model.Duration).GetHtml()
+            </div>
+
+            <div class="form-group col-sm-4">
+                <label for="Container2">Container2</label>
+
+                @Html.DevExpress().TextBox(
+                    settings =>
+                    {
+                        settings.Name = "Container2";
+                        settings.ControlStyle.CssClass = "form-control";
+                    }
+                ).Bind(Model.Container2).GetHtml()
+            </div>
+
+            <div class="form-group col-sm-4">
+                <label for="PieceCount">PieceCount</label>
+
+                @Html.DevExpress().TextBox(
+                    settings =>
+                    {
+                        settings.Name = "PieceCount";
+                        settings.ControlStyle.CssClass = "form-control";
+                    }
+                ).Bind(Model.PieceCount).GetHtml()
+            </div>
+
+            <div class="form-group col-sm-4">
+                <label for="Commodity">Commodity</label>
+
+                @Html.DevExpress().TextBox(
+                    settings =>
+                    {
+                        settings.Name = "Commodity";
+                        settings.ControlStyle.CssClass = "form-control";
+                    }
+                ).Bind(Model.Commodity).GetHtml()
+            </div>
+
+            <div class="form-group col-sm-4">
+                <label for="Origin">Origin</label>
+
+                @Html.DevExpress().TextBox(
+                    settings =>
+                    {
+                        settings.Name = "Origin";
+                        settings.ControlStyle.CssClass = "form-control";
+                    }
+                ).Bind(Model.Origin).GetHtml()
+            </div>
+
+            <div class="form-group col-sm-4">
+                <label for="Destination">Destination</label>
+
+                @Html.DevExpress().TextBox(
+                    settings =>
+                    {
+                        settings.Name = "Destination";
+                        settings.ControlStyle.CssClass = "form-control";
+                    }
+                ).Bind(Model.Destination).GetHtml()
+            </div>
+
+            <div class="form-group col-sm-4">
+                <label for="ApptTime">ApptTime</label>
+
+                @Html.DevExpress().TextBox(
+                    settings =>
+                    {
+                        settings.Name = "ApptTime";
+                        settings.ControlStyle.CssClass = "form-control";
+                    }
+                ).Bind(Model.ApptTime).GetHtml()
+            </div>
+        </fieldset>      
+
+        <div class="line">
+            @Html.DevExpress().Label(
+            settings =>
+            {
+                settings.ControlStyle.CssClass = "label";
+            }
+            ).GetHtml()
+
+            @Html.DevExpress().Button(
+            settings =>
+            {
+                settings.Name = "btnUpdate";
+                settings.ControlStyle.CssClass = "button";
+                settings.Text = "Update";
+                settings.UseSubmitBehavior = true;
+            }
+            ).GetHtml()
+
+            @Html.DevExpress().Button(
+            settings =>
+            {
+                settings.Name = "btnCancel";
+                settings.ControlStyle.CssClass = "button";
+                settings.Text = "Cancel";
+                settings.ClientSideEvents.Click = "function(s, e){ document.location='" + DevExpressHelper.GetUrl(new { Controller = "WorkOrders", Action = "Index" }) + "'; }";
+            }
+            ).GetHtml()
+        </div>
+    </div>
+}
+

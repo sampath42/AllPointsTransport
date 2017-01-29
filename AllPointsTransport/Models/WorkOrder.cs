@@ -15,6 +15,7 @@ namespace AllPointsTransport.Models
     public partial class WorkOrder
     {
         public int WorkOrderID { get; set; }
+        public Nullable<int> WorkOrderNo { get; set; }
         public Nullable<bool> Completed { get; set; }
         public string Status { get; set; }
         public System.DateTime InvoicedDate { get; set; }
@@ -69,6 +70,5 @@ namespace AllPointsTransport.Models
         public string CreatedBy { get; set; }
         public Nullable<System.DateTime> DateUpdated { get; set; }
         public string UpdatedBy { get; set; }
-        public Nullable<int> WorkOrderNo { get; set; }
     }
 }

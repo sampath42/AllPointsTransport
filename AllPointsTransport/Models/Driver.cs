@@ -19,8 +19,8 @@ namespace AllPointsTransport.Models
         public Nullable<bool> Active { get; set; }
         public string DriverType { get; set; }
         public Nullable<decimal> EmployeePayPct { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
+        public string First { get; set; }
+        public string Last { get; set; }
         public string FullName { get; set; }
         public string NickName { get; set; }
         public string Address1 { get; set; }

@@ -24,30 +24,84 @@ namespace AllPointsTransport.Controllers
             return PartialView("_WorkOrderViewPartial", model.ToList());
         }
 
-        [HttpPost, ValidateInput(false)]
-        public ActionResult WorkOrderViewPartialAddNew(AllPointsTransport.Models.WorkOrder item)
+        //[HttpPost, ValidateInput(false)]
+        //public ActionResult WorkOrderViewPartialAddNew(AllPointsTransport.Models.WorkOrder item)
+        //{
+        //    var model = db.WorkOrders;
+        //    if (ModelState.IsValid)
+        //    {
+        //        try
+        //        {
+        //            model.Add(item);
+        //            db.SaveChanges();
+        //        }
+        //        catch (Exception e)
+        //        {
+        //            ViewData["EditError"] = e.Message;
+        //        }
+        //    }
+        //    else
+        //        ViewData["EditError"] = "Please, correct all errors.";
+        //    return PartialView("_WorkOrderViewPartial", model.ToList());
+        //}
+        //[HttpPost, ValidateInput(false)]
+        //public ActionResult WorkOrderViewPartialUpdate(AllPointsTransport.Models.WorkOrder item)
+        //{
+        //    var model = db.WorkOrders;
+        //    if (ModelState.IsValid)
+        //    {
+        //        try
+        //        {
+        //            var modelItem = model.FirstOrDefault(it => it.WorkOrderID == item.WorkOrderID);
+        //            if (modelItem != null)
+        //            {
+        //                this.UpdateModel(modelItem);
+        //                db.SaveChanges();
+        //            }
+        //        }
+        //        catch (Exception e)
+        //        {
+        //            ViewData["EditError"] = e.Message;
+        //        }
+        //    }
+        //    else
+        //        ViewData["EditError"] = "Please, correct all errors.";
+        //    return PartialView("_WorkOrderViewPartial", model.ToList());
+        //}
+        //[HttpPost, ValidateInput(false)]
+        //public ActionResult WorkOrderViewPartialDelete(System.Int32 ID)
+        //{
+        //    var model = db.WorkOrders;
+        //    if (ID >= 0)
+        //    {
+        //        try
+        //        {
+        //            var item = model.FirstOrDefault(it => it.WorkOrderID == ID);
+        //            if (item != null)
+        //                model.Remove(item);
+        //            db.SaveChanges();
+        //        }
+        //        catch (Exception e)
+        //        {
+        //            ViewData["EditError"] = e.Message;
+        //        }
+        //    }
+        //    return PartialView("_WorkOrderViewPartial", model.ToList());
+        //}
+
+        public ActionResult WorkOrderExternalEditForm(System.Int32 ID)
         {
             var model = db.WorkOrders;
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    model.Add(item);
-                    db.SaveChanges();
-                }
-                catch (Exception e)
-                {
-                    ViewData["EditError"] = e.Message;
-                }
-            }
-            else
-                ViewData["EditError"] = "Please, correct all errors.";
-            return PartialView("_WorkOrderViewPartial", model.ToList());
+            var item = model.FirstOrDefault(it => it.WorkOrderID == ID);
+
+            return View("WorkOrderExternalEditFormView", item);      
         }
+
         [HttpPost, ValidateInput(false)]
-        public ActionResult WorkOrderViewPartialUpdate(AllPointsTransport.Models.WorkOrder item)
+        public ActionResult WorkOrderExternalEditForm(AllPointsTransport.Models.WorkOrder item)
         {
             var model = db.WorkOrders;
+
             if (ModelState.IsValid)
             {
                 try
@@ -66,27 +120,9 @@ namespace AllPointsTransport.Controllers
             }
             else
                 ViewData["EditError"] = "Please, correct all errors.";
-            return PartialView("_WorkOrderViewPartial", model.ToList());
+
+            return RedirectToAction("Index");
         }
-        [HttpPost, ValidateInput(false)]
-        public ActionResult WorkOrderViewPartialDelete(System.Int32 ID)
-        {
-            var model = db.WorkOrders;
-            if (ID >= 0)
-            {
-                try
-                {
-                    var item = model.FirstOrDefault(it => it.WorkOrderID == ID);
-                    if (item != null)
-                        model.Remove(item);
-                    db.SaveChanges();
-                }
-                catch (Exception e)
-                {
-                    ViewData["EditError"] = e.Message;
-                }
-            }
-            return PartialView("_WorkOrderViewPartial", model.ToList());
-        }
+
     }
 }

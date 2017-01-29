@@ -5,23 +5,23 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="9c2b9e808d92493f802f0b3772e7ecb2" Name="Diagram1" ZoomLevel="66">
-        <EntityTypeShape EntityType="AllPointsTransportDataModel.Contact" PointX="4.75" PointY="14.75" Width="1.5" />
-        <EntityTypeShape EntityType="AllPointsTransportDataModel.Driver" PointX="14.75" PointY="0.75" Width="1.5" />
-        <EntityTypeShape EntityType="AllPointsTransportDataModel.Employee" PointX="12.75" PointY="6.75" Width="1.5" />
-        <EntityTypeShape EntityType="AllPointsTransportDataModel.RowColor" PointX="12.75" PointY="3.75" Width="1.5" />
-        <EntityTypeShape EntityType="AllPointsTransportDataModel.RowColorsDriver" PointX="12.75" PointY="0.75" Width="1.5" />
-        <EntityTypeShape EntityType="AllPointsTransportDataModel.Schedule" PointX="10.75" PointY="9.75" Width="1.5" />
-        <EntityTypeShape EntityType="AllPointsTransportDataModel.sysdiagram" PointX="10.75" PointY="6.75" Width="1.5" />
-        <EntityTypeShape EntityType="AllPointsTransportDataModel.TaskManagement" PointX="2.75" PointY="10.75" Width="1.5" />
-        <EntityTypeShape EntityType="AllPointsTransportDataModel.Truck" PointX="10.75" PointY="0.75" Width="1.5" />
-        <EntityTypeShape EntityType="AllPointsTransportDataModel.WorkOrder" PointX="8.75" PointY="0.75" Width="1.5" />
-        <EntityTypeShape EntityType="AllPointsTransportDataModel.DriverPay" PointX="6.75" PointY="3.75" Width="1.5" />
-        <EntityTypeShape EntityType="AllPointsTransportDataModel.Payroll" PointX="2.75" PointY="6.75" Width="1.5" />
-        <EntityTypeShape EntityType="AllPointsTransportDataModel.TemplatesDriverPay" PointX="0.75" PointY="5.75" Width="1.5" />
-        <EntityTypeShape EntityType="AllPointsTransportDataModel.TemplatesWO" PointX="4.75" PointY="0.75" Width="1.5" />
-        <EntityTypeShape EntityType="AllPointsTransportDataModel.TemplatesWOLineItem" PointX="2.75" PointY="0.75" Width="1.5" />
-        <EntityTypeShape EntityType="AllPointsTransportDataModel.WOLineItem" PointX="0.75" PointY="0.75" Width="1.5" />
-        <EntityTypeShape EntityType="AllPointsTransportDataModel.Setting" Width="1.5" PointX="7.375" PointY="14.75" />
+        <EntityTypeShape EntityType="AllPointsTransportDataModel.Contact" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="AllPointsTransportDataModel.DriverPay" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="AllPointsTransportDataModel.Driver" Width="1.5" PointX="4.75" PointY="0.75" />
+        <EntityTypeShape EntityType="AllPointsTransportDataModel.WOLineItem" Width="1.5" PointX="6.75" PointY="0.75" />
+        <EntityTypeShape EntityType="AllPointsTransportDataModel.WorkOrder" Width="1.5" PointX="6.75" PointY="5.75" />
+        <EntityTypeShape EntityType="AllPointsTransportDataModel.Employee" Width="1.5" PointX="8.75" PointY="0.75" />
+        <EntityTypeShape EntityType="AllPointsTransportDataModel.Payroll" Width="1.5" PointX="10.75" PointY="0.75" />
+        <EntityTypeShape EntityType="AllPointsTransportDataModel.RowColor" Width="1.5" PointX="10.75" PointY="4.75" />
+        <EntityTypeShape EntityType="AllPointsTransportDataModel.RowColorsDriver" Width="1.5" PointX="10.75" PointY="7.75" />
+        <EntityTypeShape EntityType="AllPointsTransportDataModel.Schedule" Width="1.5" PointX="10.75" PointY="10.75" />
+        <EntityTypeShape EntityType="AllPointsTransportDataModel.Setting" Width="1.5" PointX="0.75" PointY="11.75" />
+        <EntityTypeShape EntityType="AllPointsTransportDataModel.TaskManagement" Width="1.5" PointX="2.75" PointY="11.75" />
+        <EntityTypeShape EntityType="AllPointsTransportDataModel.TemplatesDriverPay" Width="1.5" PointX="12.75" PointY="0.75" />
+        <EntityTypeShape EntityType="AllPointsTransportDataModel.TemplatesWO" Width="1.5" PointX="12.75" PointY="10.75" />
+        <EntityTypeShape EntityType="AllPointsTransportDataModel.TemplatesWOLineItem" Width="1.5" PointX="14.75" PointY="0.75" />
+        <EntityTypeShape EntityType="AllPointsTransportDataModel.Truck" Width="1.5" PointX="14.75" PointY="5.75" />
+        <EntityTypeShape EntityType="AllPointsTransportDataModel.vwDispatch_Progress" Width="1.5" PointX="14.75" PointY="11.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

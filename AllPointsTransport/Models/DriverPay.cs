@@ -14,8 +14,8 @@ namespace AllPointsTransport.Models
     
     public partial class DriverPay
     {
-        public int ID { get; set; }
-        public Nullable<int> WorkOrder { get; set; }
+        public int WorkOrderID { get; set; }
+        public Nullable<int> WorkOrderNo { get; set; }
         public Nullable<int> RowOrder { get; set; }
         public string Status { get; set; }
         public Nullable<bool> ToDispatch { get; set; }

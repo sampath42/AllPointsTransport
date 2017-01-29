@@ -14,8 +14,8 @@ namespace AllPointsTransport.Models
     
     public partial class WOLineItem
     {
-        public int ID { get; set; }
-        public Nullable<int> WorkOrder { get; set; }
+        public int WorkOrderLineItemID { get; set; }
+        public Nullable<int> WorkOrderNo { get; set; }
         public Nullable<int> RowOrder { get; set; }
         public string BillingItem { get; set; }
         public string Description { get; set; }
