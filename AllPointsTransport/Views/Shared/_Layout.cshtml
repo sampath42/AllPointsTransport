@@ -6,8 +6,6 @@
     <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
 
-    <link href="~/Content/simple-sidebar.css" rel="stylesheet">
-
     @Scripts.Render("~/bundles/modernizr")
 
     @RenderSection("scripts", required: false)
@@ -27,7 +25,7 @@
         new Script { ExtensionSuite = ExtensionSuite.Editors }
         )
 
-    @Html.DevExpress().GetStyleSheets(
+    @*@Html.DevExpress().GetStyleSheets(
         new StyleSheet { ExtensionSuite = ExtensionSuite.NavigationAndLayout, Theme = "Aqua" },
         new StyleSheet { ExtensionSuite = ExtensionSuite.Editors, Theme = "Aqua" },
         new StyleSheet { ExtensionSuite = ExtensionSuite.HtmlEditor, Theme = "Aqua" },
@@ -37,13 +35,13 @@
         new StyleSheet { ExtensionSuite = ExtensionSuite.Report, Theme = "Aqua" },
         new StyleSheet { ExtensionSuite = ExtensionSuite.Scheduler, Theme = "Aqua" },
         new StyleSheet { ExtensionSuite = ExtensionSuite.TreeList, Theme = "Aqua" }
-    )
+    )*@
 </head>
 <body>
     <div class="navbar navbar-default navbar-fixed-top">
         <div class="container-fluid">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
@@ -96,112 +94,83 @@
             </div>
         </div>
     </div>
-    <div id="wrapper">
-        <!-- Sidebar -->
-        <div id="sidebar-wrapper">
-            <div class="panel-group" id="accordion">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">
-                        <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
-                                Work Orders and Billing
-                            </a>
-                        </h4>
-                    </div>
-                    <div id="collapse1" class="panel-collapse collapse in">
-                        <div class="panel-body">
-                            @Html.ActionLink("Work Orders", "Index", "WorkOrders", new { area = "" }, null)<br />
-                            @Html.ActionLink("Billing Preview", "Index", "WorkOrders", new { area = "" }, null)<br />
-                            @Html.ActionLink("Paperwork", "Index", "WorkOrders", new { area = "" }, null)
-                        </div>
-                    </div>
-                </div>
-                <div class="panel panel-primary">
-                    <div class="panel-heading">
-                        <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">
-                                Dispatch
-                            </a>
-                        </h4>
-                    </div>
-                    <div id="collapse2" class="panel-collapse collapse">
-                        <div class="panel-body">
-                            @Html.ActionLink("Dispatch", "Index", "Dispatch", new { area = "" }, null)<br />
-                            @Html.ActionLink("Weekly Goals", "Index", "WorkOrders", new { area = "" }, null)<br />
-                            @Html.ActionLink("Task Management", "Index", "WorkOrders", new { area = "" }, null)
-                        </div>
-                    </div>
-                </div>
-                <div class="panel panel-primary">
-                    <div class="panel-heading">
-                        <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">
-                                Contacts and Drivers
-                            </a>
-                        </h4>
-                    </div>
-                    <div id="collapse3" class="panel-collapse collapse">
-                        <div class="panel-body">
-                            @Html.ActionLink("Contacts", "Index", "Contacts", new { area = "" }, null)<br />
-                            @Html.ActionLink("Trucks", "Index", "Trucks", new { area = "" }, null)<br />
-                            @Html.ActionLink("Drivers", "Index", "Drivers", new { area = "" }, null)
-                        </div>
-                    </div>
-                </div>
-                <div class="panel panel-primary">
-                    <div class="panel-heading">
-                        <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse4">
-                               Pay and Commission
-                            </a>
-                        </h4>
-                    </div>
-                    <div id="collapse4" class="panel-collapse collapse">
-                        <div class="panel-body">
-                            @Html.ActionLink("Truck Pay", "Index", "WorkOrders", new { area = "" }, null)<br />
-                            @Html.ActionLink("Employee Driver Pay", "Index", "WorkOrders", new { area = "" }, null)<br />
-                            @Html.ActionLink("3rd Party Commission", "Index", "WorkOrders", new { area = "" }, null)
-                        </div>
-                    </div>
-                </div>
-                <div class="panel panel-primary">
-                    <div class="panel-heading">
-                        <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse5">
-                                Settings
-                            </a>
-                        </h4>
-                    </div>
-                    <div id="collapse5" class="panel-collapse collapse">
-                        <div class="panel-body">
-                            @Html.ActionLink("Settings", "Index", "WorkOrders", new { area = "" }, null)
-                        </div>
-                    </div>
+
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                Work Orders and Billing
+            </h4>
+        </div>
+        <div class="panel-body">
+            @Html.ActionLink("Work Orders", "Index", "WorkOrders", new { area = "" }, null)<br />
+            @*@Html.ActionLink("Billing Preview", "Index", "WorkOrders", new { area = "" }, null)<br />
+            @Html.ActionLink("Paperwork", "Index", "WorkOrders", new { area = "" }, null)*@
+        </div>
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                Dispatch
+            </h4>
+        </div>
+        <div class="panel-body">
+            @Html.ActionLink("Dispatch", "Index", "Dispatch", new { area = "" }, null)<br />
+            @*@Html.ActionLink("Weekly Goals", "Index", "WorkOrders", new { area = "" }, null)<br />
+            @Html.ActionLink("Task Management", "Index", "WorkOrders", new { area = "" }, null)*@
+        </div>
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                Contacts, Drivers and Trucks
+            </h4>
+        </div>
+        <div class="panel-body">
+            @Html.ActionLink("Contacts/Drivers", "Index", "Contacts", new { area = "" }, null)<br />
+            @Html.ActionLink("Trucks", "Index", "Trucks", new { area = "" }, null)<br />
+        </div>
+        @*<div class="panel-heading">
+            <h4 class="panel-title">
+                Pay and Commission
+            </h4>
+        </div>
+        <div class="panel-body">
+            @Html.ActionLink("Truck Pay", "Index", "WorkOrders", new { area = "" }, null)<br />
+            @Html.ActionLink("Employee Driver Pay", "Index", "WorkOrders", new { area = "" }, null)<br />
+            @Html.ActionLink("3rd Party Commission", "Index", "WorkOrders", new { area = "" }, null)
+        </div>*@
+        @*<div class="panel-heading">
+            <h4 class="panel-title">
+                Settings
+            </h4>
+        </div>
+        <div class="panel-body">
+            @Html.ActionLink("Settings", "Index", "WorkOrders", new { area = "" }, null)
+        </div>*@
+    </div>
+
+    <div id="main">
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <span onclick="openNav()">&#9776;</span>
+                    <div> @RenderBody() </div>
                 </div>
             </div>
         </div>
-        <!-- /#sidebar-wrapper -->
-        <!-- Page Content -->
-        <div id="page-content-wrapper">
-        
-                <div class="row">
-                    <div class="col-lg-12">
-                        <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
-                        <div> @RenderBody() </div>
-                    </div>
-                </div>
-            
-        </div>
-        <!-- /#page-content-wrapper -->
     </div>
-    <!-- /#wrapper -->
 
     <!-- Menu Toggle Script -->
     <script type="text/javascript">
-    $("#menu-toggle").click(function(e) {
-        e.preventDefault();
-        $("#wrapper").toggleClass("toggled");
-    });
+        /* Set the width of the side navigation to 250px and the left margin of the page content to 250px */
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "250px";
+            document.getElementById("main").style.marginLeft = "250px";
+        }
+
+        /* Set the width of the side navigation to 0 and the left margin of the page content to 0 */
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+            document.getElementById("main").style.marginLeft = "0";
+        }
     </script>
 </body>
 </html>

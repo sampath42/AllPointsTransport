@@ -14,7 +14,7 @@ namespace AllPointsTransport.Models
     
     public partial class TemplatesDriverPay
     {
-        public int ID { get; set; }
+        public int TemplatesDriverPayID { get; set; }
         public string TemplateName { get; set; }
         public Nullable<int> RowOrder { get; set; }
         public Nullable<bool> ToDispatch { get; set; }

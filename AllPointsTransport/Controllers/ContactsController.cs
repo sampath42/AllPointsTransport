@@ -1,127 +1,94 @@
-﻿using System;
+﻿using DevExpress.Web.Mvc;
+using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
 using System.Linq;
-using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using AllPointsTransport.Models;
 
 namespace AllPointsTransport.Controllers
 {
     public class ContactsController : Controller
     {
-        private AllPointsTransportEntities db = new AllPointsTransportEntities();
-
         // GET: Contacts
         public ActionResult Index()
-        {
-            return View(db.Contacts.ToList());
-        }
-
-        // GET: Contacts/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Contact contact = db.Contacts.Find(id);
-            if (contact == null)
-            {
-                return HttpNotFound();
-            }
-            return View(contact);
-        }
-
-        // GET: Contacts/Create
-        public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Contacts/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ContactID,Active,Company,BillTo,Broker,EquipmentProvider,ChassisProvider,Location,RailPort,CYDepot,DallasDY,FtWorthDY,Vendor,Description,Contact1,Phone1,Email1,Contact2,Phone2,Email2,Fax,Address1,Address2,City,State,Zip,BillingCode,CCType,CCNum,CCExpiration,CCSecurityCode,CCCardholder,CCBillingStreet,CCBillingZip,MC,Notes,TotalCredit,DateCreated,CreatedBy,LastUpdated,UpdatedBy")] Contact contact)
+
+
+        AllPointsTransport.Models.AllPointsTransportEntities db = new AllPointsTransport.Models.AllPointsTransportEntities();
+
+        [ValidateInput(false)]
+        public ActionResult ContactsGridViewPartial()
         {
+            var model = db.Contacts;
+            return PartialView("_ContactsGridViewPartial", model.ToList());
+        }
+
+        [HttpPost, ValidateInput(false)]
+        public ActionResult ContactsGridViewPartialAddNew(AllPointsTransport.Models.Contact item)
+        {
+            var model = db.Contacts;
             if (ModelState.IsValid)
             {
-                db.Contacts.Add(contact);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                try
+                {
+                    model.Add(item);
+                    db.SaveChanges();
+                }
+                catch (Exception e)
+                {
+                    ViewData["EditError"] = e.Message;
+                }
             }
-
-            return View(contact);
+            else
+                ViewData["EditError"] = "Please, correct all errors.";
+            return PartialView("_ContactsGridViewPartial", model.ToList());
         }
-
-        // GET: Contacts/Edit/5
-        public ActionResult Edit(int? id)
+        [HttpPost, ValidateInput(false)]
+        public ActionResult ContactsGridViewPartialUpdate(AllPointsTransport.Models.Contact item)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Contact contact = db.Contacts.Find(id);
-            if (contact == null)
-            {
-                return HttpNotFound();
-            }
-            return View(contact);
-        }
-
-        // POST: Contacts/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ContactID,Active,Company,BillTo,Broker,EquipmentProvider,ChassisProvider,Location,RailPort,CYDepot,DallasDY,FtWorthDY,Vendor,Description,Contact1,Phone1,Email1,Contact2,Phone2,Email2,Fax,Address1,Address2,City,State,Zip,BillingCode,CCType,CCNum,CCExpiration,CCSecurityCode,CCCardholder,CCBillingStreet,CCBillingZip,MC,Notes,TotalCredit,DateCreated,CreatedBy,LastUpdated,UpdatedBy")] Contact contact)
-        {
+            var model = db.Contacts;
             if (ModelState.IsValid)
             {
-                db.Entry(contact).State = System.Data.Entity.EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                try
+                {
+                    var modelItem = model.FirstOrDefault(it => it.ContactID == item.ContactID);
+                    if (modelItem != null)
+                    {
+                        this.UpdateModel(modelItem);
+                        db.SaveChanges();
+                    }
+                }
+                catch (Exception e)
+                {
+                    ViewData["EditError"] = e.Message;
+                }
             }
-            return View(contact);
+            else
+                ViewData["EditError"] = "Please, correct all errors.";
+            return PartialView("_ContactsGridViewPartial", model.ToList());
         }
-
-        // GET: Contacts/Delete/5
-        public ActionResult Delete(int? id)
+        [HttpPost, ValidateInput(false)]
+        public ActionResult ContactsGridViewPartialDelete(System.Int32 ContactID)
         {
-            if (id == null)
+            var model = db.Contacts;
+            if (ContactID >= 0)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                try
+                {
+                    var item = model.FirstOrDefault(it => it.ContactID == ContactID);
+                    if (item != null)
+                        model.Remove(item);
+                    db.SaveChanges();
+                }
+                catch (Exception e)
+                {
+                    ViewData["EditError"] = e.Message;
+                }
             }
-            Contact contact = db.Contacts.Find(id);
-            if (contact == null)
-            {
-                return HttpNotFound();
-            }
-            return View(contact);
-        }
-
-        // POST: Contacts/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Contact contact = db.Contacts.Find(id);
-            db.Contacts.Remove(contact);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
+            return PartialView("_ContactsGridViewPartial", model.ToList());
         }
     }
 }

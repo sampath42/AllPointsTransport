@@ -1,7 +1,8 @@
-@{
-    var grid = Html.DevExpress().GridView(settings => {
-        settings.Name = "GridView";
-        settings.CallbackRouteValues = new { Controller = "Drivers", Action = "DriverPartial" };
+﻿@*@{
+    var grid = Html.DevExpress().GridView(settings =>
+    {
+        settings.Name = "DispatchNewGridView";
+        settings.CallbackRouteValues = new { Controller = "DispatchNew", Action = "DispatchNewPartial" };
 
         settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
         settings.Settings.HorizontalScrollBarMode = ScrollBarMode.Visible;
@@ -39,8 +40,9 @@
         settings.Columns.Add("Address1");
         settings.Columns.Add("Address2");
     });
-    if (ViewData["EditError"] != null){
+    if (ViewData["EditError"] != null)
+    {
         grid.SetEditErrorText((string)ViewData["EditError"]);
     }
 }
-@grid.Bind(Model).GetHtml()
+@grid.Bind(Model).GetHtml()*@

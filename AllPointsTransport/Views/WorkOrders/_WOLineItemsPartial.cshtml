@@ -1,0 +1,68 @@
+@{
+    var grid = Html.DevExpress().GridView(settings => {
+        settings.Name = "WOLineItemsGridView";
+        settings.CallbackRouteValues = new { Controller = "WorkOrders", Action = "WOLineItemsPartial" };
+
+        settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "WorkOrders", Action = "WOLineItemsPartialAddNew" };
+        settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "WorkOrders", Action = "WOLineItemsPartialUpdate" };
+        settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "WorkOrders", Action = "WOLineItemsPartialDelete" };
+        settings.SettingsEditing.Mode = GridViewEditingMode.Inline;
+        settings.SettingsBehavior.ConfirmDelete = true;
+
+        settings.CommandColumn.Visible = true;
+        settings.CommandColumn.ShowNewButton = true;
+        settings.CommandColumn.ShowDeleteButton = true;
+        settings.CommandColumn.ShowEditButton = true;
+
+        settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+        settings.Settings.HorizontalScrollBarMode = ScrollBarMode.Visible;
+
+        settings.KeyFieldName = "WorkOrderLineItemID";
+
+        settings.SettingsPager.Visible = true;
+        settings.Settings.ShowGroupPanel = false;
+        settings.Settings.ShowFilterRow = true;
+        settings.SettingsBehavior.AllowSelectByRowClick = true;
+
+        settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.Off;
+        settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;
+        settings.SettingsAdaptivity.AdaptiveDetailColumnCount = 1;
+        settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = false;
+        settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 0;
+
+        settings.Styles.AlternatingRow.BackColor = System.Drawing.ColorTranslator.FromHtml("#ccc");
+
+        //settings.Columns.Add("WorkOrderLineItemID");
+        //settings.Columns.Add("WorkOrderNo");
+        //settings.Columns.Add("RowOrder");
+        settings.Columns.Add("BillingItem");
+        settings.Columns.Add("Description");
+        settings.Columns.Add("Vendor");
+        //settings.Columns.Add("VendorReference");
+        settings.Columns.Add("Quantity");
+        settings.Columns.Add("Rate");
+        //   settings.Columns.Add("Amount");
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "Amount";
+            column.UnboundType = DevExpress.Data.UnboundColumnType.Decimal;
+            column.PropertiesEdit.DisplayFormatString = "c";
+        });
+
+        //settings.Columns.Add("Fee");
+        //settings.Columns.Add("PayDriver");
+        //settings.Columns.Add("DateCreated");
+        //settings.Columns.Add("CreatedBy");
+        //settings.Columns.Add("DateUpdated");
+        //settings.Columns.Add("UpdatedBy");
+
+
+        settings.TotalSummary.Add(DevExpress.Data.SummaryItemType.Sum, "Amount").DisplayFormat = "c";
+        settings.Settings.ShowFooter = true;
+    });
+    if (ViewData["EditError"] != null){
+        grid.SetEditErrorText((string)ViewData["EditError"]);
+    }
+}
+@grid.Bind(Model).GetHtml()

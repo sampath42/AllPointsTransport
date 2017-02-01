@@ -14,7 +14,7 @@ namespace AllPointsTransport.Models
     
     public partial class TemplatesWO
     {
-        public int ID { get; set; }
+        public int TemplateWOID { get; set; }
         public string TemplateName { get; set; }
         public string BillTo { get; set; }
         public string Broker { get; set; }

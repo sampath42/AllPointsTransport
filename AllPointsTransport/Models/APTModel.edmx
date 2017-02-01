@@ -5,6 +5,24 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="AllPointsTransportDataModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AgentCodes">
+          <Key>
+            <PropertyRef Name="AgentCodeID" />
+          </Key>
+          <Property Name="AgentCodeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AgentCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'AllPointsTransport.dbo.ContactAgentCodes' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ContactAgentCodes">
+          <Key>
+            <PropertyRef Name="AgentCodeID" />
+            <PropertyRef Name="ContactID" />
+          </Key>
+          <Property Name="AgentCodeID" Type="int" Nullable="false" />
+          <Property Name="ContactID" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Contacts">
           <Key>
             <PropertyRef Name="ContactID" />
@@ -194,13 +212,11 @@ warning 6002: The table/view 'AllPointsTransport.dbo.Employees' does not have a 
           <Property Name="LastUpdated" Type="smalldatetime" />
           <Property Name="UpdatedBy" Type="nvarchar" MaxLength="255" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'AllPointsTransport.dbo.Payroll' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Payroll">
           <Key>
-            <PropertyRef Name="ID" />
+            <PropertyRef Name="PayrollID" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="PayrollID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Driver" Type="nvarchar" MaxLength="255" />
           <Property Name="PayDate" Type="smalldatetime" />
           <Property Name="PayPeriodStart" Type="smalldatetime" />
@@ -290,13 +306,11 @@ warning 6002: The table/view 'AllPointsTransport.dbo.TaskManagement' does not ha
           <Property Name="DateUpdated" Type="smalldatetime" />
           <Property Name="UpdatedBy" Type="nvarchar" MaxLength="255" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'AllPointsTransport.dbo.TemplatesDriverPay' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="TemplatesDriverPay">
           <Key>
-            <PropertyRef Name="ID" />
+            <PropertyRef Name="TemplatesDriverPayID" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="TemplatesDriverPayID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="TemplateName" Type="nvarchar" MaxLength="255" />
           <Property Name="RowOrder" Type="int" />
           <Property Name="ToDispatch" Type="bit" />
@@ -338,14 +352,11 @@ warning 6002: The table/view 'AllPointsTransport.dbo.TemplatesDriverPay' does no
           <Property Name="DateUpdated" Type="smalldatetime" />
           <Property Name="UpdatedBy" Type="nvarchar" MaxLength="255" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'AllPointsTransport.dbo.TemplatesWO' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="TemplatesWO">
           <Key>
-            <PropertyRef Name="ID" />
-            <PropertyRef Name="TemplateName" />
+            <PropertyRef Name="TemplateWOID" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="TemplateWOID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="TemplateName" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="BillTo" Type="nvarchar" MaxLength="255" />
           <Property Name="Broker" Type="nvarchar" MaxLength="255" />
@@ -496,6 +507,74 @@ warning 6002: The table/view 'AllPointsTransport.dbo.Trucks' does not have a pri
           <Property Name="UpdatedBy" Type="nvarchar" MaxLength="255" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6002: The table/view 'AllPointsTransport.APTAdmin.vwDispatch_New' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vwDispatch_New">
+          <Key>
+            <PropertyRef Name="WorkOrderID" />
+            <PropertyRef Name="InvoicedDate" />
+            <PropertyRef Name="DatePaid" />
+            <PropertyRef Name="StorageLFD" />
+            <PropertyRef Name="Cutoff" />
+            <PropertyRef Name="ApptTime" />
+          </Key>
+          <Property Name="WorkOrderID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="WorkOrderNo" Type="int" />
+          <Property Name="Completed" Type="bit" />
+          <Property Name="Status" Type="nvarchar" MaxLength="255" />
+          <Property Name="InvoicedDate" Type="smalldatetime" Nullable="false" />
+          <Property Name="DatePaid" Type="smalldatetime" Nullable="false" />
+          <Property Name="Broker" Type="nvarchar" MaxLength="255" />
+          <Property Name="BillTo" Type="nvarchar" MaxLength="255" />
+          <Property Name="Container1" Type="nvarchar" MaxLength="255" />
+          <Property Name="Seal" Type="nvarchar" MaxLength="255" />
+          <Property Name="StreetTurn" Type="bit" />
+          <Property Name="EquipmentSize" Type="nvarchar" MaxLength="255" />
+          <Property Name="Chassis" Type="nvarchar" MaxLength="255" />
+          <Property Name="EquipmentProvider" Type="nvarchar" MaxLength="255" />
+          <Property Name="ChassisProvider" Type="nvarchar" MaxLength="255" />
+          <Property Name="Booking" Type="nvarchar" MaxLength="255" />
+          <Property Name="MasterBOL" Type="nvarchar" MaxLength="255" />
+          <Property Name="Reference" Type="nvarchar" MaxLength="255" />
+          <Property Name="Pro" Type="nvarchar" MaxLength="255" />
+          <Property Name="ApptNumber" Type="nvarchar" MaxLength="255" />
+          <Property Name="Release" Type="nvarchar" MaxLength="255" />
+          <Property Name="Weight" Type="nvarchar" MaxLength="255" />
+          <Property Name="PieceCount" Type="nvarchar" MaxLength="255" />
+          <Property Name="Commodity" Type="nvarchar" MaxLength="255" />
+          <Property Name="PO" Type="nvarchar" MaxLength="255" />
+          <Property Name="EquipmentPickup" Type="nvarchar" MaxLength="255" />
+          <Property Name="EquipmentReturn" Type="nvarchar" MaxLength="255" />
+          <Property Name="Origin" Type="nvarchar" MaxLength="255" />
+          <Property Name="Destination" Type="nvarchar" MaxLength="255" />
+          <Property Name="TypeOfMove" Type="nvarchar" MaxLength="255" />
+          <Property Name="Duration" Type="int" />
+          <Property Name="StorageLFD" Type="smalldatetime" Nullable="false" />
+          <Property Name="PerDiemLFD" Type="smalldatetime" />
+          <Property Name="Cutoff" Type="smalldatetime" Nullable="false" />
+          <Property Name="ApptTime" Type="smalldatetime" Nullable="false" />
+          <Property Name="Container2" Type="nvarchar" MaxLength="255" />
+          <Property Name="LocationHours" Type="nvarchar" MaxLength="255" />
+          <Property Name="OutgateReceipt" Type="smalldatetime" />
+          <Property Name="IngateReceipt" Type="smalldatetime" />
+          <Property Name="ReadyNotification" Type="smalldatetime" />
+          <Property Name="NotesInvoice" Type="nvarchar(max)" />
+          <Property Name="NotesPrivate" Type="nvarchar(max)" />
+          <Property Name="ETA" Type="smalldatetime" />
+          <Property Name="LinkedProNum" Type="nvarchar" MaxLength="255" />
+          <Property Name="InfoSymbol" Type="nvarchar" MaxLength="255" />
+          <Property Name="BilledAmount" Type="money" />
+          <Property Name="AcceptedByDispatch" Type="bit" />
+          <Property Name="RejectedByDispatch" Type="bit" />
+          <Property Name="POD1" Type="bit" />
+          <Property Name="POD2" Type="bit" />
+          <Property Name="BOL" Type="bit" />
+          <Property Name="Uploaded" Type="bit" />
+          <Property Name="DateCreated" Type="smalldatetime" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="255" />
+          <Property Name="DateUpdated" Type="smalldatetime" />
+          <Property Name="UpdatedBy" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'AllPointsTransport.APTAdmin.vwDispatch_Progress' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwDispatch_Progress">
           <Key>
@@ -510,12 +589,308 @@ warning 6002: The table/view 'AllPointsTransport.APTAdmin.vwDispatch_Progress' d
           <Property Name="leg" Type="nvarchar" MaxLength="514" />
           <Property Name="WorkOrderID" Type="int" Nullable="false" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'AllPointsTransport.APTAdmin.vwPopulateBillTo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vwPopulateBillTo">
+          <Key>
+            <PropertyRef Name="ContactID" />
+          </Key>
+          <Property Name="ContactID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Active" Type="bit" />
+          <Property Name="Company" Type="nvarchar" MaxLength="255" />
+          <Property Name="BillTo" Type="bit" />
+          <Property Name="Broker" Type="bit" />
+          <Property Name="EquipmentProvider" Type="bit" />
+          <Property Name="ChassisProvider" Type="bit" />
+          <Property Name="Location" Type="bit" />
+          <Property Name="RailPort" Type="bit" />
+          <Property Name="CYDepot" Type="bit" />
+          <Property Name="DallasDY" Type="bit" />
+          <Property Name="FtWorthDY" Type="bit" />
+          <Property Name="Vendor" Type="bit" />
+          <Property Name="Description" Type="nvarchar" MaxLength="255" />
+          <Property Name="Contact1" Type="nvarchar" MaxLength="255" />
+          <Property Name="Phone1" Type="nvarchar" MaxLength="255" />
+          <Property Name="Email1" Type="nvarchar(max)" />
+          <Property Name="Contact2" Type="nvarchar" MaxLength="255" />
+          <Property Name="Phone2" Type="nvarchar" MaxLength="255" />
+          <Property Name="Email2" Type="nvarchar(max)" />
+          <Property Name="Fax" Type="nvarchar" MaxLength="255" />
+          <Property Name="Address1" Type="nvarchar" MaxLength="255" />
+          <Property Name="Address2" Type="nvarchar" MaxLength="255" />
+          <Property Name="City" Type="nvarchar" MaxLength="255" />
+          <Property Name="State" Type="nvarchar" MaxLength="255" />
+          <Property Name="Zip" Type="nvarchar" MaxLength="255" />
+          <Property Name="BillingCode" Type="nvarchar" MaxLength="255" />
+          <Property Name="CCType" Type="nvarchar" MaxLength="255" />
+          <Property Name="CCNum" Type="nvarchar" MaxLength="255" />
+          <Property Name="CCExpiration" Type="nvarchar" MaxLength="255" />
+          <Property Name="CCSecurityCode" Type="nvarchar" MaxLength="255" />
+          <Property Name="CCCardholder" Type="nvarchar" MaxLength="255" />
+          <Property Name="CCBillingStreet" Type="nvarchar" MaxLength="255" />
+          <Property Name="CCBillingZip" Type="nvarchar" MaxLength="255" />
+          <Property Name="MC" Type="nvarchar" MaxLength="255" />
+          <Property Name="Notes" Type="nvarchar(max)" />
+          <Property Name="TotalCredit" Type="money" />
+          <Property Name="DateCreated" Type="datetime" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="255" />
+          <Property Name="LastUpdated" Type="datetime" />
+          <Property Name="UpdatedBy" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'AllPointsTransport.APTAdmin.vwPopulateBroker' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vwPopulateBroker">
+          <Key>
+            <PropertyRef Name="ContactID" />
+          </Key>
+          <Property Name="ContactID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Active" Type="bit" />
+          <Property Name="Company" Type="nvarchar" MaxLength="255" />
+          <Property Name="BillTo" Type="bit" />
+          <Property Name="Broker" Type="bit" />
+          <Property Name="EquipmentProvider" Type="bit" />
+          <Property Name="ChassisProvider" Type="bit" />
+          <Property Name="Location" Type="bit" />
+          <Property Name="RailPort" Type="bit" />
+          <Property Name="CYDepot" Type="bit" />
+          <Property Name="DallasDY" Type="bit" />
+          <Property Name="FtWorthDY" Type="bit" />
+          <Property Name="Vendor" Type="bit" />
+          <Property Name="Description" Type="nvarchar" MaxLength="255" />
+          <Property Name="Contact1" Type="nvarchar" MaxLength="255" />
+          <Property Name="Phone1" Type="nvarchar" MaxLength="255" />
+          <Property Name="Email1" Type="nvarchar(max)" />
+          <Property Name="Contact2" Type="nvarchar" MaxLength="255" />
+          <Property Name="Phone2" Type="nvarchar" MaxLength="255" />
+          <Property Name="Email2" Type="nvarchar(max)" />
+          <Property Name="Fax" Type="nvarchar" MaxLength="255" />
+          <Property Name="Address1" Type="nvarchar" MaxLength="255" />
+          <Property Name="Address2" Type="nvarchar" MaxLength="255" />
+          <Property Name="City" Type="nvarchar" MaxLength="255" />
+          <Property Name="State" Type="nvarchar" MaxLength="255" />
+          <Property Name="Zip" Type="nvarchar" MaxLength="255" />
+          <Property Name="BillingCode" Type="nvarchar" MaxLength="255" />
+          <Property Name="CCType" Type="nvarchar" MaxLength="255" />
+          <Property Name="CCNum" Type="nvarchar" MaxLength="255" />
+          <Property Name="CCExpiration" Type="nvarchar" MaxLength="255" />
+          <Property Name="CCSecurityCode" Type="nvarchar" MaxLength="255" />
+          <Property Name="CCCardholder" Type="nvarchar" MaxLength="255" />
+          <Property Name="CCBillingStreet" Type="nvarchar" MaxLength="255" />
+          <Property Name="CCBillingZip" Type="nvarchar" MaxLength="255" />
+          <Property Name="MC" Type="nvarchar" MaxLength="255" />
+          <Property Name="Notes" Type="nvarchar(max)" />
+          <Property Name="TotalCredit" Type="money" />
+          <Property Name="DateCreated" Type="datetime" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="255" />
+          <Property Name="LastUpdated" Type="datetime" />
+          <Property Name="UpdatedBy" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'AllPointsTransport.APTAdmin.vwPopulateChassisProvider' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vwPopulateChassisProvider">
+          <Key>
+            <PropertyRef Name="ContactID" />
+          </Key>
+          <Property Name="ContactID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Active" Type="bit" />
+          <Property Name="Company" Type="nvarchar" MaxLength="255" />
+          <Property Name="BillTo" Type="bit" />
+          <Property Name="Broker" Type="bit" />
+          <Property Name="EquipmentProvider" Type="bit" />
+          <Property Name="ChassisProvider" Type="bit" />
+          <Property Name="Location" Type="bit" />
+          <Property Name="RailPort" Type="bit" />
+          <Property Name="CYDepot" Type="bit" />
+          <Property Name="DallasDY" Type="bit" />
+          <Property Name="FtWorthDY" Type="bit" />
+          <Property Name="Vendor" Type="bit" />
+          <Property Name="Description" Type="nvarchar" MaxLength="255" />
+          <Property Name="Contact1" Type="nvarchar" MaxLength="255" />
+          <Property Name="Phone1" Type="nvarchar" MaxLength="255" />
+          <Property Name="Email1" Type="nvarchar(max)" />
+          <Property Name="Contact2" Type="nvarchar" MaxLength="255" />
+          <Property Name="Phone2" Type="nvarchar" MaxLength="255" />
+          <Property Name="Email2" Type="nvarchar(max)" />
+          <Property Name="Fax" Type="nvarchar" MaxLength="255" />
+          <Property Name="Address1" Type="nvarchar" MaxLength="255" />
+          <Property Name="Address2" Type="nvarchar" MaxLength="255" />
+          <Property Name="City" Type="nvarchar" MaxLength="255" />
+          <Property Name="State" Type="nvarchar" MaxLength="255" />
+          <Property Name="Zip" Type="nvarchar" MaxLength="255" />
+          <Property Name="BillingCode" Type="nvarchar" MaxLength="255" />
+          <Property Name="CCType" Type="nvarchar" MaxLength="255" />
+          <Property Name="CCNum" Type="nvarchar" MaxLength="255" />
+          <Property Name="CCExpiration" Type="nvarchar" MaxLength="255" />
+          <Property Name="CCSecurityCode" Type="nvarchar" MaxLength="255" />
+          <Property Name="CCCardholder" Type="nvarchar" MaxLength="255" />
+          <Property Name="CCBillingStreet" Type="nvarchar" MaxLength="255" />
+          <Property Name="CCBillingZip" Type="nvarchar" MaxLength="255" />
+          <Property Name="MC" Type="nvarchar" MaxLength="255" />
+          <Property Name="Notes" Type="nvarchar(max)" />
+          <Property Name="TotalCredit" Type="money" />
+          <Property Name="DateCreated" Type="datetime" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="255" />
+          <Property Name="LastUpdated" Type="datetime" />
+          <Property Name="UpdatedBy" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'AllPointsTransport.APTAdmin.vwPopulateDrivers' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vwPopulateDrivers">
+          <Key>
+            <PropertyRef Name="DriverID" />
+          </Key>
+          <Property Name="DriverID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DriverNo" Type="nvarchar" MaxLength="255" />
+          <Property Name="Active" Type="bit" />
+          <Property Name="DriverType" Type="nvarchar" MaxLength="255" />
+          <Property Name="EmployeePayPct" Type="money" />
+          <Property Name="First" Type="nvarchar" MaxLength="255" />
+          <Property Name="Last" Type="nvarchar" MaxLength="255" />
+          <Property Name="FullName" Type="nvarchar" MaxLength="255" />
+          <Property Name="NickName" Type="nvarchar" MaxLength="255" />
+          <Property Name="Address1" Type="nvarchar" MaxLength="255" />
+          <Property Name="Address2" Type="nvarchar" MaxLength="255" />
+          <Property Name="City" Type="nvarchar" MaxLength="255" />
+          <Property Name="State" Type="nvarchar" MaxLength="255" />
+          <Property Name="Zip" Type="nvarchar" MaxLength="255" />
+          <Property Name="HomePhone" Type="nvarchar" MaxLength="255" />
+          <Property Name="MobilePhone" Type="nvarchar" MaxLength="255" />
+          <Property Name="Email" Type="nvarchar" MaxLength="255" />
+          <Property Name="TextMessage" Type="nvarchar" MaxLength="255" />
+          <Property Name="EmergencyContact" Type="nvarchar" MaxLength="255" />
+          <Property Name="EmergencyPhone" Type="nvarchar" MaxLength="255" />
+          <Property Name="SSNum" Type="nvarchar" MaxLength="255" />
+          <Property Name="DOB" Type="nvarchar" MaxLength="255" />
+          <Property Name="CDLNum" Type="nvarchar" MaxLength="255" />
+          <Property Name="CDLExpiration" Type="smalldatetime" />
+          <Property Name="MedicalExpiration" Type="smalldatetime" />
+          <Property Name="TWICExpiration" Type="smalldatetime" />
+          <Property Name="AnnualReview" Type="smalldatetime" />
+          <Property Name="HireDate" Type="smalldatetime" />
+          <Property Name="ResignDate" Type="smalldatetime" />
+          <Property Name="ResignReason" Type="nvarchar(max)" />
+          <Property Name="Rehire" Type="bit" />
+          <Property Name="FuelCardNum" Type="nvarchar" MaxLength="255" />
+          <Property Name="Notes" Type="nvarchar(max)" />
+          <Property Name="TruckNum" Type="nvarchar" MaxLength="255" />
+          <Property Name="Color" Type="nvarchar" MaxLength="255" />
+          <Property Name="DateCreated" Type="smalldatetime" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="255" />
+          <Property Name="LastUpdated" Type="smalldatetime" />
+          <Property Name="UpdatedBy" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'AllPointsTransport.APTAdmin.vwPopulateEquipmentProvider' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vwPopulateEquipmentProvider">
+          <Key>
+            <PropertyRef Name="ContactID" />
+          </Key>
+          <Property Name="ContactID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Active" Type="bit" />
+          <Property Name="Company" Type="nvarchar" MaxLength="255" />
+          <Property Name="BillTo" Type="bit" />
+          <Property Name="Broker" Type="bit" />
+          <Property Name="EquipmentProvider" Type="bit" />
+          <Property Name="ChassisProvider" Type="bit" />
+          <Property Name="Location" Type="bit" />
+          <Property Name="RailPort" Type="bit" />
+          <Property Name="CYDepot" Type="bit" />
+          <Property Name="DallasDY" Type="bit" />
+          <Property Name="FtWorthDY" Type="bit" />
+          <Property Name="Vendor" Type="bit" />
+          <Property Name="Description" Type="nvarchar" MaxLength="255" />
+          <Property Name="Contact1" Type="nvarchar" MaxLength="255" />
+          <Property Name="Phone1" Type="nvarchar" MaxLength="255" />
+          <Property Name="Email1" Type="nvarchar(max)" />
+          <Property Name="Contact2" Type="nvarchar" MaxLength="255" />
+          <Property Name="Phone2" Type="nvarchar" MaxLength="255" />
+          <Property Name="Email2" Type="nvarchar(max)" />
+          <Property Name="Fax" Type="nvarchar" MaxLength="255" />
+          <Property Name="Address1" Type="nvarchar" MaxLength="255" />
+          <Property Name="Address2" Type="nvarchar" MaxLength="255" />
+          <Property Name="City" Type="nvarchar" MaxLength="255" />
+          <Property Name="State" Type="nvarchar" MaxLength="255" />
+          <Property Name="Zip" Type="nvarchar" MaxLength="255" />
+          <Property Name="BillingCode" Type="nvarchar" MaxLength="255" />
+          <Property Name="CCType" Type="nvarchar" MaxLength="255" />
+          <Property Name="CCNum" Type="nvarchar" MaxLength="255" />
+          <Property Name="CCExpiration" Type="nvarchar" MaxLength="255" />
+          <Property Name="CCSecurityCode" Type="nvarchar" MaxLength="255" />
+          <Property Name="CCCardholder" Type="nvarchar" MaxLength="255" />
+          <Property Name="CCBillingStreet" Type="nvarchar" MaxLength="255" />
+          <Property Name="CCBillingZip" Type="nvarchar" MaxLength="255" />
+          <Property Name="MC" Type="nvarchar" MaxLength="255" />
+          <Property Name="Notes" Type="nvarchar(max)" />
+          <Property Name="TotalCredit" Type="money" />
+          <Property Name="DateCreated" Type="datetime" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="255" />
+          <Property Name="LastUpdated" Type="datetime" />
+          <Property Name="UpdatedBy" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'AllPointsTransport.APTAdmin.vwPopulateOriginDestination' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vwPopulateOriginDestination">
+          <Key>
+            <PropertyRef Name="ContactID" />
+          </Key>
+          <Property Name="ContactID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Active" Type="bit" />
+          <Property Name="Company" Type="nvarchar" MaxLength="255" />
+          <Property Name="BillTo" Type="bit" />
+          <Property Name="Broker" Type="bit" />
+          <Property Name="EquipmentProvider" Type="bit" />
+          <Property Name="ChassisProvider" Type="bit" />
+          <Property Name="Location" Type="bit" />
+          <Property Name="RailPort" Type="bit" />
+          <Property Name="CYDepot" Type="bit" />
+          <Property Name="DallasDY" Type="bit" />
+          <Property Name="FtWorthDY" Type="bit" />
+          <Property Name="Vendor" Type="bit" />
+          <Property Name="Description" Type="nvarchar" MaxLength="255" />
+          <Property Name="Contact1" Type="nvarchar" MaxLength="255" />
+          <Property Name="Phone1" Type="nvarchar" MaxLength="255" />
+          <Property Name="Email1" Type="nvarchar(max)" />
+          <Property Name="Contact2" Type="nvarchar" MaxLength="255" />
+          <Property Name="Phone2" Type="nvarchar" MaxLength="255" />
+          <Property Name="Email2" Type="nvarchar(max)" />
+          <Property Name="Fax" Type="nvarchar" MaxLength="255" />
+          <Property Name="Address1" Type="nvarchar" MaxLength="255" />
+          <Property Name="Address2" Type="nvarchar" MaxLength="255" />
+          <Property Name="City" Type="nvarchar" MaxLength="255" />
+          <Property Name="State" Type="nvarchar" MaxLength="255" />
+          <Property Name="Zip" Type="nvarchar" MaxLength="255" />
+          <Property Name="BillingCode" Type="nvarchar" MaxLength="255" />
+          <Property Name="CCType" Type="nvarchar" MaxLength="255" />
+          <Property Name="CCNum" Type="nvarchar" MaxLength="255" />
+          <Property Name="CCExpiration" Type="nvarchar" MaxLength="255" />
+          <Property Name="CCSecurityCode" Type="nvarchar" MaxLength="255" />
+          <Property Name="CCCardholder" Type="nvarchar" MaxLength="255" />
+          <Property Name="CCBillingStreet" Type="nvarchar" MaxLength="255" />
+          <Property Name="CCBillingZip" Type="nvarchar" MaxLength="255" />
+          <Property Name="MC" Type="nvarchar" MaxLength="255" />
+          <Property Name="Notes" Type="nvarchar(max)" />
+          <Property Name="TotalCredit" Type="money" />
+          <Property Name="DateCreated" Type="datetime" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="255" />
+          <Property Name="LastUpdated" Type="datetime" />
+          <Property Name="UpdatedBy" Type="nvarchar" MaxLength="255" />
+        </EntityType>
         <EntityContainer Name="AllPointsTransportDataModelStoreContainer">
+          <EntitySet Name="AgentCodes" EntityType="Self.AgentCodes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Contacts" EntityType="Self.Contacts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DriverPay" EntityType="Self.DriverPay" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Drivers" EntityType="Self.Drivers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Payroll" EntityType="Self.Payroll" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TemplatesDriverPay" EntityType="Self.TemplatesDriverPay" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TemplatesWO" EntityType="Self.TemplatesWO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WOLineItems" EntityType="Self.WOLineItems" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WorkOrders" EntityType="Self.WorkOrders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ContactAgentCodes" EntityType="Self.ContactAgentCodes" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ContactAgentCodes].[AgentCodeID] AS [AgentCodeID], 
+    [ContactAgentCodes].[ContactID] AS [ContactID]
+    FROM [dbo].[ContactAgentCodes] AS [ContactAgentCodes]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="Employees" EntityType="Self.Employees" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [Employees].[ID] AS [ID], 
@@ -563,21 +938,6 @@ warning 6002: The table/view 'AllPointsTransport.APTAdmin.vwDispatch_Progress' d
     [Employees].[LastUpdated] AS [LastUpdated], 
     [Employees].[UpdatedBy] AS [UpdatedBy]
     FROM [dbo].[Employees] AS [Employees]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="Payroll" EntityType="Self.Payroll" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [Payroll].[ID] AS [ID], 
-    [Payroll].[Driver] AS [Driver], 
-    [Payroll].[PayDate] AS [PayDate], 
-    [Payroll].[PayPeriodStart] AS [PayPeriodStart], 
-    [Payroll].[PayPeriodEnd] AS [PayPeriodEnd], 
-    [Payroll].[Freight] AS [Freight], 
-    [Payroll].[Fuel] AS [Fuel], 
-    [Payroll].[Deductions] AS [Deductions], 
-    [Payroll].[Total] AS [Total], 
-    [Payroll].[DateCreated] AS [DateCreated], 
-    [Payroll].[CreatedBy] AS [CreatedBy]
-    FROM [dbo].[Payroll] AS [Payroll]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="RowColors" EntityType="Self.RowColors" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -641,72 +1001,6 @@ warning 6002: The table/view 'AllPointsTransport.APTAdmin.vwDispatch_Progress' d
     [TaskManagement].[UpdatedBy] AS [UpdatedBy]
     FROM [dbo].[TaskManagement] AS [TaskManagement]</DefiningQuery>
           </EntitySet>
-          <EntitySet Name="TemplatesDriverPay" EntityType="Self.TemplatesDriverPay" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [TemplatesDriverPay].[ID] AS [ID], 
-    [TemplatesDriverPay].[TemplateName] AS [TemplateName], 
-    [TemplatesDriverPay].[RowOrder] AS [RowOrder], 
-    [TemplatesDriverPay].[ToDispatch] AS [ToDispatch], 
-    [TemplatesDriverPay].[ActiveLeg] AS [ActiveLeg], 
-    [TemplatesDriverPay].[TypeOfLoad] AS [TypeOfLoad], 
-    [TemplatesDriverPay].[PayType] AS [PayType], 
-    [TemplatesDriverPay].[DispatchNotes] AS [DispatchNotes], 
-    [TemplatesDriverPay].[ApptTime] AS [ApptTime], 
-    [TemplatesDriverPay].[DetentionStarts] AS [DetentionStarts], 
-    [TemplatesDriverPay].[DepartTime] AS [DepartTime], 
-    [TemplatesDriverPay].[ArrivalTime] AS [ArrivalTime], 
-    [TemplatesDriverPay].[LineHaulAmountTruck] AS [LineHaulAmountTruck], 
-    [TemplatesDriverPay].[FSAmountTruck] AS [FSAmountTruck], 
-    [TemplatesDriverPay].[TotalAmountTruck] AS [TotalAmountTruck], 
-    [TemplatesDriverPay].[TotalAmountEmployee] AS [TotalAmountEmployee], 
-    [TemplatesDriverPay].[Driver] AS [Driver], 
-    [TemplatesDriverPay].[DriverRowID] AS [DriverRowID], 
-    [TemplatesDriverPay].[DriverType] AS [DriverType], 
-    [TemplatesDriverPay].[TruckNum] AS [TruckNum], 
-    [TemplatesDriverPay].[TruckPayPct] AS [TruckPayPct], 
-    [TemplatesDriverPay].[FSDeductionPct] AS [FSDeductionPct], 
-    [TemplatesDriverPay].[EmployeePayPct] AS [EmployeePayPct], 
-    [TemplatesDriverPay].[Origin] AS [Origin], 
-    [TemplatesDriverPay].[Destination] AS [Destination], 
-    [TemplatesDriverPay].[Duration] AS [Duration], 
-    [TemplatesDriverPay].[PrePlanSent] AS [PrePlanSent], 
-    [TemplatesDriverPay].[DispatchAcceptedStatus] AS [DispatchAcceptedStatus], 
-    [TemplatesDriverPay].[WayBilled] AS [WayBilled], 
-    [TemplatesDriverPay].[PayDriver] AS [PayDriver], 
-    [TemplatesDriverPay].[Outgate] AS [Outgate], 
-    [TemplatesDriverPay].[Ingate] AS [Ingate], 
-    [TemplatesDriverPay].[POD] AS [POD], 
-    [TemplatesDriverPay].[BOL] AS [BOL], 
-    [TemplatesDriverPay].[ReceivedDate] AS [ReceivedDate], 
-    [TemplatesDriverPay].[DriverPaid] AS [DriverPaid], 
-    [TemplatesDriverPay].[CommissionPaid] AS [CommissionPaid], 
-    [TemplatesDriverPay].[DateCreated] AS [DateCreated], 
-    [TemplatesDriverPay].[CreatedBy] AS [CreatedBy], 
-    [TemplatesDriverPay].[DateUpdated] AS [DateUpdated], 
-    [TemplatesDriverPay].[UpdatedBy] AS [UpdatedBy]
-    FROM [dbo].[TemplatesDriverPay] AS [TemplatesDriverPay]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="TemplatesWO" EntityType="Self.TemplatesWO" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [TemplatesWO].[ID] AS [ID], 
-    [TemplatesWO].[TemplateName] AS [TemplateName], 
-    [TemplatesWO].[BillTo] AS [BillTo], 
-    [TemplatesWO].[Broker] AS [Broker], 
-    [TemplatesWO].[TypeOfMove] AS [TypeOfMove], 
-    [TemplatesWO].[EquipmentProvider] AS [EquipmentProvider], 
-    [TemplatesWO].[EquipmentSize] AS [EquipmentSize], 
-    [TemplatesWO].[ChassisProvider] AS [ChassisProvider], 
-    [TemplatesWO].[EquipmentPickup] AS [EquipmentPickup], 
-    [TemplatesWO].[EquipmentReturn] AS [EquipmentReturn], 
-    [TemplatesWO].[LocationHours] AS [LocationHours], 
-    [TemplatesWO].[Origin] AS [Origin], 
-    [TemplatesWO].[Destination] AS [Destination], 
-    [TemplatesWO].[DateCreated] AS [DateCreated], 
-    [TemplatesWO].[CreatedBy] AS [CreatedBy], 
-    [TemplatesWO].[DateUpdated] AS [DateUpdated], 
-    [TemplatesWO].[UpdatedBy] AS [UpdatedBy]
-    FROM [dbo].[TemplatesWO] AS [TemplatesWO]</DefiningQuery>
-          </EntitySet>
           <EntitySet Name="TemplatesWOLineItems" EntityType="Self.TemplatesWOLineItems" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [TemplatesWOLineItems].[ID] AS [ID], 
@@ -750,6 +1044,66 @@ warning 6002: The table/view 'AllPointsTransport.APTAdmin.vwDispatch_Progress' d
     [Trucks].[UpdatedBy] AS [UpdatedBy]
     FROM [dbo].[Trucks] AS [Trucks]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="vwDispatch_New" EntityType="Self.vwDispatch_New" store:Type="Views" store:Schema="APTAdmin">
+            <DefiningQuery>SELECT 
+    [vwDispatch_New].[WorkOrderID] AS [WorkOrderID], 
+    [vwDispatch_New].[WorkOrderNo] AS [WorkOrderNo], 
+    [vwDispatch_New].[Completed] AS [Completed], 
+    [vwDispatch_New].[Status] AS [Status], 
+    [vwDispatch_New].[InvoicedDate] AS [InvoicedDate], 
+    [vwDispatch_New].[DatePaid] AS [DatePaid], 
+    [vwDispatch_New].[Broker] AS [Broker], 
+    [vwDispatch_New].[BillTo] AS [BillTo], 
+    [vwDispatch_New].[Container1] AS [Container1], 
+    [vwDispatch_New].[Seal] AS [Seal], 
+    [vwDispatch_New].[StreetTurn] AS [StreetTurn], 
+    [vwDispatch_New].[EquipmentSize] AS [EquipmentSize], 
+    [vwDispatch_New].[Chassis] AS [Chassis], 
+    [vwDispatch_New].[EquipmentProvider] AS [EquipmentProvider], 
+    [vwDispatch_New].[ChassisProvider] AS [ChassisProvider], 
+    [vwDispatch_New].[Booking] AS [Booking], 
+    [vwDispatch_New].[MasterBOL] AS [MasterBOL], 
+    [vwDispatch_New].[Reference] AS [Reference], 
+    [vwDispatch_New].[Pro] AS [Pro], 
+    [vwDispatch_New].[ApptNumber] AS [ApptNumber], 
+    [vwDispatch_New].[Release] AS [Release], 
+    [vwDispatch_New].[Weight] AS [Weight], 
+    [vwDispatch_New].[PieceCount] AS [PieceCount], 
+    [vwDispatch_New].[Commodity] AS [Commodity], 
+    [vwDispatch_New].[PO] AS [PO], 
+    [vwDispatch_New].[EquipmentPickup] AS [EquipmentPickup], 
+    [vwDispatch_New].[EquipmentReturn] AS [EquipmentReturn], 
+    [vwDispatch_New].[Origin] AS [Origin], 
+    [vwDispatch_New].[Destination] AS [Destination], 
+    [vwDispatch_New].[TypeOfMove] AS [TypeOfMove], 
+    [vwDispatch_New].[Duration] AS [Duration], 
+    [vwDispatch_New].[StorageLFD] AS [StorageLFD], 
+    [vwDispatch_New].[PerDiemLFD] AS [PerDiemLFD], 
+    [vwDispatch_New].[Cutoff] AS [Cutoff], 
+    [vwDispatch_New].[ApptTime] AS [ApptTime], 
+    [vwDispatch_New].[Container2] AS [Container2], 
+    [vwDispatch_New].[LocationHours] AS [LocationHours], 
+    [vwDispatch_New].[OutgateReceipt] AS [OutgateReceipt], 
+    [vwDispatch_New].[IngateReceipt] AS [IngateReceipt], 
+    [vwDispatch_New].[ReadyNotification] AS [ReadyNotification], 
+    [vwDispatch_New].[NotesInvoice] AS [NotesInvoice], 
+    [vwDispatch_New].[NotesPrivate] AS [NotesPrivate], 
+    [vwDispatch_New].[ETA] AS [ETA], 
+    [vwDispatch_New].[LinkedProNum] AS [LinkedProNum], 
+    [vwDispatch_New].[InfoSymbol] AS [InfoSymbol], 
+    [vwDispatch_New].[BilledAmount] AS [BilledAmount], 
+    [vwDispatch_New].[AcceptedByDispatch] AS [AcceptedByDispatch], 
+    [vwDispatch_New].[RejectedByDispatch] AS [RejectedByDispatch], 
+    [vwDispatch_New].[POD1] AS [POD1], 
+    [vwDispatch_New].[POD2] AS [POD2], 
+    [vwDispatch_New].[BOL] AS [BOL], 
+    [vwDispatch_New].[Uploaded] AS [Uploaded], 
+    [vwDispatch_New].[DateCreated] AS [DateCreated], 
+    [vwDispatch_New].[CreatedBy] AS [CreatedBy], 
+    [vwDispatch_New].[DateUpdated] AS [DateUpdated], 
+    [vwDispatch_New].[UpdatedBy] AS [UpdatedBy]
+    FROM [APTAdmin].[vwDispatch_New] AS [vwDispatch_New]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="vwDispatch_Progress" EntityType="Self.vwDispatch_Progress" store:Type="Views" store:Schema="APTAdmin">
             <DefiningQuery>SELECT 
     [vwDispatch_Progress].[WorkOrder] AS [WorkOrder], 
@@ -761,6 +1115,274 @@ warning 6002: The table/view 'AllPointsTransport.APTAdmin.vwDispatch_Progress' d
     [vwDispatch_Progress].[leg] AS [leg], 
     [vwDispatch_Progress].[WorkOrderID] AS [WorkOrderID]
     FROM [APTAdmin].[vwDispatch_Progress] AS [vwDispatch_Progress]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vwPopulateBillTo" EntityType="Self.vwPopulateBillTo" store:Type="Views" store:Schema="APTAdmin">
+            <DefiningQuery>SELECT 
+    [vwPopulateBillTo].[ContactID] AS [ContactID], 
+    [vwPopulateBillTo].[Active] AS [Active], 
+    [vwPopulateBillTo].[Company] AS [Company], 
+    [vwPopulateBillTo].[BillTo] AS [BillTo], 
+    [vwPopulateBillTo].[Broker] AS [Broker], 
+    [vwPopulateBillTo].[EquipmentProvider] AS [EquipmentProvider], 
+    [vwPopulateBillTo].[ChassisProvider] AS [ChassisProvider], 
+    [vwPopulateBillTo].[Location] AS [Location], 
+    [vwPopulateBillTo].[RailPort] AS [RailPort], 
+    [vwPopulateBillTo].[CYDepot] AS [CYDepot], 
+    [vwPopulateBillTo].[DallasDY] AS [DallasDY], 
+    [vwPopulateBillTo].[FtWorthDY] AS [FtWorthDY], 
+    [vwPopulateBillTo].[Vendor] AS [Vendor], 
+    [vwPopulateBillTo].[Description] AS [Description], 
+    [vwPopulateBillTo].[Contact1] AS [Contact1], 
+    [vwPopulateBillTo].[Phone1] AS [Phone1], 
+    [vwPopulateBillTo].[Email1] AS [Email1], 
+    [vwPopulateBillTo].[Contact2] AS [Contact2], 
+    [vwPopulateBillTo].[Phone2] AS [Phone2], 
+    [vwPopulateBillTo].[Email2] AS [Email2], 
+    [vwPopulateBillTo].[Fax] AS [Fax], 
+    [vwPopulateBillTo].[Address1] AS [Address1], 
+    [vwPopulateBillTo].[Address2] AS [Address2], 
+    [vwPopulateBillTo].[City] AS [City], 
+    [vwPopulateBillTo].[State] AS [State], 
+    [vwPopulateBillTo].[Zip] AS [Zip], 
+    [vwPopulateBillTo].[BillingCode] AS [BillingCode], 
+    [vwPopulateBillTo].[CCType] AS [CCType], 
+    [vwPopulateBillTo].[CCNum] AS [CCNum], 
+    [vwPopulateBillTo].[CCExpiration] AS [CCExpiration], 
+    [vwPopulateBillTo].[CCSecurityCode] AS [CCSecurityCode], 
+    [vwPopulateBillTo].[CCCardholder] AS [CCCardholder], 
+    [vwPopulateBillTo].[CCBillingStreet] AS [CCBillingStreet], 
+    [vwPopulateBillTo].[CCBillingZip] AS [CCBillingZip], 
+    [vwPopulateBillTo].[MC] AS [MC], 
+    [vwPopulateBillTo].[Notes] AS [Notes], 
+    [vwPopulateBillTo].[TotalCredit] AS [TotalCredit], 
+    [vwPopulateBillTo].[DateCreated] AS [DateCreated], 
+    [vwPopulateBillTo].[CreatedBy] AS [CreatedBy], 
+    [vwPopulateBillTo].[LastUpdated] AS [LastUpdated], 
+    [vwPopulateBillTo].[UpdatedBy] AS [UpdatedBy]
+    FROM [APTAdmin].[vwPopulateBillTo] AS [vwPopulateBillTo]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vwPopulateBroker" EntityType="Self.vwPopulateBroker" store:Type="Views" store:Schema="APTAdmin">
+            <DefiningQuery>SELECT 
+    [vwPopulateBroker].[ContactID] AS [ContactID], 
+    [vwPopulateBroker].[Active] AS [Active], 
+    [vwPopulateBroker].[Company] AS [Company], 
+    [vwPopulateBroker].[BillTo] AS [BillTo], 
+    [vwPopulateBroker].[Broker] AS [Broker], 
+    [vwPopulateBroker].[EquipmentProvider] AS [EquipmentProvider], 
+    [vwPopulateBroker].[ChassisProvider] AS [ChassisProvider], 
+    [vwPopulateBroker].[Location] AS [Location], 
+    [vwPopulateBroker].[RailPort] AS [RailPort], 
+    [vwPopulateBroker].[CYDepot] AS [CYDepot], 
+    [vwPopulateBroker].[DallasDY] AS [DallasDY], 
+    [vwPopulateBroker].[FtWorthDY] AS [FtWorthDY], 
+    [vwPopulateBroker].[Vendor] AS [Vendor], 
+    [vwPopulateBroker].[Description] AS [Description], 
+    [vwPopulateBroker].[Contact1] AS [Contact1], 
+    [vwPopulateBroker].[Phone1] AS [Phone1], 
+    [vwPopulateBroker].[Email1] AS [Email1], 
+    [vwPopulateBroker].[Contact2] AS [Contact2], 
+    [vwPopulateBroker].[Phone2] AS [Phone2], 
+    [vwPopulateBroker].[Email2] AS [Email2], 
+    [vwPopulateBroker].[Fax] AS [Fax], 
+    [vwPopulateBroker].[Address1] AS [Address1], 
+    [vwPopulateBroker].[Address2] AS [Address2], 
+    [vwPopulateBroker].[City] AS [City], 
+    [vwPopulateBroker].[State] AS [State], 
+    [vwPopulateBroker].[Zip] AS [Zip], 
+    [vwPopulateBroker].[BillingCode] AS [BillingCode], 
+    [vwPopulateBroker].[CCType] AS [CCType], 
+    [vwPopulateBroker].[CCNum] AS [CCNum], 
+    [vwPopulateBroker].[CCExpiration] AS [CCExpiration], 
+    [vwPopulateBroker].[CCSecurityCode] AS [CCSecurityCode], 
+    [vwPopulateBroker].[CCCardholder] AS [CCCardholder], 
+    [vwPopulateBroker].[CCBillingStreet] AS [CCBillingStreet], 
+    [vwPopulateBroker].[CCBillingZip] AS [CCBillingZip], 
+    [vwPopulateBroker].[MC] AS [MC], 
+    [vwPopulateBroker].[Notes] AS [Notes], 
+    [vwPopulateBroker].[TotalCredit] AS [TotalCredit], 
+    [vwPopulateBroker].[DateCreated] AS [DateCreated], 
+    [vwPopulateBroker].[CreatedBy] AS [CreatedBy], 
+    [vwPopulateBroker].[LastUpdated] AS [LastUpdated], 
+    [vwPopulateBroker].[UpdatedBy] AS [UpdatedBy]
+    FROM [APTAdmin].[vwPopulateBroker] AS [vwPopulateBroker]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vwPopulateChassisProvider" EntityType="Self.vwPopulateChassisProvider" store:Type="Views" store:Schema="APTAdmin">
+            <DefiningQuery>SELECT 
+    [vwPopulateChassisProvider].[ContactID] AS [ContactID], 
+    [vwPopulateChassisProvider].[Active] AS [Active], 
+    [vwPopulateChassisProvider].[Company] AS [Company], 
+    [vwPopulateChassisProvider].[BillTo] AS [BillTo], 
+    [vwPopulateChassisProvider].[Broker] AS [Broker], 
+    [vwPopulateChassisProvider].[EquipmentProvider] AS [EquipmentProvider], 
+    [vwPopulateChassisProvider].[ChassisProvider] AS [ChassisProvider], 
+    [vwPopulateChassisProvider].[Location] AS [Location], 
+    [vwPopulateChassisProvider].[RailPort] AS [RailPort], 
+    [vwPopulateChassisProvider].[CYDepot] AS [CYDepot], 
+    [vwPopulateChassisProvider].[DallasDY] AS [DallasDY], 
+    [vwPopulateChassisProvider].[FtWorthDY] AS [FtWorthDY], 
+    [vwPopulateChassisProvider].[Vendor] AS [Vendor], 
+    [vwPopulateChassisProvider].[Description] AS [Description], 
+    [vwPopulateChassisProvider].[Contact1] AS [Contact1], 
+    [vwPopulateChassisProvider].[Phone1] AS [Phone1], 
+    [vwPopulateChassisProvider].[Email1] AS [Email1], 
+    [vwPopulateChassisProvider].[Contact2] AS [Contact2], 
+    [vwPopulateChassisProvider].[Phone2] AS [Phone2], 
+    [vwPopulateChassisProvider].[Email2] AS [Email2], 
+    [vwPopulateChassisProvider].[Fax] AS [Fax], 
+    [vwPopulateChassisProvider].[Address1] AS [Address1], 
+    [vwPopulateChassisProvider].[Address2] AS [Address2], 
+    [vwPopulateChassisProvider].[City] AS [City], 
+    [vwPopulateChassisProvider].[State] AS [State], 
+    [vwPopulateChassisProvider].[Zip] AS [Zip], 
+    [vwPopulateChassisProvider].[BillingCode] AS [BillingCode], 
+    [vwPopulateChassisProvider].[CCType] AS [CCType], 
+    [vwPopulateChassisProvider].[CCNum] AS [CCNum], 
+    [vwPopulateChassisProvider].[CCExpiration] AS [CCExpiration], 
+    [vwPopulateChassisProvider].[CCSecurityCode] AS [CCSecurityCode], 
+    [vwPopulateChassisProvider].[CCCardholder] AS [CCCardholder], 
+    [vwPopulateChassisProvider].[CCBillingStreet] AS [CCBillingStreet], 
+    [vwPopulateChassisProvider].[CCBillingZip] AS [CCBillingZip], 
+    [vwPopulateChassisProvider].[MC] AS [MC], 
+    [vwPopulateChassisProvider].[Notes] AS [Notes], 
+    [vwPopulateChassisProvider].[TotalCredit] AS [TotalCredit], 
+    [vwPopulateChassisProvider].[DateCreated] AS [DateCreated], 
+    [vwPopulateChassisProvider].[CreatedBy] AS [CreatedBy], 
+    [vwPopulateChassisProvider].[LastUpdated] AS [LastUpdated], 
+    [vwPopulateChassisProvider].[UpdatedBy] AS [UpdatedBy]
+    FROM [APTAdmin].[vwPopulateChassisProvider] AS [vwPopulateChassisProvider]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vwPopulateDrivers" EntityType="Self.vwPopulateDrivers" store:Type="Views" store:Schema="APTAdmin">
+            <DefiningQuery>SELECT 
+    [vwPopulateDrivers].[DriverID] AS [DriverID], 
+    [vwPopulateDrivers].[DriverNo] AS [DriverNo], 
+    [vwPopulateDrivers].[Active] AS [Active], 
+    [vwPopulateDrivers].[DriverType] AS [DriverType], 
+    [vwPopulateDrivers].[EmployeePayPct] AS [EmployeePayPct], 
+    [vwPopulateDrivers].[First] AS [First], 
+    [vwPopulateDrivers].[Last] AS [Last], 
+    [vwPopulateDrivers].[FullName] AS [FullName], 
+    [vwPopulateDrivers].[NickName] AS [NickName], 
+    [vwPopulateDrivers].[Address1] AS [Address1], 
+    [vwPopulateDrivers].[Address2] AS [Address2], 
+    [vwPopulateDrivers].[City] AS [City], 
+    [vwPopulateDrivers].[State] AS [State], 
+    [vwPopulateDrivers].[Zip] AS [Zip], 
+    [vwPopulateDrivers].[HomePhone] AS [HomePhone], 
+    [vwPopulateDrivers].[MobilePhone] AS [MobilePhone], 
+    [vwPopulateDrivers].[Email] AS [Email], 
+    [vwPopulateDrivers].[TextMessage] AS [TextMessage], 
+    [vwPopulateDrivers].[EmergencyContact] AS [EmergencyContact], 
+    [vwPopulateDrivers].[EmergencyPhone] AS [EmergencyPhone], 
+    [vwPopulateDrivers].[SSNum] AS [SSNum], 
+    [vwPopulateDrivers].[DOB] AS [DOB], 
+    [vwPopulateDrivers].[CDLNum] AS [CDLNum], 
+    [vwPopulateDrivers].[CDLExpiration] AS [CDLExpiration], 
+    [vwPopulateDrivers].[MedicalExpiration] AS [MedicalExpiration], 
+    [vwPopulateDrivers].[TWICExpiration] AS [TWICExpiration], 
+    [vwPopulateDrivers].[AnnualReview] AS [AnnualReview], 
+    [vwPopulateDrivers].[HireDate] AS [HireDate], 
+    [vwPopulateDrivers].[ResignDate] AS [ResignDate], 
+    [vwPopulateDrivers].[ResignReason] AS [ResignReason], 
+    [vwPopulateDrivers].[Rehire] AS [Rehire], 
+    [vwPopulateDrivers].[FuelCardNum] AS [FuelCardNum], 
+    [vwPopulateDrivers].[Notes] AS [Notes], 
+    [vwPopulateDrivers].[TruckNum] AS [TruckNum], 
+    [vwPopulateDrivers].[Color] AS [Color], 
+    [vwPopulateDrivers].[DateCreated] AS [DateCreated], 
+    [vwPopulateDrivers].[CreatedBy] AS [CreatedBy], 
+    [vwPopulateDrivers].[LastUpdated] AS [LastUpdated], 
+    [vwPopulateDrivers].[UpdatedBy] AS [UpdatedBy]
+    FROM [APTAdmin].[vwPopulateDrivers] AS [vwPopulateDrivers]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vwPopulateEquipmentProvider" EntityType="Self.vwPopulateEquipmentProvider" store:Type="Views" store:Schema="APTAdmin">
+            <DefiningQuery>SELECT 
+    [vwPopulateEquipmentProvider].[ContactID] AS [ContactID], 
+    [vwPopulateEquipmentProvider].[Active] AS [Active], 
+    [vwPopulateEquipmentProvider].[Company] AS [Company], 
+    [vwPopulateEquipmentProvider].[BillTo] AS [BillTo], 
+    [vwPopulateEquipmentProvider].[Broker] AS [Broker], 
+    [vwPopulateEquipmentProvider].[EquipmentProvider] AS [EquipmentProvider], 
+    [vwPopulateEquipmentProvider].[ChassisProvider] AS [ChassisProvider], 
+    [vwPopulateEquipmentProvider].[Location] AS [Location], 
+    [vwPopulateEquipmentProvider].[RailPort] AS [RailPort], 
+    [vwPopulateEquipmentProvider].[CYDepot] AS [CYDepot], 
+    [vwPopulateEquipmentProvider].[DallasDY] AS [DallasDY], 
+    [vwPopulateEquipmentProvider].[FtWorthDY] AS [FtWorthDY], 
+    [vwPopulateEquipmentProvider].[Vendor] AS [Vendor], 
+    [vwPopulateEquipmentProvider].[Description] AS [Description], 
+    [vwPopulateEquipmentProvider].[Contact1] AS [Contact1], 
+    [vwPopulateEquipmentProvider].[Phone1] AS [Phone1], 
+    [vwPopulateEquipmentProvider].[Email1] AS [Email1], 
+    [vwPopulateEquipmentProvider].[Contact2] AS [Contact2], 
+    [vwPopulateEquipmentProvider].[Phone2] AS [Phone2], 
+    [vwPopulateEquipmentProvider].[Email2] AS [Email2], 
+    [vwPopulateEquipmentProvider].[Fax] AS [Fax], 
+    [vwPopulateEquipmentProvider].[Address1] AS [Address1], 
+    [vwPopulateEquipmentProvider].[Address2] AS [Address2], 
+    [vwPopulateEquipmentProvider].[City] AS [City], 
+    [vwPopulateEquipmentProvider].[State] AS [State], 
+    [vwPopulateEquipmentProvider].[Zip] AS [Zip], 
+    [vwPopulateEquipmentProvider].[BillingCode] AS [BillingCode], 
+    [vwPopulateEquipmentProvider].[CCType] AS [CCType], 
+    [vwPopulateEquipmentProvider].[CCNum] AS [CCNum], 
+    [vwPopulateEquipmentProvider].[CCExpiration] AS [CCExpiration], 
+    [vwPopulateEquipmentProvider].[CCSecurityCode] AS [CCSecurityCode], 
+    [vwPopulateEquipmentProvider].[CCCardholder] AS [CCCardholder], 
+    [vwPopulateEquipmentProvider].[CCBillingStreet] AS [CCBillingStreet], 
+    [vwPopulateEquipmentProvider].[CCBillingZip] AS [CCBillingZip], 
+    [vwPopulateEquipmentProvider].[MC] AS [MC], 
+    [vwPopulateEquipmentProvider].[Notes] AS [Notes], 
+    [vwPopulateEquipmentProvider].[TotalCredit] AS [TotalCredit], 
+    [vwPopulateEquipmentProvider].[DateCreated] AS [DateCreated], 
+    [vwPopulateEquipmentProvider].[CreatedBy] AS [CreatedBy], 
+    [vwPopulateEquipmentProvider].[LastUpdated] AS [LastUpdated], 
+    [vwPopulateEquipmentProvider].[UpdatedBy] AS [UpdatedBy]
+    FROM [APTAdmin].[vwPopulateEquipmentProvider] AS [vwPopulateEquipmentProvider]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vwPopulateOriginDestination" EntityType="Self.vwPopulateOriginDestination" store:Type="Views" store:Schema="APTAdmin">
+            <DefiningQuery>SELECT 
+    [vwPopulateOriginDestination].[ContactID] AS [ContactID], 
+    [vwPopulateOriginDestination].[Active] AS [Active], 
+    [vwPopulateOriginDestination].[Company] AS [Company], 
+    [vwPopulateOriginDestination].[BillTo] AS [BillTo], 
+    [vwPopulateOriginDestination].[Broker] AS [Broker], 
+    [vwPopulateOriginDestination].[EquipmentProvider] AS [EquipmentProvider], 
+    [vwPopulateOriginDestination].[ChassisProvider] AS [ChassisProvider], 
+    [vwPopulateOriginDestination].[Location] AS [Location], 
+    [vwPopulateOriginDestination].[RailPort] AS [RailPort], 
+    [vwPopulateOriginDestination].[CYDepot] AS [CYDepot], 
+    [vwPopulateOriginDestination].[DallasDY] AS [DallasDY], 
+    [vwPopulateOriginDestination].[FtWorthDY] AS [FtWorthDY], 
+    [vwPopulateOriginDestination].[Vendor] AS [Vendor], 
+    [vwPopulateOriginDestination].[Description] AS [Description], 
+    [vwPopulateOriginDestination].[Contact1] AS [Contact1], 
+    [vwPopulateOriginDestination].[Phone1] AS [Phone1], 
+    [vwPopulateOriginDestination].[Email1] AS [Email1], 
+    [vwPopulateOriginDestination].[Contact2] AS [Contact2], 
+    [vwPopulateOriginDestination].[Phone2] AS [Phone2], 
+    [vwPopulateOriginDestination].[Email2] AS [Email2], 
+    [vwPopulateOriginDestination].[Fax] AS [Fax], 
+    [vwPopulateOriginDestination].[Address1] AS [Address1], 
+    [vwPopulateOriginDestination].[Address2] AS [Address2], 
+    [vwPopulateOriginDestination].[City] AS [City], 
+    [vwPopulateOriginDestination].[State] AS [State], 
+    [vwPopulateOriginDestination].[Zip] AS [Zip], 
+    [vwPopulateOriginDestination].[BillingCode] AS [BillingCode], 
+    [vwPopulateOriginDestination].[CCType] AS [CCType], 
+    [vwPopulateOriginDestination].[CCNum] AS [CCNum], 
+    [vwPopulateOriginDestination].[CCExpiration] AS [CCExpiration], 
+    [vwPopulateOriginDestination].[CCSecurityCode] AS [CCSecurityCode], 
+    [vwPopulateOriginDestination].[CCCardholder] AS [CCCardholder], 
+    [vwPopulateOriginDestination].[CCBillingStreet] AS [CCBillingStreet], 
+    [vwPopulateOriginDestination].[CCBillingZip] AS [CCBillingZip], 
+    [vwPopulateOriginDestination].[MC] AS [MC], 
+    [vwPopulateOriginDestination].[Notes] AS [Notes], 
+    [vwPopulateOriginDestination].[TotalCredit] AS [TotalCredit], 
+    [vwPopulateOriginDestination].[DateCreated] AS [DateCreated], 
+    [vwPopulateOriginDestination].[CreatedBy] AS [CreatedBy], 
+    [vwPopulateOriginDestination].[LastUpdated] AS [LastUpdated], 
+    [vwPopulateOriginDestination].[UpdatedBy] AS [UpdatedBy]
+    FROM [APTAdmin].[vwPopulateOriginDestination] AS [vwPopulateOriginDestination]</DefiningQuery>
           </EntitySet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -801,20 +1423,29 @@ warning 6002: The table/view 'AllPointsTransport.APTAdmin.vwDispatch_Progress' d
           <EntitySet Name="Contacts" EntityType="AllPointsTransportDataModel.Contact" />
           <EntitySet Name="DriverPays" EntityType="AllPointsTransportDataModel.DriverPay" />
           <EntitySet Name="Drivers" EntityType="AllPointsTransportDataModel.Driver" />
+          <EntitySet Name="Payrolls" EntityType="AllPointsTransportDataModel.Payroll" />
+          <EntitySet Name="TemplatesDriverPays" EntityType="AllPointsTransportDataModel.TemplatesDriverPay" />
+          <EntitySet Name="TemplatesWOes" EntityType="AllPointsTransportDataModel.TemplatesWO" />
           <EntitySet Name="WOLineItems" EntityType="AllPointsTransportDataModel.WOLineItem" />
           <EntitySet Name="WorkOrders" EntityType="AllPointsTransportDataModel.WorkOrder" />
           <EntitySet Name="Employees" EntityType="AllPointsTransportDataModel.Employee" />
-          <EntitySet Name="Payrolls" EntityType="AllPointsTransportDataModel.Payroll" />
           <EntitySet Name="RowColors" EntityType="AllPointsTransportDataModel.RowColor" />
           <EntitySet Name="RowColorsDrivers" EntityType="AllPointsTransportDataModel.RowColorsDriver" />
           <EntitySet Name="Schedules" EntityType="AllPointsTransportDataModel.Schedule" />
           <EntitySet Name="Settings" EntityType="AllPointsTransportDataModel.Setting" />
           <EntitySet Name="TaskManagements" EntityType="AllPointsTransportDataModel.TaskManagement" />
-          <EntitySet Name="TemplatesDriverPays" EntityType="AllPointsTransportDataModel.TemplatesDriverPay" />
-          <EntitySet Name="TemplatesWOes" EntityType="AllPointsTransportDataModel.TemplatesWO" />
           <EntitySet Name="TemplatesWOLineItems" EntityType="AllPointsTransportDataModel.TemplatesWOLineItem" />
           <EntitySet Name="Trucks" EntityType="AllPointsTransportDataModel.Truck" />
+          <EntitySet Name="vwDispatch_New" EntityType="AllPointsTransportDataModel.vwDispatch_New" />
           <EntitySet Name="vwDispatch_Progress" EntityType="AllPointsTransportDataModel.vwDispatch_Progress" />
+          <EntitySet Name="vwPopulateBillToes" EntityType="AllPointsTransportDataModel.vwPopulateBillTo" />
+          <EntitySet Name="vwPopulateBrokers" EntityType="AllPointsTransportDataModel.vwPopulateBroker" />
+          <EntitySet Name="vwPopulateChassisProviders" EntityType="AllPointsTransportDataModel.vwPopulateChassisProvider" />
+          <EntitySet Name="vwPopulateDrivers" EntityType="AllPointsTransportDataModel.vwPopulateDriver" />
+          <EntitySet Name="vwPopulateEquipmentProviders" EntityType="AllPointsTransportDataModel.vwPopulateEquipmentProvider" />
+          <EntitySet Name="vwPopulateOriginDestinations" EntityType="AllPointsTransportDataModel.vwPopulateOriginDestination" />
+          <EntitySet Name="AgentCodes" EntityType="AllPointsTransportDataModel.AgentCode" />
+          <EntitySet Name="ContactAgentCodes" EntityType="AllPointsTransportDataModel.ContactAgentCode" />
           </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -965,6 +1596,90 @@ warning 6002: The table/view 'AllPointsTransport.APTAdmin.vwDispatch_Progress' d
           <Property Name="LastUpdated" Type="DateTime" Precision="0" />
           <Property Name="UpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="Payroll">
+          <Key>
+            <PropertyRef Name="PayrollID" />
+          </Key>
+          <Property Name="PayrollID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Driver" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="PayDate" Type="DateTime" Precision="0" />
+          <Property Name="PayPeriodStart" Type="DateTime" Precision="0" />
+          <Property Name="PayPeriodEnd" Type="DateTime" Precision="0" />
+          <Property Name="Freight" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Fuel" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Deductions" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Total" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="DateCreated" Type="DateTime" Precision="0" />
+          <Property Name="CreatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="TemplatesDriverPay">
+          <Key>
+            <PropertyRef Name="TemplatesDriverPayID" />
+          </Key>
+          <Property Name="TemplatesDriverPayID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TemplateName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="RowOrder" Type="Int32" />
+          <Property Name="ToDispatch" Type="Boolean" />
+          <Property Name="ActiveLeg" Type="Boolean" />
+          <Property Name="TypeOfLoad" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="PayType" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="DispatchNotes" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ApptTime" Type="DateTime" Precision="0" />
+          <Property Name="DetentionStarts" Type="DateTime" Precision="0" />
+          <Property Name="DepartTime" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ArrivalTime" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="LineHaulAmountTruck" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="FSAmountTruck" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="TotalAmountTruck" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="TotalAmountEmployee" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Driver" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="DriverRowID" Type="Int32" />
+          <Property Name="DriverType" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="TruckNum" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="TruckPayPct" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="FSDeductionPct" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="EmployeePayPct" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Origin" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Destination" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Duration" Type="Int32" />
+          <Property Name="PrePlanSent" Type="Boolean" />
+          <Property Name="DispatchAcceptedStatus" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="WayBilled" Type="Boolean" />
+          <Property Name="PayDriver" Type="Boolean" />
+          <Property Name="Outgate" Type="Boolean" />
+          <Property Name="Ingate" Type="Boolean" />
+          <Property Name="POD" Type="Boolean" />
+          <Property Name="BOL" Type="Boolean" />
+          <Property Name="ReceivedDate" Type="DateTime" Precision="0" />
+          <Property Name="DriverPaid" Type="Boolean" />
+          <Property Name="CommissionPaid" Type="Boolean" />
+          <Property Name="DateCreated" Type="DateTime" Precision="0" />
+          <Property Name="CreatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="DateUpdated" Type="DateTime" Precision="0" />
+          <Property Name="UpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="TemplatesWO">
+          <Key>
+            <PropertyRef Name="TemplateWOID" />
+          </Key>
+          <Property Name="TemplateWOID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TemplateName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="BillTo" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Broker" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="TypeOfMove" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="EquipmentProvider" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="EquipmentSize" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ChassisProvider" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="EquipmentPickup" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="EquipmentReturn" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="LocationHours" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Origin" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Destination" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="DateCreated" Type="DateTime" Precision="0" />
+          <Property Name="CreatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="DateUpdated" Type="DateTime" Precision="0" />
+          <Property Name="UpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
         <EntityType Name="WOLineItem">
           <Key>
             <PropertyRef Name="WorkOrderLineItemID" />
@@ -1096,22 +1811,6 @@ warning 6002: The table/view 'AllPointsTransport.APTAdmin.vwDispatch_Progress' d
           <Property Name="LastUpdated" Type="DateTime" Precision="0" />
           <Property Name="UpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="Payroll">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
-          <Property Name="Driver" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="PayDate" Type="DateTime" Precision="0" />
-          <Property Name="PayPeriodStart" Type="DateTime" Precision="0" />
-          <Property Name="PayPeriodEnd" Type="DateTime" Precision="0" />
-          <Property Name="Freight" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="Fuel" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="Deductions" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="Total" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="DateCreated" Type="DateTime" Precision="0" />
-          <Property Name="CreatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="RowColor">
           <Key>
             <PropertyRef Name="WorkOrder" />
@@ -1180,75 +1879,6 @@ warning 6002: The table/view 'AllPointsTransport.APTAdmin.vwDispatch_Progress' d
           <Property Name="DateUpdated" Type="DateTime" Precision="0" />
           <Property Name="UpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="TemplatesDriverPay">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
-          <Property Name="TemplateName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="RowOrder" Type="Int32" />
-          <Property Name="ToDispatch" Type="Boolean" />
-          <Property Name="ActiveLeg" Type="Boolean" />
-          <Property Name="TypeOfLoad" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="PayType" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="DispatchNotes" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="ApptTime" Type="DateTime" Precision="0" />
-          <Property Name="DetentionStarts" Type="DateTime" Precision="0" />
-          <Property Name="DepartTime" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="ArrivalTime" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="LineHaulAmountTruck" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="FSAmountTruck" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="TotalAmountTruck" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="TotalAmountEmployee" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="Driver" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="DriverRowID" Type="Int32" />
-          <Property Name="DriverType" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="TruckNum" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="TruckPayPct" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="FSDeductionPct" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="EmployeePayPct" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="Origin" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="Destination" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="Duration" Type="Int32" />
-          <Property Name="PrePlanSent" Type="Boolean" />
-          <Property Name="DispatchAcceptedStatus" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="WayBilled" Type="Boolean" />
-          <Property Name="PayDriver" Type="Boolean" />
-          <Property Name="Outgate" Type="Boolean" />
-          <Property Name="Ingate" Type="Boolean" />
-          <Property Name="POD" Type="Boolean" />
-          <Property Name="BOL" Type="Boolean" />
-          <Property Name="ReceivedDate" Type="DateTime" Precision="0" />
-          <Property Name="DriverPaid" Type="Boolean" />
-          <Property Name="CommissionPaid" Type="Boolean" />
-          <Property Name="DateCreated" Type="DateTime" Precision="0" />
-          <Property Name="CreatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="DateUpdated" Type="DateTime" Precision="0" />
-          <Property Name="UpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="TemplatesWO">
-          <Key>
-            <PropertyRef Name="ID" />
-            <PropertyRef Name="TemplateName" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
-          <Property Name="TemplateName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="BillTo" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="Broker" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="TypeOfMove" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="EquipmentProvider" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="EquipmentSize" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="ChassisProvider" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="EquipmentPickup" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="EquipmentReturn" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="LocationHours" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="Origin" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="Destination" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="DateCreated" Type="DateTime" Precision="0" />
-          <Property Name="CreatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="DateUpdated" Type="DateTime" Precision="0" />
-          <Property Name="UpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="TemplatesWOLineItem">
           <Key>
             <PropertyRef Name="ID" />
@@ -1295,6 +1925,72 @@ warning 6002: The table/view 'AllPointsTransport.APTAdmin.vwDispatch_Progress' d
           <Property Name="DateUpdated" Type="DateTime" Precision="0" />
           <Property Name="UpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="vwDispatch_New">
+          <Key>
+            <PropertyRef Name="WorkOrderID" />
+            <PropertyRef Name="InvoicedDate" />
+            <PropertyRef Name="DatePaid" />
+            <PropertyRef Name="StorageLFD" />
+            <PropertyRef Name="Cutoff" />
+            <PropertyRef Name="ApptTime" />
+          </Key>
+          <Property Name="WorkOrderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="WorkOrderNo" Type="Int32" />
+          <Property Name="Completed" Type="Boolean" />
+          <Property Name="Status" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="InvoicedDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="DatePaid" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Broker" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="BillTo" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Container1" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Seal" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="StreetTurn" Type="Boolean" />
+          <Property Name="EquipmentSize" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Chassis" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="EquipmentProvider" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ChassisProvider" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Booking" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="MasterBOL" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Reference" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Pro" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ApptNumber" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Release" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Weight" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="PieceCount" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Commodity" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="PO" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="EquipmentPickup" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="EquipmentReturn" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Origin" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Destination" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="TypeOfMove" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Duration" Type="Int32" />
+          <Property Name="StorageLFD" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="PerDiemLFD" Type="DateTime" Precision="0" />
+          <Property Name="Cutoff" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ApptTime" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Container2" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="LocationHours" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="OutgateReceipt" Type="DateTime" Precision="0" />
+          <Property Name="IngateReceipt" Type="DateTime" Precision="0" />
+          <Property Name="ReadyNotification" Type="DateTime" Precision="0" />
+          <Property Name="NotesInvoice" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="NotesPrivate" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ETA" Type="DateTime" Precision="0" />
+          <Property Name="LinkedProNum" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="InfoSymbol" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="BilledAmount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="AcceptedByDispatch" Type="Boolean" />
+          <Property Name="RejectedByDispatch" Type="Boolean" />
+          <Property Name="POD1" Type="Boolean" />
+          <Property Name="POD2" Type="Boolean" />
+          <Property Name="BOL" Type="Boolean" />
+          <Property Name="Uploaded" Type="Boolean" />
+          <Property Name="DateCreated" Type="DateTime" Precision="0" />
+          <Property Name="CreatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="DateUpdated" Type="DateTime" Precision="0" />
+          <Property Name="UpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
         <EntityType Name="vwDispatch_Progress">
           <Key>
             <PropertyRef Name="WorkOrderID" />
@@ -1307,6 +2003,296 @@ warning 6002: The table/view 'AllPointsTransport.APTAdmin.vwDispatch_Progress' d
           <Property Name="Status" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="leg" Type="String" MaxLength="514" FixedLength="false" Unicode="true" />
           <Property Name="WorkOrderID" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="vwPopulateBillTo">
+          <Key>
+            <PropertyRef Name="ContactID" />
+          </Key>
+          <Property Name="ContactID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Active" Type="Boolean" />
+          <Property Name="Company" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="BillTo" Type="Boolean" />
+          <Property Name="Broker" Type="Boolean" />
+          <Property Name="EquipmentProvider" Type="Boolean" />
+          <Property Name="ChassisProvider" Type="Boolean" />
+          <Property Name="Location" Type="Boolean" />
+          <Property Name="RailPort" Type="Boolean" />
+          <Property Name="CYDepot" Type="Boolean" />
+          <Property Name="DallasDY" Type="Boolean" />
+          <Property Name="FtWorthDY" Type="Boolean" />
+          <Property Name="Vendor" Type="Boolean" />
+          <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Contact1" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Phone1" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Email1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Contact2" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Phone2" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Email2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Fax" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Address1" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Address2" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Zip" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="BillingCode" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CCType" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CCNum" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CCExpiration" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CCSecurityCode" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CCCardholder" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CCBillingStreet" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CCBillingZip" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="MC" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TotalCredit" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="DateCreated" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdated" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="vwPopulateBroker">
+          <Key>
+            <PropertyRef Name="ContactID" />
+          </Key>
+          <Property Name="ContactID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Active" Type="Boolean" />
+          <Property Name="Company" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="BillTo" Type="Boolean" />
+          <Property Name="Broker" Type="Boolean" />
+          <Property Name="EquipmentProvider" Type="Boolean" />
+          <Property Name="ChassisProvider" Type="Boolean" />
+          <Property Name="Location" Type="Boolean" />
+          <Property Name="RailPort" Type="Boolean" />
+          <Property Name="CYDepot" Type="Boolean" />
+          <Property Name="DallasDY" Type="Boolean" />
+          <Property Name="FtWorthDY" Type="Boolean" />
+          <Property Name="Vendor" Type="Boolean" />
+          <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Contact1" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Phone1" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Email1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Contact2" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Phone2" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Email2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Fax" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Address1" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Address2" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Zip" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="BillingCode" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CCType" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CCNum" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CCExpiration" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CCSecurityCode" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CCCardholder" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CCBillingStreet" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CCBillingZip" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="MC" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TotalCredit" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="DateCreated" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdated" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="vwPopulateChassisProvider">
+          <Key>
+            <PropertyRef Name="ContactID" />
+          </Key>
+          <Property Name="ContactID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Active" Type="Boolean" />
+          <Property Name="Company" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="BillTo" Type="Boolean" />
+          <Property Name="Broker" Type="Boolean" />
+          <Property Name="EquipmentProvider" Type="Boolean" />
+          <Property Name="ChassisProvider" Type="Boolean" />
+          <Property Name="Location" Type="Boolean" />
+          <Property Name="RailPort" Type="Boolean" />
+          <Property Name="CYDepot" Type="Boolean" />
+          <Property Name="DallasDY" Type="Boolean" />
+          <Property Name="FtWorthDY" Type="Boolean" />
+          <Property Name="Vendor" Type="Boolean" />
+          <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Contact1" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Phone1" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Email1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Contact2" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Phone2" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Email2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Fax" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Address1" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Address2" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Zip" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="BillingCode" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CCType" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CCNum" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CCExpiration" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CCSecurityCode" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CCCardholder" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CCBillingStreet" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CCBillingZip" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="MC" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TotalCredit" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="DateCreated" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdated" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="vwPopulateDriver">
+          <Key>
+            <PropertyRef Name="DriverID" />
+          </Key>
+          <Property Name="DriverID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DriverNo" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Active" Type="Boolean" />
+          <Property Name="DriverType" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="EmployeePayPct" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="First" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Last" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="FullName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="NickName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Address1" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Address2" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Zip" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="HomePhone" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="MobilePhone" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="TextMessage" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="EmergencyContact" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="EmergencyPhone" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="SSNum" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="DOB" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CDLNum" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CDLExpiration" Type="DateTime" Precision="0" />
+          <Property Name="MedicalExpiration" Type="DateTime" Precision="0" />
+          <Property Name="TWICExpiration" Type="DateTime" Precision="0" />
+          <Property Name="AnnualReview" Type="DateTime" Precision="0" />
+          <Property Name="HireDate" Type="DateTime" Precision="0" />
+          <Property Name="ResignDate" Type="DateTime" Precision="0" />
+          <Property Name="ResignReason" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Rehire" Type="Boolean" />
+          <Property Name="FuelCardNum" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TruckNum" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Color" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="DateCreated" Type="DateTime" Precision="0" />
+          <Property Name="CreatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdated" Type="DateTime" Precision="0" />
+          <Property Name="UpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="vwPopulateEquipmentProvider">
+          <Key>
+            <PropertyRef Name="ContactID" />
+          </Key>
+          <Property Name="ContactID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Active" Type="Boolean" />
+          <Property Name="Company" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="BillTo" Type="Boolean" />
+          <Property Name="Broker" Type="Boolean" />
+          <Property Name="EquipmentProvider" Type="Boolean" />
+          <Property Name="ChassisProvider" Type="Boolean" />
+          <Property Name="Location" Type="Boolean" />
+          <Property Name="RailPort" Type="Boolean" />
+          <Property Name="CYDepot" Type="Boolean" />
+          <Property Name="DallasDY" Type="Boolean" />
+          <Property Name="FtWorthDY" Type="Boolean" />
+          <Property Name="Vendor" Type="Boolean" />
+          <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Contact1" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Phone1" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Email1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Contact2" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Phone2" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Email2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Fax" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Address1" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Address2" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Zip" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="BillingCode" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CCType" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CCNum" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CCExpiration" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CCSecurityCode" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CCCardholder" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CCBillingStreet" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CCBillingZip" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="MC" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TotalCredit" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="DateCreated" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdated" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="vwPopulateOriginDestination">
+          <Key>
+            <PropertyRef Name="ContactID" />
+          </Key>
+          <Property Name="ContactID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Active" Type="Boolean" />
+          <Property Name="Company" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="BillTo" Type="Boolean" />
+          <Property Name="Broker" Type="Boolean" />
+          <Property Name="EquipmentProvider" Type="Boolean" />
+          <Property Name="ChassisProvider" Type="Boolean" />
+          <Property Name="Location" Type="Boolean" />
+          <Property Name="RailPort" Type="Boolean" />
+          <Property Name="CYDepot" Type="Boolean" />
+          <Property Name="DallasDY" Type="Boolean" />
+          <Property Name="FtWorthDY" Type="Boolean" />
+          <Property Name="Vendor" Type="Boolean" />
+          <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Contact1" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Phone1" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Email1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Contact2" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Phone2" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Email2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Fax" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Address1" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Address2" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Zip" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="BillingCode" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CCType" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CCNum" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CCExpiration" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CCSecurityCode" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CCCardholder" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CCBillingStreet" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CCBillingZip" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="MC" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TotalCredit" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="DateCreated" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdated" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="AgentCode">
+          <Key>
+            <PropertyRef Name="AgentCodeID" />
+          </Key>
+          <Property Name="AgentCodeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AgentCode1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ContactAgentCode">
+          <Key>
+            <PropertyRef Name="AgentCodeID" />
+            <PropertyRef Name="ContactID" />
+          </Key>
+          <Property Name="AgentCodeID" Type="Int32" Nullable="false" />
+          <Property Name="ContactID" Type="Int32" Nullable="false" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -1455,6 +2441,93 @@ warning 6002: The table/view 'AllPointsTransport.APTAdmin.vwDispatch_Progress' d
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Payrolls">
+            <EntityTypeMapping TypeName="AllPointsTransportDataModel.Payroll">
+              <MappingFragment StoreEntitySet="Payroll">
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="Deductions" ColumnName="Deductions" />
+                <ScalarProperty Name="Fuel" ColumnName="Fuel" />
+                <ScalarProperty Name="Freight" ColumnName="Freight" />
+                <ScalarProperty Name="PayPeriodEnd" ColumnName="PayPeriodEnd" />
+                <ScalarProperty Name="PayPeriodStart" ColumnName="PayPeriodStart" />
+                <ScalarProperty Name="PayDate" ColumnName="PayDate" />
+                <ScalarProperty Name="Driver" ColumnName="Driver" />
+                <ScalarProperty Name="PayrollID" ColumnName="PayrollID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TemplatesDriverPays">
+            <EntityTypeMapping TypeName="AllPointsTransportDataModel.TemplatesDriverPay">
+              <MappingFragment StoreEntitySet="TemplatesDriverPay">
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="CommissionPaid" ColumnName="CommissionPaid" />
+                <ScalarProperty Name="DriverPaid" ColumnName="DriverPaid" />
+                <ScalarProperty Name="ReceivedDate" ColumnName="ReceivedDate" />
+                <ScalarProperty Name="BOL" ColumnName="BOL" />
+                <ScalarProperty Name="POD" ColumnName="POD" />
+                <ScalarProperty Name="Ingate" ColumnName="Ingate" />
+                <ScalarProperty Name="Outgate" ColumnName="Outgate" />
+                <ScalarProperty Name="PayDriver" ColumnName="PayDriver" />
+                <ScalarProperty Name="WayBilled" ColumnName="WayBilled" />
+                <ScalarProperty Name="DispatchAcceptedStatus" ColumnName="DispatchAcceptedStatus" />
+                <ScalarProperty Name="PrePlanSent" ColumnName="PrePlanSent" />
+                <ScalarProperty Name="Duration" ColumnName="Duration" />
+                <ScalarProperty Name="Destination" ColumnName="Destination" />
+                <ScalarProperty Name="Origin" ColumnName="Origin" />
+                <ScalarProperty Name="EmployeePayPct" ColumnName="EmployeePayPct" />
+                <ScalarProperty Name="FSDeductionPct" ColumnName="FSDeductionPct" />
+                <ScalarProperty Name="TruckPayPct" ColumnName="TruckPayPct" />
+                <ScalarProperty Name="TruckNum" ColumnName="TruckNum" />
+                <ScalarProperty Name="DriverType" ColumnName="DriverType" />
+                <ScalarProperty Name="DriverRowID" ColumnName="DriverRowID" />
+                <ScalarProperty Name="Driver" ColumnName="Driver" />
+                <ScalarProperty Name="TotalAmountEmployee" ColumnName="TotalAmountEmployee" />
+                <ScalarProperty Name="TotalAmountTruck" ColumnName="TotalAmountTruck" />
+                <ScalarProperty Name="FSAmountTruck" ColumnName="FSAmountTruck" />
+                <ScalarProperty Name="LineHaulAmountTruck" ColumnName="LineHaulAmountTruck" />
+                <ScalarProperty Name="ArrivalTime" ColumnName="ArrivalTime" />
+                <ScalarProperty Name="DepartTime" ColumnName="DepartTime" />
+                <ScalarProperty Name="DetentionStarts" ColumnName="DetentionStarts" />
+                <ScalarProperty Name="ApptTime" ColumnName="ApptTime" />
+                <ScalarProperty Name="DispatchNotes" ColumnName="DispatchNotes" />
+                <ScalarProperty Name="PayType" ColumnName="PayType" />
+                <ScalarProperty Name="TypeOfLoad" ColumnName="TypeOfLoad" />
+                <ScalarProperty Name="ActiveLeg" ColumnName="ActiveLeg" />
+                <ScalarProperty Name="ToDispatch" ColumnName="ToDispatch" />
+                <ScalarProperty Name="RowOrder" ColumnName="RowOrder" />
+                <ScalarProperty Name="TemplateName" ColumnName="TemplateName" />
+                <ScalarProperty Name="TemplatesDriverPayID" ColumnName="TemplatesDriverPayID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TemplatesWOes">
+            <EntityTypeMapping TypeName="AllPointsTransportDataModel.TemplatesWO">
+              <MappingFragment StoreEntitySet="TemplatesWO">
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="Destination" ColumnName="Destination" />
+                <ScalarProperty Name="Origin" ColumnName="Origin" />
+                <ScalarProperty Name="LocationHours" ColumnName="LocationHours" />
+                <ScalarProperty Name="EquipmentReturn" ColumnName="EquipmentReturn" />
+                <ScalarProperty Name="EquipmentPickup" ColumnName="EquipmentPickup" />
+                <ScalarProperty Name="ChassisProvider" ColumnName="ChassisProvider" />
+                <ScalarProperty Name="EquipmentSize" ColumnName="EquipmentSize" />
+                <ScalarProperty Name="EquipmentProvider" ColumnName="EquipmentProvider" />
+                <ScalarProperty Name="TypeOfMove" ColumnName="TypeOfMove" />
+                <ScalarProperty Name="Broker" ColumnName="Broker" />
+                <ScalarProperty Name="BillTo" ColumnName="BillTo" />
+                <ScalarProperty Name="TemplateName" ColumnName="TemplateName" />
+                <ScalarProperty Name="TemplateWOID" ColumnName="TemplateWOID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="WOLineItems">
             <EntityTypeMapping TypeName="AllPointsTransportDataModel.WOLineItem">
               <MappingFragment StoreEntitySet="WOLineItems">
@@ -1589,23 +2662,6 @@ warning 6002: The table/view 'AllPointsTransport.APTAdmin.vwDispatch_Progress' d
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Payrolls">
-            <EntityTypeMapping TypeName="AllPointsTransportDataModel.Payroll">
-              <MappingFragment StoreEntitySet="Payroll">
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
-                <ScalarProperty Name="Total" ColumnName="Total" />
-                <ScalarProperty Name="Deductions" ColumnName="Deductions" />
-                <ScalarProperty Name="Fuel" ColumnName="Fuel" />
-                <ScalarProperty Name="Freight" ColumnName="Freight" />
-                <ScalarProperty Name="PayPeriodEnd" ColumnName="PayPeriodEnd" />
-                <ScalarProperty Name="PayPeriodStart" ColumnName="PayPeriodStart" />
-                <ScalarProperty Name="PayDate" ColumnName="PayDate" />
-                <ScalarProperty Name="Driver" ColumnName="Driver" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="RowColors">
             <EntityTypeMapping TypeName="AllPointsTransportDataModel.RowColor">
               <MappingFragment StoreEntitySet="RowColors">
@@ -1678,76 +2734,6 @@ warning 6002: The table/view 'AllPointsTransport.APTAdmin.vwDispatch_Progress' d
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="TemplatesDriverPays">
-            <EntityTypeMapping TypeName="AllPointsTransportDataModel.TemplatesDriverPay">
-              <MappingFragment StoreEntitySet="TemplatesDriverPay">
-                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
-                <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
-                <ScalarProperty Name="CommissionPaid" ColumnName="CommissionPaid" />
-                <ScalarProperty Name="DriverPaid" ColumnName="DriverPaid" />
-                <ScalarProperty Name="ReceivedDate" ColumnName="ReceivedDate" />
-                <ScalarProperty Name="BOL" ColumnName="BOL" />
-                <ScalarProperty Name="POD" ColumnName="POD" />
-                <ScalarProperty Name="Ingate" ColumnName="Ingate" />
-                <ScalarProperty Name="Outgate" ColumnName="Outgate" />
-                <ScalarProperty Name="PayDriver" ColumnName="PayDriver" />
-                <ScalarProperty Name="WayBilled" ColumnName="WayBilled" />
-                <ScalarProperty Name="DispatchAcceptedStatus" ColumnName="DispatchAcceptedStatus" />
-                <ScalarProperty Name="PrePlanSent" ColumnName="PrePlanSent" />
-                <ScalarProperty Name="Duration" ColumnName="Duration" />
-                <ScalarProperty Name="Destination" ColumnName="Destination" />
-                <ScalarProperty Name="Origin" ColumnName="Origin" />
-                <ScalarProperty Name="EmployeePayPct" ColumnName="EmployeePayPct" />
-                <ScalarProperty Name="FSDeductionPct" ColumnName="FSDeductionPct" />
-                <ScalarProperty Name="TruckPayPct" ColumnName="TruckPayPct" />
-                <ScalarProperty Name="TruckNum" ColumnName="TruckNum" />
-                <ScalarProperty Name="DriverType" ColumnName="DriverType" />
-                <ScalarProperty Name="DriverRowID" ColumnName="DriverRowID" />
-                <ScalarProperty Name="Driver" ColumnName="Driver" />
-                <ScalarProperty Name="TotalAmountEmployee" ColumnName="TotalAmountEmployee" />
-                <ScalarProperty Name="TotalAmountTruck" ColumnName="TotalAmountTruck" />
-                <ScalarProperty Name="FSAmountTruck" ColumnName="FSAmountTruck" />
-                <ScalarProperty Name="LineHaulAmountTruck" ColumnName="LineHaulAmountTruck" />
-                <ScalarProperty Name="ArrivalTime" ColumnName="ArrivalTime" />
-                <ScalarProperty Name="DepartTime" ColumnName="DepartTime" />
-                <ScalarProperty Name="DetentionStarts" ColumnName="DetentionStarts" />
-                <ScalarProperty Name="ApptTime" ColumnName="ApptTime" />
-                <ScalarProperty Name="DispatchNotes" ColumnName="DispatchNotes" />
-                <ScalarProperty Name="PayType" ColumnName="PayType" />
-                <ScalarProperty Name="TypeOfLoad" ColumnName="TypeOfLoad" />
-                <ScalarProperty Name="ActiveLeg" ColumnName="ActiveLeg" />
-                <ScalarProperty Name="ToDispatch" ColumnName="ToDispatch" />
-                <ScalarProperty Name="RowOrder" ColumnName="RowOrder" />
-                <ScalarProperty Name="TemplateName" ColumnName="TemplateName" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TemplatesWOes">
-            <EntityTypeMapping TypeName="AllPointsTransportDataModel.TemplatesWO">
-              <MappingFragment StoreEntitySet="TemplatesWO">
-                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
-                <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
-                <ScalarProperty Name="Destination" ColumnName="Destination" />
-                <ScalarProperty Name="Origin" ColumnName="Origin" />
-                <ScalarProperty Name="LocationHours" ColumnName="LocationHours" />
-                <ScalarProperty Name="EquipmentReturn" ColumnName="EquipmentReturn" />
-                <ScalarProperty Name="EquipmentPickup" ColumnName="EquipmentPickup" />
-                <ScalarProperty Name="ChassisProvider" ColumnName="ChassisProvider" />
-                <ScalarProperty Name="EquipmentSize" ColumnName="EquipmentSize" />
-                <ScalarProperty Name="EquipmentProvider" ColumnName="EquipmentProvider" />
-                <ScalarProperty Name="TypeOfMove" ColumnName="TypeOfMove" />
-                <ScalarProperty Name="Broker" ColumnName="Broker" />
-                <ScalarProperty Name="BillTo" ColumnName="BillTo" />
-                <ScalarProperty Name="TemplateName" ColumnName="TemplateName" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="TemplatesWOLineItems">
             <EntityTypeMapping TypeName="AllPointsTransportDataModel.TemplatesWOLineItem">
               <MappingFragment StoreEntitySet="TemplatesWOLineItems">
@@ -1795,6 +2781,68 @@ warning 6002: The table/view 'AllPointsTransport.APTAdmin.vwDispatch_Progress' d
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="vwDispatch_New">
+            <EntityTypeMapping TypeName="AllPointsTransportDataModel.vwDispatch_New">
+              <MappingFragment StoreEntitySet="vwDispatch_New">
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="Uploaded" ColumnName="Uploaded" />
+                <ScalarProperty Name="BOL" ColumnName="BOL" />
+                <ScalarProperty Name="POD2" ColumnName="POD2" />
+                <ScalarProperty Name="POD1" ColumnName="POD1" />
+                <ScalarProperty Name="RejectedByDispatch" ColumnName="RejectedByDispatch" />
+                <ScalarProperty Name="AcceptedByDispatch" ColumnName="AcceptedByDispatch" />
+                <ScalarProperty Name="BilledAmount" ColumnName="BilledAmount" />
+                <ScalarProperty Name="InfoSymbol" ColumnName="InfoSymbol" />
+                <ScalarProperty Name="LinkedProNum" ColumnName="LinkedProNum" />
+                <ScalarProperty Name="ETA" ColumnName="ETA" />
+                <ScalarProperty Name="NotesPrivate" ColumnName="NotesPrivate" />
+                <ScalarProperty Name="NotesInvoice" ColumnName="NotesInvoice" />
+                <ScalarProperty Name="ReadyNotification" ColumnName="ReadyNotification" />
+                <ScalarProperty Name="IngateReceipt" ColumnName="IngateReceipt" />
+                <ScalarProperty Name="OutgateReceipt" ColumnName="OutgateReceipt" />
+                <ScalarProperty Name="LocationHours" ColumnName="LocationHours" />
+                <ScalarProperty Name="Container2" ColumnName="Container2" />
+                <ScalarProperty Name="ApptTime" ColumnName="ApptTime" />
+                <ScalarProperty Name="Cutoff" ColumnName="Cutoff" />
+                <ScalarProperty Name="PerDiemLFD" ColumnName="PerDiemLFD" />
+                <ScalarProperty Name="StorageLFD" ColumnName="StorageLFD" />
+                <ScalarProperty Name="Duration" ColumnName="Duration" />
+                <ScalarProperty Name="TypeOfMove" ColumnName="TypeOfMove" />
+                <ScalarProperty Name="Destination" ColumnName="Destination" />
+                <ScalarProperty Name="Origin" ColumnName="Origin" />
+                <ScalarProperty Name="EquipmentReturn" ColumnName="EquipmentReturn" />
+                <ScalarProperty Name="EquipmentPickup" ColumnName="EquipmentPickup" />
+                <ScalarProperty Name="PO" ColumnName="PO" />
+                <ScalarProperty Name="Commodity" ColumnName="Commodity" />
+                <ScalarProperty Name="PieceCount" ColumnName="PieceCount" />
+                <ScalarProperty Name="Weight" ColumnName="Weight" />
+                <ScalarProperty Name="Release" ColumnName="Release" />
+                <ScalarProperty Name="ApptNumber" ColumnName="ApptNumber" />
+                <ScalarProperty Name="Pro" ColumnName="Pro" />
+                <ScalarProperty Name="Reference" ColumnName="Reference" />
+                <ScalarProperty Name="MasterBOL" ColumnName="MasterBOL" />
+                <ScalarProperty Name="Booking" ColumnName="Booking" />
+                <ScalarProperty Name="ChassisProvider" ColumnName="ChassisProvider" />
+                <ScalarProperty Name="EquipmentProvider" ColumnName="EquipmentProvider" />
+                <ScalarProperty Name="Chassis" ColumnName="Chassis" />
+                <ScalarProperty Name="EquipmentSize" ColumnName="EquipmentSize" />
+                <ScalarProperty Name="StreetTurn" ColumnName="StreetTurn" />
+                <ScalarProperty Name="Seal" ColumnName="Seal" />
+                <ScalarProperty Name="Container1" ColumnName="Container1" />
+                <ScalarProperty Name="BillTo" ColumnName="BillTo" />
+                <ScalarProperty Name="Broker" ColumnName="Broker" />
+                <ScalarProperty Name="DatePaid" ColumnName="DatePaid" />
+                <ScalarProperty Name="InvoicedDate" ColumnName="InvoicedDate" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Completed" ColumnName="Completed" />
+                <ScalarProperty Name="WorkOrderNo" ColumnName="WorkOrderNo" />
+                <ScalarProperty Name="WorkOrderID" ColumnName="WorkOrderID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="vwDispatch_Progress">
             <EntityTypeMapping TypeName="AllPointsTransportDataModel.vwDispatch_Progress">
               <MappingFragment StoreEntitySet="vwDispatch_Progress">
@@ -1806,6 +2854,303 @@ warning 6002: The table/view 'AllPointsTransport.APTAdmin.vwDispatch_Progress' d
                 <ScalarProperty Name="Pro" ColumnName="Pro" />
                 <ScalarProperty Name="RowOrder" ColumnName="RowOrder" />
                 <ScalarProperty Name="WorkOrder" ColumnName="WorkOrder" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwPopulateBillToes">
+            <EntityTypeMapping TypeName="AllPointsTransportDataModel.vwPopulateBillTo">
+              <MappingFragment StoreEntitySet="vwPopulateBillTo">
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="TotalCredit" ColumnName="TotalCredit" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="MC" ColumnName="MC" />
+                <ScalarProperty Name="CCBillingZip" ColumnName="CCBillingZip" />
+                <ScalarProperty Name="CCBillingStreet" ColumnName="CCBillingStreet" />
+                <ScalarProperty Name="CCCardholder" ColumnName="CCCardholder" />
+                <ScalarProperty Name="CCSecurityCode" ColumnName="CCSecurityCode" />
+                <ScalarProperty Name="CCExpiration" ColumnName="CCExpiration" />
+                <ScalarProperty Name="CCNum" ColumnName="CCNum" />
+                <ScalarProperty Name="CCType" ColumnName="CCType" />
+                <ScalarProperty Name="BillingCode" ColumnName="BillingCode" />
+                <ScalarProperty Name="Zip" ColumnName="Zip" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Address2" ColumnName="Address2" />
+                <ScalarProperty Name="Address1" ColumnName="Address1" />
+                <ScalarProperty Name="Fax" ColumnName="Fax" />
+                <ScalarProperty Name="Email2" ColumnName="Email2" />
+                <ScalarProperty Name="Phone2" ColumnName="Phone2" />
+                <ScalarProperty Name="Contact2" ColumnName="Contact2" />
+                <ScalarProperty Name="Email1" ColumnName="Email1" />
+                <ScalarProperty Name="Phone1" ColumnName="Phone1" />
+                <ScalarProperty Name="Contact1" ColumnName="Contact1" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Vendor" ColumnName="Vendor" />
+                <ScalarProperty Name="FtWorthDY" ColumnName="FtWorthDY" />
+                <ScalarProperty Name="DallasDY" ColumnName="DallasDY" />
+                <ScalarProperty Name="CYDepot" ColumnName="CYDepot" />
+                <ScalarProperty Name="RailPort" ColumnName="RailPort" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="ChassisProvider" ColumnName="ChassisProvider" />
+                <ScalarProperty Name="EquipmentProvider" ColumnName="EquipmentProvider" />
+                <ScalarProperty Name="Broker" ColumnName="Broker" />
+                <ScalarProperty Name="BillTo" ColumnName="BillTo" />
+                <ScalarProperty Name="Company" ColumnName="Company" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="ContactID" ColumnName="ContactID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwPopulateBrokers">
+            <EntityTypeMapping TypeName="AllPointsTransportDataModel.vwPopulateBroker">
+              <MappingFragment StoreEntitySet="vwPopulateBroker">
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="TotalCredit" ColumnName="TotalCredit" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="MC" ColumnName="MC" />
+                <ScalarProperty Name="CCBillingZip" ColumnName="CCBillingZip" />
+                <ScalarProperty Name="CCBillingStreet" ColumnName="CCBillingStreet" />
+                <ScalarProperty Name="CCCardholder" ColumnName="CCCardholder" />
+                <ScalarProperty Name="CCSecurityCode" ColumnName="CCSecurityCode" />
+                <ScalarProperty Name="CCExpiration" ColumnName="CCExpiration" />
+                <ScalarProperty Name="CCNum" ColumnName="CCNum" />
+                <ScalarProperty Name="CCType" ColumnName="CCType" />
+                <ScalarProperty Name="BillingCode" ColumnName="BillingCode" />
+                <ScalarProperty Name="Zip" ColumnName="Zip" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Address2" ColumnName="Address2" />
+                <ScalarProperty Name="Address1" ColumnName="Address1" />
+                <ScalarProperty Name="Fax" ColumnName="Fax" />
+                <ScalarProperty Name="Email2" ColumnName="Email2" />
+                <ScalarProperty Name="Phone2" ColumnName="Phone2" />
+                <ScalarProperty Name="Contact2" ColumnName="Contact2" />
+                <ScalarProperty Name="Email1" ColumnName="Email1" />
+                <ScalarProperty Name="Phone1" ColumnName="Phone1" />
+                <ScalarProperty Name="Contact1" ColumnName="Contact1" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Vendor" ColumnName="Vendor" />
+                <ScalarProperty Name="FtWorthDY" ColumnName="FtWorthDY" />
+                <ScalarProperty Name="DallasDY" ColumnName="DallasDY" />
+                <ScalarProperty Name="CYDepot" ColumnName="CYDepot" />
+                <ScalarProperty Name="RailPort" ColumnName="RailPort" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="ChassisProvider" ColumnName="ChassisProvider" />
+                <ScalarProperty Name="EquipmentProvider" ColumnName="EquipmentProvider" />
+                <ScalarProperty Name="Broker" ColumnName="Broker" />
+                <ScalarProperty Name="BillTo" ColumnName="BillTo" />
+                <ScalarProperty Name="Company" ColumnName="Company" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="ContactID" ColumnName="ContactID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwPopulateChassisProviders">
+            <EntityTypeMapping TypeName="AllPointsTransportDataModel.vwPopulateChassisProvider">
+              <MappingFragment StoreEntitySet="vwPopulateChassisProvider">
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="TotalCredit" ColumnName="TotalCredit" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="MC" ColumnName="MC" />
+                <ScalarProperty Name="CCBillingZip" ColumnName="CCBillingZip" />
+                <ScalarProperty Name="CCBillingStreet" ColumnName="CCBillingStreet" />
+                <ScalarProperty Name="CCCardholder" ColumnName="CCCardholder" />
+                <ScalarProperty Name="CCSecurityCode" ColumnName="CCSecurityCode" />
+                <ScalarProperty Name="CCExpiration" ColumnName="CCExpiration" />
+                <ScalarProperty Name="CCNum" ColumnName="CCNum" />
+                <ScalarProperty Name="CCType" ColumnName="CCType" />
+                <ScalarProperty Name="BillingCode" ColumnName="BillingCode" />
+                <ScalarProperty Name="Zip" ColumnName="Zip" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Address2" ColumnName="Address2" />
+                <ScalarProperty Name="Address1" ColumnName="Address1" />
+                <ScalarProperty Name="Fax" ColumnName="Fax" />
+                <ScalarProperty Name="Email2" ColumnName="Email2" />
+                <ScalarProperty Name="Phone2" ColumnName="Phone2" />
+                <ScalarProperty Name="Contact2" ColumnName="Contact2" />
+                <ScalarProperty Name="Email1" ColumnName="Email1" />
+                <ScalarProperty Name="Phone1" ColumnName="Phone1" />
+                <ScalarProperty Name="Contact1" ColumnName="Contact1" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Vendor" ColumnName="Vendor" />
+                <ScalarProperty Name="FtWorthDY" ColumnName="FtWorthDY" />
+                <ScalarProperty Name="DallasDY" ColumnName="DallasDY" />
+                <ScalarProperty Name="CYDepot" ColumnName="CYDepot" />
+                <ScalarProperty Name="RailPort" ColumnName="RailPort" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="ChassisProvider" ColumnName="ChassisProvider" />
+                <ScalarProperty Name="EquipmentProvider" ColumnName="EquipmentProvider" />
+                <ScalarProperty Name="Broker" ColumnName="Broker" />
+                <ScalarProperty Name="BillTo" ColumnName="BillTo" />
+                <ScalarProperty Name="Company" ColumnName="Company" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="ContactID" ColumnName="ContactID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwPopulateDrivers">
+            <EntityTypeMapping TypeName="AllPointsTransportDataModel.vwPopulateDriver">
+              <MappingFragment StoreEntitySet="vwPopulateDrivers">
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="Color" ColumnName="Color" />
+                <ScalarProperty Name="TruckNum" ColumnName="TruckNum" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="FuelCardNum" ColumnName="FuelCardNum" />
+                <ScalarProperty Name="Rehire" ColumnName="Rehire" />
+                <ScalarProperty Name="ResignReason" ColumnName="ResignReason" />
+                <ScalarProperty Name="ResignDate" ColumnName="ResignDate" />
+                <ScalarProperty Name="HireDate" ColumnName="HireDate" />
+                <ScalarProperty Name="AnnualReview" ColumnName="AnnualReview" />
+                <ScalarProperty Name="TWICExpiration" ColumnName="TWICExpiration" />
+                <ScalarProperty Name="MedicalExpiration" ColumnName="MedicalExpiration" />
+                <ScalarProperty Name="CDLExpiration" ColumnName="CDLExpiration" />
+                <ScalarProperty Name="CDLNum" ColumnName="CDLNum" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="SSNum" ColumnName="SSNum" />
+                <ScalarProperty Name="EmergencyPhone" ColumnName="EmergencyPhone" />
+                <ScalarProperty Name="EmergencyContact" ColumnName="EmergencyContact" />
+                <ScalarProperty Name="TextMessage" ColumnName="TextMessage" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="MobilePhone" ColumnName="MobilePhone" />
+                <ScalarProperty Name="HomePhone" ColumnName="HomePhone" />
+                <ScalarProperty Name="Zip" ColumnName="Zip" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Address2" ColumnName="Address2" />
+                <ScalarProperty Name="Address1" ColumnName="Address1" />
+                <ScalarProperty Name="NickName" ColumnName="NickName" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="Last" ColumnName="Last" />
+                <ScalarProperty Name="First" ColumnName="First" />
+                <ScalarProperty Name="EmployeePayPct" ColumnName="EmployeePayPct" />
+                <ScalarProperty Name="DriverType" ColumnName="DriverType" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="DriverNo" ColumnName="DriverNo" />
+                <ScalarProperty Name="DriverID" ColumnName="DriverID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwPopulateEquipmentProviders">
+            <EntityTypeMapping TypeName="AllPointsTransportDataModel.vwPopulateEquipmentProvider">
+              <MappingFragment StoreEntitySet="vwPopulateEquipmentProvider">
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="TotalCredit" ColumnName="TotalCredit" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="MC" ColumnName="MC" />
+                <ScalarProperty Name="CCBillingZip" ColumnName="CCBillingZip" />
+                <ScalarProperty Name="CCBillingStreet" ColumnName="CCBillingStreet" />
+                <ScalarProperty Name="CCCardholder" ColumnName="CCCardholder" />
+                <ScalarProperty Name="CCSecurityCode" ColumnName="CCSecurityCode" />
+                <ScalarProperty Name="CCExpiration" ColumnName="CCExpiration" />
+                <ScalarProperty Name="CCNum" ColumnName="CCNum" />
+                <ScalarProperty Name="CCType" ColumnName="CCType" />
+                <ScalarProperty Name="BillingCode" ColumnName="BillingCode" />
+                <ScalarProperty Name="Zip" ColumnName="Zip" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Address2" ColumnName="Address2" />
+                <ScalarProperty Name="Address1" ColumnName="Address1" />
+                <ScalarProperty Name="Fax" ColumnName="Fax" />
+                <ScalarProperty Name="Email2" ColumnName="Email2" />
+                <ScalarProperty Name="Phone2" ColumnName="Phone2" />
+                <ScalarProperty Name="Contact2" ColumnName="Contact2" />
+                <ScalarProperty Name="Email1" ColumnName="Email1" />
+                <ScalarProperty Name="Phone1" ColumnName="Phone1" />
+                <ScalarProperty Name="Contact1" ColumnName="Contact1" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Vendor" ColumnName="Vendor" />
+                <ScalarProperty Name="FtWorthDY" ColumnName="FtWorthDY" />
+                <ScalarProperty Name="DallasDY" ColumnName="DallasDY" />
+                <ScalarProperty Name="CYDepot" ColumnName="CYDepot" />
+                <ScalarProperty Name="RailPort" ColumnName="RailPort" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="ChassisProvider" ColumnName="ChassisProvider" />
+                <ScalarProperty Name="EquipmentProvider" ColumnName="EquipmentProvider" />
+                <ScalarProperty Name="Broker" ColumnName="Broker" />
+                <ScalarProperty Name="BillTo" ColumnName="BillTo" />
+                <ScalarProperty Name="Company" ColumnName="Company" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="ContactID" ColumnName="ContactID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwPopulateOriginDestinations">
+            <EntityTypeMapping TypeName="AllPointsTransportDataModel.vwPopulateOriginDestination">
+              <MappingFragment StoreEntitySet="vwPopulateOriginDestination">
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="TotalCredit" ColumnName="TotalCredit" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="MC" ColumnName="MC" />
+                <ScalarProperty Name="CCBillingZip" ColumnName="CCBillingZip" />
+                <ScalarProperty Name="CCBillingStreet" ColumnName="CCBillingStreet" />
+                <ScalarProperty Name="CCCardholder" ColumnName="CCCardholder" />
+                <ScalarProperty Name="CCSecurityCode" ColumnName="CCSecurityCode" />
+                <ScalarProperty Name="CCExpiration" ColumnName="CCExpiration" />
+                <ScalarProperty Name="CCNum" ColumnName="CCNum" />
+                <ScalarProperty Name="CCType" ColumnName="CCType" />
+                <ScalarProperty Name="BillingCode" ColumnName="BillingCode" />
+                <ScalarProperty Name="Zip" ColumnName="Zip" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Address2" ColumnName="Address2" />
+                <ScalarProperty Name="Address1" ColumnName="Address1" />
+                <ScalarProperty Name="Fax" ColumnName="Fax" />
+                <ScalarProperty Name="Email2" ColumnName="Email2" />
+                <ScalarProperty Name="Phone2" ColumnName="Phone2" />
+                <ScalarProperty Name="Contact2" ColumnName="Contact2" />
+                <ScalarProperty Name="Email1" ColumnName="Email1" />
+                <ScalarProperty Name="Phone1" ColumnName="Phone1" />
+                <ScalarProperty Name="Contact1" ColumnName="Contact1" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Vendor" ColumnName="Vendor" />
+                <ScalarProperty Name="FtWorthDY" ColumnName="FtWorthDY" />
+                <ScalarProperty Name="DallasDY" ColumnName="DallasDY" />
+                <ScalarProperty Name="CYDepot" ColumnName="CYDepot" />
+                <ScalarProperty Name="RailPort" ColumnName="RailPort" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="ChassisProvider" ColumnName="ChassisProvider" />
+                <ScalarProperty Name="EquipmentProvider" ColumnName="EquipmentProvider" />
+                <ScalarProperty Name="Broker" ColumnName="Broker" />
+                <ScalarProperty Name="BillTo" ColumnName="BillTo" />
+                <ScalarProperty Name="Company" ColumnName="Company" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="ContactID" ColumnName="ContactID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AgentCodes">
+            <EntityTypeMapping TypeName="AllPointsTransportDataModel.AgentCode">
+              <MappingFragment StoreEntitySet="AgentCodes">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="AgentCode1" ColumnName="AgentCode" />
+                <ScalarProperty Name="AgentCodeID" ColumnName="AgentCodeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ContactAgentCodes">
+            <EntityTypeMapping TypeName="AllPointsTransportDataModel.ContactAgentCode">
+              <MappingFragment StoreEntitySet="ContactAgentCodes">
+                <ScalarProperty Name="ContactID" ColumnName="ContactID" />
+                <ScalarProperty Name="AgentCodeID" ColumnName="AgentCodeID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

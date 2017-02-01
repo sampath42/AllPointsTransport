@@ -61,6 +61,29 @@
 
         settings.Styles.AlternatingRow.BackColor = System.Drawing.ColorTranslator.FromHtml("#ccc");
 
+
+        ////DONT ERASE
+        //settings.HtmlDataCellPrepared = (sender, e) =>
+        //{
+        //    if (e.DataColumn.FieldName == "Status")
+        //    {
+        //        if (e.CellValue.ToString() == "Paid")
+        //        {
+
+        //            e.Cell.BackColor = System.Drawing.Color.Green;
+        //        }
+        //        else if (e.CellValue.ToString() == "")
+        //        {
+        //            e.Cell.BackColor = System.Drawing.Color.Blue;
+        //        }
+        //        else
+        //        {
+        //            e.Cell.BackColor = System.Drawing.Color.Brown;
+        //        }
+        //    }
+        //};
+
+
         settings.Columns.Add("WorkOrderNo");
 
         settings.Columns.Add(column =>
@@ -258,5 +281,8 @@
     if (ViewData["EditError"] != null){
         grid.SetEditErrorText((string)ViewData["EditError"]);
     }
+
+
+
 }
 @grid.Bind(Model).GetHtml()

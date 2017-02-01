@@ -14,7 +14,7 @@ namespace AllPointsTransport.Models
     
     public partial class Payroll
     {
-        public int ID { get; set; }
+        public int PayrollID { get; set; }
         public string Driver { get; set; }
         public Nullable<System.DateTime> PayDate { get; set; }
         public Nullable<System.DateTime> PayPeriodStart { get; set; }
