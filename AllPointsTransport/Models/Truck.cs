@@ -14,7 +14,7 @@ namespace AllPointsTransport.Models
     
     public partial class Truck
     {
-        public int ID { get; set; }
+        public int TruckID { get; set; }
         public Nullable<bool> Active { get; set; }
         public string TruckNum { get; set; }
         public string Year { get; set; }

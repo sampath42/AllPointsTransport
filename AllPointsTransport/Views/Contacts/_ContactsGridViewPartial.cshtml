@@ -1,182 +1,74 @@
 @{
-    var grid = Html.DevExpress().GridView(settings => {
+	var grid = Html.DevExpress().GridView(settings => {
         settings.Name = "ContactsGridView";
         settings.CallbackRouteValues = new { Controller = "Contacts", Action = "ContactsGridViewPartial" };
 
-        settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-        settings.Settings.HorizontalScrollBarMode = ScrollBarMode.Visible;
-
-        settings.SettingsContextMenu.Enabled = true;
-
-        settings.SettingsPager.FirstPageButton.Visible = true;
-        settings.SettingsPager.LastPageButton.Visible = true;
-        settings.SettingsPager.PageSize = 10;
-        settings.SettingsPager.PageSizeItemSettings.Visible = true;
-        settings.SettingsPager.PageSizeItemSettings.Items = new string[] { "10", "20", "50" };
-
-        settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "Contacts", Action = "ContactsGridViewPartialAddNew" };
+				settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "Contacts", Action = "ContactsGridViewPartialAddNew" };
         settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "Contacts", Action = "ContactsGridViewPartialUpdate" };
         settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "Contacts", Action = "ContactsGridViewPartialDelete" };
         settings.SettingsEditing.Mode = GridViewEditingMode.Inline;
         settings.SettingsBehavior.ConfirmDelete = true;
 
-        settings.CommandColumn.Visible = true;
+		settings.CommandColumn.Visible = true;
         settings.CommandColumn.ShowNewButton = true;
         settings.CommandColumn.ShowDeleteButton = true;
         settings.CommandColumn.ShowEditButton = true;
 
-        settings.KeyFieldName = "ContactID";
+		settings.KeyFieldName = "ContactID";
 
-        settings.SettingsPager.Visible = true;
-        settings.Settings.ShowGroupPanel = false;
-        settings.Settings.ShowFilterRow = true;
-        settings.SettingsBehavior.AllowSelectByRowClick = true;
+		settings.SettingsPager.Visible = true;
+		settings.Settings.ShowGroupPanel = false;
+		settings.Settings.ShowFilterRow = true;
+		settings.SettingsBehavior.AllowSelectByRowClick = true;
 
-        settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.Off;
-        settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;
-        settings.SettingsAdaptivity.AdaptiveDetailColumnCount = 1;
-        settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = false;
-        settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 0;
+		settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.Off;
+		settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;
+		settings.SettingsAdaptivity.AdaptiveDetailColumnCount = 1;
+		settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = false;
+		settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 0;
 
-        settings.Columns.Add(column =>
-        {
-            column.FieldName = "Active";
-            column.ColumnType = MVCxGridViewColumnType.CheckBox;
-            column.Settings.AutoFilterCondition = AutoFilterCondition.Equals;
-            column.HeaderStyle.Wrap = DefaultBoolean.True;
-            column.HeaderStyle.HorizontalAlign = System.Web.UI.WebControls.HorizontalAlign.Center;
-        });
-
-        settings.Columns.Add("Company");
-
-        settings.Columns.Add(column =>
-        {
-            column.FieldName = "Company";
-            column.ColumnType = MVCxGridViewColumnType.TextBox;
-            column.Width = 250;
-        });
-
-
-        settings.Columns.Add(column =>
-        {
-            column.FieldName = "BillTo";
-            column.ColumnType = MVCxGridViewColumnType.CheckBox;
-            column.Settings.AutoFilterCondition = AutoFilterCondition.Equals;
-            column.HeaderStyle.Wrap = DefaultBoolean.True;
-            column.HeaderStyle.HorizontalAlign = System.Web.UI.WebControls.HorizontalAlign.Center;
-        });
-
-        settings.Columns.Add(column =>
-        {
-            column.FieldName = "Broker";
-            column.ColumnType = MVCxGridViewColumnType.CheckBox;
-            column.Settings.AutoFilterCondition = AutoFilterCondition.Equals;
-            column.HeaderStyle.Wrap = DefaultBoolean.True;
-            column.HeaderStyle.HorizontalAlign = System.Web.UI.WebControls.HorizontalAlign.Center;
-        });
-
-        settings.Columns.Add(column =>
-        {
-            column.FieldName = "EquipmentProvider";
-            column.ColumnType = MVCxGridViewColumnType.CheckBox;
-            column.Settings.AutoFilterCondition = AutoFilterCondition.Equals;
-            column.HeaderStyle.Wrap = DefaultBoolean.True;
-            column.HeaderStyle.HorizontalAlign = System.Web.UI.WebControls.HorizontalAlign.Center;
-        });
-
-        settings.Columns.Add(column =>
-        {
-            column.FieldName = "ChassisProvider";
-            column.ColumnType = MVCxGridViewColumnType.CheckBox;
-            column.Settings.AutoFilterCondition = AutoFilterCondition.Equals;
-            column.HeaderStyle.Wrap = DefaultBoolean.True;
-            column.HeaderStyle.HorizontalAlign = System.Web.UI.WebControls.HorizontalAlign.Center;
-        });
-
-        settings.Columns.Add(column =>
-        {
-            column.FieldName = "Location";
-            column.ColumnType = MVCxGridViewColumnType.CheckBox;
-            column.Settings.AutoFilterCondition = AutoFilterCondition.Equals;
-            column.HeaderStyle.Wrap = DefaultBoolean.True;
-            column.HeaderStyle.HorizontalAlign = System.Web.UI.WebControls.HorizontalAlign.Center;
-        });
-
-        settings.Columns.Add(column =>
-        {
-            column.FieldName = "RailPort";
-            column.ColumnType = MVCxGridViewColumnType.CheckBox;
-            column.Settings.AutoFilterCondition = AutoFilterCondition.Equals;
-            column.HeaderStyle.Wrap = DefaultBoolean.True;
-            column.HeaderStyle.HorizontalAlign = System.Web.UI.WebControls.HorizontalAlign.Center;
-        });
-
-        settings.Columns.Add(column =>
-        {
-            column.FieldName = "CYDepot";
-            column.ColumnType = MVCxGridViewColumnType.CheckBox;
-            column.Settings.AutoFilterCondition = AutoFilterCondition.Equals;
-            column.HeaderStyle.Wrap = DefaultBoolean.True;
-            column.HeaderStyle.HorizontalAlign = System.Web.UI.WebControls.HorizontalAlign.Center;
-        });
-
-        settings.Columns.Add(column =>
-        {
-            column.FieldName = "DallasDY";
-            column.ColumnType = MVCxGridViewColumnType.CheckBox;
-            column.Settings.AutoFilterCondition = AutoFilterCondition.Equals;
-            column.HeaderStyle.Wrap = DefaultBoolean.True;
-            column.HeaderStyle.HorizontalAlign = System.Web.UI.WebControls.HorizontalAlign.Center;
-        });
-
-        settings.Columns.Add(column =>
-        {
-            column.FieldName = "FtWorthDY";
-            column.ColumnType = MVCxGridViewColumnType.CheckBox;
-            column.Settings.AutoFilterCondition = AutoFilterCondition.Equals;
-            column.HeaderStyle.Wrap = DefaultBoolean.True;
-            column.HeaderStyle.HorizontalAlign = System.Web.UI.WebControls.HorizontalAlign.Center;
-        });
-
-        settings.Columns.Add(column =>
-        {
-            column.FieldName = "Vendor";
-            column.ColumnType = MVCxGridViewColumnType.CheckBox;
-            column.Settings.AutoFilterCondition = AutoFilterCondition.Equals;
-            column.HeaderStyle.Wrap = DefaultBoolean.True;
-            column.HeaderStyle.HorizontalAlign = System.Web.UI.WebControls.HorizontalAlign.Center;
-        });
-
-        settings.Columns.Add("Description");
-        settings.Columns.Add("Contact1");
-        settings.Columns.Add("Phone1");
-        settings.Columns.Add("Email1");
-        settings.Columns.Add("Contact2");
-        settings.Columns.Add("Phone2");
-        settings.Columns.Add("Email2");
-        settings.Columns.Add("Fax");
-        settings.Columns.Add("Address1");
-        settings.Columns.Add("Address2");
-        settings.Columns.Add("City");
-        settings.Columns.Add("State");
-        settings.Columns.Add("Zip");
-        settings.Columns.Add("BillingCode");
-        settings.Columns.Add("CCType");
-        settings.Columns.Add("CCNum");
-        settings.Columns.Add("CCExpiration");
-        settings.Columns.Add("CCSecurityCode");
-        settings.Columns.Add("CCCardholder");
-        settings.Columns.Add("CCBillingStreet");
-        settings.Columns.Add("CCBillingZip");
-        settings.Columns.Add("MC");
-        settings.Columns.Add("Notes");
-        settings.Columns.Add("TotalCredit");
-        //settings.Columns.Add("DateCreated");
-        //settings.Columns.Add("CreatedBy");
-        //settings.Columns.Add("LastUpdated");
-        //settings.Columns.Add("UpdatedBy");
-    });
-    if (ViewData["EditError"] != null){
+				settings.Columns.Add("Active");
+				settings.Columns.Add("Company");
+				settings.Columns.Add("BillTo");
+				settings.Columns.Add("Broker");
+				settings.Columns.Add("EquipmentProvider");
+				settings.Columns.Add("ChassisProvider");
+				settings.Columns.Add("Location");
+				settings.Columns.Add("RailPort");
+				settings.Columns.Add("CYDepot");
+				settings.Columns.Add("DallasDY");
+				settings.Columns.Add("FtWorthDY");
+				settings.Columns.Add("Vendor");
+				settings.Columns.Add("Description");
+				settings.Columns.Add("Contact1");
+				settings.Columns.Add("Phone1");
+				settings.Columns.Add("Email1");
+				settings.Columns.Add("Contact2");
+				settings.Columns.Add("Phone2");
+				settings.Columns.Add("Email2");
+				settings.Columns.Add("Fax");
+				settings.Columns.Add("Address1");
+				settings.Columns.Add("Address2");
+				settings.Columns.Add("City");
+				settings.Columns.Add("State");
+				settings.Columns.Add("Zip");
+				settings.Columns.Add("BillingCode");
+				settings.Columns.Add("CCType");
+				settings.Columns.Add("CCNum");
+				settings.Columns.Add("CCExpiration");
+				settings.Columns.Add("CCSecurityCode");
+				settings.Columns.Add("CCCardholder");
+				settings.Columns.Add("CCBillingStreet");
+				settings.Columns.Add("CCBillingZip");
+				settings.Columns.Add("MC");
+				settings.Columns.Add("Notes");
+				settings.Columns.Add("TotalCredit");
+				settings.Columns.Add("DateCreated");
+				settings.Columns.Add("CreatedBy");
+				settings.Columns.Add("LastUpdated");
+				settings.Columns.Add("UpdatedBy");
+			});
+		if (ViewData["EditError"] != null){
         grid.SetEditErrorText((string)ViewData["EditError"]);
     }
 }

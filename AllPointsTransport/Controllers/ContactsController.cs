@@ -15,8 +15,6 @@ namespace AllPointsTransport.Controllers
             return View();
         }
 
-
-
         AllPointsTransport.Models.AllPointsTransportEntities db = new AllPointsTransport.Models.AllPointsTransportEntities();
 
         [ValidateInput(false)]

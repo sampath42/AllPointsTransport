@@ -1,41 +1,33 @@
 ﻿using DevExpress.Web.Mvc;
 using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
 using System.Linq;
-using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using AllPointsTransport.Models;
 
 namespace AllPointsTransport.Controllers
 {
-    public class TrucksController : Controller
+    public class DriversController : Controller
     {
-
-        // GET: Trucks
+        // GET: Drivers
         public ActionResult Index()
         {
             return View();
         }
 
-
-
-
         AllPointsTransport.Models.AllPointsTransportEntities db = new AllPointsTransport.Models.AllPointsTransportEntities();
 
         [ValidateInput(false)]
-        public ActionResult GridView1Partial()
+        public ActionResult DriversGridViewPartial()
         {
-            var model = db.Trucks;
-            return PartialView("_GridView1Partial", model.ToList());
+            var model = db.Drivers;
+            return PartialView("_DriversGridViewPartial", model.ToList());
         }
 
         [HttpPost, ValidateInput(false)]
-        public ActionResult GridView1PartialAddNew(AllPointsTransport.Models.Truck item)
+        public ActionResult DriversGridViewPartialAddNew(AllPointsTransport.Models.Driver item)
         {
-            var model = db.Trucks;
+            var model = db.Drivers;
             if (ModelState.IsValid)
             {
                 try
@@ -50,17 +42,17 @@ namespace AllPointsTransport.Controllers
             }
             else
                 ViewData["EditError"] = "Please, correct all errors.";
-            return PartialView("_GridView1Partial", model.ToList());
+            return PartialView("_DriversGridViewPartial", model.ToList());
         }
         [HttpPost, ValidateInput(false)]
-        public ActionResult GridView1PartialUpdate(AllPointsTransport.Models.Truck item)
+        public ActionResult DriversGridViewPartialUpdate(AllPointsTransport.Models.Driver item)
         {
-            var model = db.Trucks;
+            var model = db.Drivers;
             if (ModelState.IsValid)
             {
                 try
                 {
-                    var modelItem = model.FirstOrDefault(it => it.TruckID == item.TruckID);
+                    var modelItem = model.FirstOrDefault(it => it.DriverID == item.DriverID);
                     if (modelItem != null)
                     {
                         this.UpdateModel(modelItem);
@@ -74,17 +66,17 @@ namespace AllPointsTransport.Controllers
             }
             else
                 ViewData["EditError"] = "Please, correct all errors.";
-            return PartialView("_GridView1Partial", model.ToList());
+            return PartialView("_DriversGridViewPartial", model.ToList());
         }
         [HttpPost, ValidateInput(false)]
-        public ActionResult GridView1PartialDelete(System.Int32 ID)
+        public ActionResult DriversGridViewPartialDelete(System.Int32 DriverID)
         {
-            var model = db.Trucks;
-            if (ID >= 0)
+            var model = db.Drivers;
+            if (DriverID >= 0)
             {
                 try
                 {
-                    var item = model.FirstOrDefault(it => it.TruckID == ID);
+                    var item = model.FirstOrDefault(it => it.DriverID == DriverID);
                     if (item != null)
                         model.Remove(item);
                     db.SaveChanges();
@@ -94,7 +86,7 @@ namespace AllPointsTransport.Controllers
                     ViewData["EditError"] = e.Message;
                 }
             }
-            return PartialView("_GridView1Partial", model.ToList());
+            return PartialView("_DriversGridViewPartial", model.ToList());
         }
     }
 }

@@ -397,14 +397,11 @@ warning 6002: The table/view 'AllPointsTransport.dbo.TemplatesWOLineItems' does 
           <Property Name="DateUpdated" Type="smalldatetime" />
           <Property Name="UpdatedBy" Type="nvarchar" MaxLength="255" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'AllPointsTransport.dbo.Trucks' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Trucks">
           <Key>
-            <PropertyRef Name="ID" />
-            <PropertyRef Name="TruckNum" />
+            <PropertyRef Name="TruckID" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="TruckID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Active" Type="bit" />
           <Property Name="TruckNum" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="Year" Type="nvarchar" MaxLength="255" />
@@ -883,6 +880,7 @@ warning 6002: The table/view 'AllPointsTransport.APTAdmin.vwPopulateOriginDestin
           <EntitySet Name="Payroll" EntityType="Self.Payroll" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TemplatesDriverPay" EntityType="Self.TemplatesDriverPay" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TemplatesWO" EntityType="Self.TemplatesWO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Trucks" EntityType="Self.Trucks" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WOLineItems" EntityType="Self.WOLineItems" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WorkOrders" EntityType="Self.WorkOrders" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ContactAgentCodes" EntityType="Self.ContactAgentCodes" store:Type="Tables" store:Schema="dbo">
@@ -1020,29 +1018,6 @@ warning 6002: The table/view 'AllPointsTransport.APTAdmin.vwPopulateOriginDestin
     [TemplatesWOLineItems].[DateUpdated] AS [DateUpdated], 
     [TemplatesWOLineItems].[UpdatedBy] AS [UpdatedBy]
     FROM [dbo].[TemplatesWOLineItems] AS [TemplatesWOLineItems]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="Trucks" EntityType="Self.Trucks" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [Trucks].[ID] AS [ID], 
-    [Trucks].[Active] AS [Active], 
-    [Trucks].[TruckNum] AS [TruckNum], 
-    [Trucks].[Year] AS [Year], 
-    [Trucks].[Make] AS [Make], 
-    [Trucks].[Model] AS [Model], 
-    [Trucks].[VIN] AS [VIN], 
-    [Trucks].[LicensePlate] AS [LicensePlate], 
-    [Trucks].[State] AS [State], 
-    [Trucks].[Color] AS [Color], 
-    [Trucks].[TitleOwner] AS [TitleOwner], 
-    [Trucks].[TruckPayPct] AS [TruckPayPct], 
-    [Trucks].[FSDeductionPct] AS [FSDeductionPct], 
-    [Trucks].[Referral] AS [Referral], 
-    [Trucks].[ReferralPct] AS [ReferralPct], 
-    [Trucks].[DateCreated] AS [DateCreated], 
-    [Trucks].[CreatedBy] AS [CreatedBy], 
-    [Trucks].[DateUpdated] AS [DateUpdated], 
-    [Trucks].[UpdatedBy] AS [UpdatedBy]
-    FROM [dbo].[Trucks] AS [Trucks]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vwDispatch_New" EntityType="Self.vwDispatch_New" store:Type="Views" store:Schema="APTAdmin">
             <DefiningQuery>SELECT 
@@ -1420,14 +1395,17 @@ warning 6002: The table/view 'AllPointsTransport.APTAdmin.vwPopulateOriginDestin
             <Parameter Name="new_diagramname" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams" />
+          <EntitySet Name="AgentCodes" EntityType="AllPointsTransportDataModel.AgentCode" />
           <EntitySet Name="Contacts" EntityType="AllPointsTransportDataModel.Contact" />
           <EntitySet Name="DriverPays" EntityType="AllPointsTransportDataModel.DriverPay" />
           <EntitySet Name="Drivers" EntityType="AllPointsTransportDataModel.Driver" />
           <EntitySet Name="Payrolls" EntityType="AllPointsTransportDataModel.Payroll" />
           <EntitySet Name="TemplatesDriverPays" EntityType="AllPointsTransportDataModel.TemplatesDriverPay" />
           <EntitySet Name="TemplatesWOes" EntityType="AllPointsTransportDataModel.TemplatesWO" />
+          <EntitySet Name="Trucks" EntityType="AllPointsTransportDataModel.Truck" />
           <EntitySet Name="WOLineItems" EntityType="AllPointsTransportDataModel.WOLineItem" />
           <EntitySet Name="WorkOrders" EntityType="AllPointsTransportDataModel.WorkOrder" />
+          <EntitySet Name="ContactAgentCodes" EntityType="AllPointsTransportDataModel.ContactAgentCode" />
           <EntitySet Name="Employees" EntityType="AllPointsTransportDataModel.Employee" />
           <EntitySet Name="RowColors" EntityType="AllPointsTransportDataModel.RowColor" />
           <EntitySet Name="RowColorsDrivers" EntityType="AllPointsTransportDataModel.RowColorsDriver" />
@@ -1435,7 +1413,6 @@ warning 6002: The table/view 'AllPointsTransport.APTAdmin.vwPopulateOriginDestin
           <EntitySet Name="Settings" EntityType="AllPointsTransportDataModel.Setting" />
           <EntitySet Name="TaskManagements" EntityType="AllPointsTransportDataModel.TaskManagement" />
           <EntitySet Name="TemplatesWOLineItems" EntityType="AllPointsTransportDataModel.TemplatesWOLineItem" />
-          <EntitySet Name="Trucks" EntityType="AllPointsTransportDataModel.Truck" />
           <EntitySet Name="vwDispatch_New" EntityType="AllPointsTransportDataModel.vwDispatch_New" />
           <EntitySet Name="vwDispatch_Progress" EntityType="AllPointsTransportDataModel.vwDispatch_Progress" />
           <EntitySet Name="vwPopulateBillToes" EntityType="AllPointsTransportDataModel.vwPopulateBillTo" />
@@ -1444,8 +1421,6 @@ warning 6002: The table/view 'AllPointsTransport.APTAdmin.vwPopulateOriginDestin
           <EntitySet Name="vwPopulateDrivers" EntityType="AllPointsTransportDataModel.vwPopulateDriver" />
           <EntitySet Name="vwPopulateEquipmentProviders" EntityType="AllPointsTransportDataModel.vwPopulateEquipmentProvider" />
           <EntitySet Name="vwPopulateOriginDestinations" EntityType="AllPointsTransportDataModel.vwPopulateOriginDestination" />
-          <EntitySet Name="AgentCodes" EntityType="AllPointsTransportDataModel.AgentCode" />
-          <EntitySet Name="ContactAgentCodes" EntityType="AllPointsTransportDataModel.ContactAgentCode" />
           </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -1458,6 +1433,14 @@ warning 6002: The table/view 'AllPointsTransport.APTAdmin.vwPopulateOriginDestin
           <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
           <Property Type="Int32" Name="OwnerID" Nullable="false" />
         </ComplexType>
+        <EntityType Name="AgentCode">
+          <Key>
+            <PropertyRef Name="AgentCodeID" />
+          </Key>
+          <Property Name="AgentCodeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AgentCode1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+        </EntityType>
         <EntityType Name="Contact">
           <Key>
             <PropertyRef Name="ContactID" />
@@ -1680,6 +1663,30 @@ warning 6002: The table/view 'AllPointsTransport.APTAdmin.vwPopulateOriginDestin
           <Property Name="DateUpdated" Type="DateTime" Precision="0" />
           <Property Name="UpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="Truck">
+          <Key>
+            <PropertyRef Name="TruckID" />
+          </Key>
+          <Property Name="TruckID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Active" Type="Boolean" />
+          <Property Name="TruckNum" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Year" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Make" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Model" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="VIN" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="LicensePlate" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Color" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="TitleOwner" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="TruckPayPct" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="FSDeductionPct" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Referral" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ReferralPct" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="DateCreated" Type="DateTime" Precision="0" />
+          <Property Name="CreatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="DateUpdated" Type="DateTime" Precision="0" />
+          <Property Name="UpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
         <EntityType Name="WOLineItem">
           <Key>
             <PropertyRef Name="WorkOrderLineItemID" />
@@ -1761,6 +1768,14 @@ warning 6002: The table/view 'AllPointsTransport.APTAdmin.vwPopulateOriginDestin
           <Property Name="CreatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="DateUpdated" Type="DateTime" Precision="0" />
           <Property Name="UpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ContactAgentCode">
+          <Key>
+            <PropertyRef Name="AgentCodeID" />
+            <PropertyRef Name="ContactID" />
+          </Key>
+          <Property Name="AgentCodeID" Type="Int32" Nullable="false" />
+          <Property Name="ContactID" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="Employee">
           <Key>
@@ -1895,31 +1910,6 @@ warning 6002: The table/view 'AllPointsTransport.APTAdmin.vwPopulateOriginDestin
           <Property Name="Amount" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="Fee" Type="Boolean" />
           <Property Name="PayDriver" Type="Boolean" />
-          <Property Name="DateCreated" Type="DateTime" Precision="0" />
-          <Property Name="CreatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="DateUpdated" Type="DateTime" Precision="0" />
-          <Property Name="UpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="Truck">
-          <Key>
-            <PropertyRef Name="ID" />
-            <PropertyRef Name="TruckNum" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
-          <Property Name="Active" Type="Boolean" />
-          <Property Name="TruckNum" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="Year" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="Make" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="Model" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="VIN" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="LicensePlate" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="State" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="Color" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="TitleOwner" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="TruckPayPct" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="FSDeductionPct" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="Referral" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="ReferralPct" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="DateCreated" Type="DateTime" Precision="0" />
           <Property Name="CreatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="DateUpdated" Type="DateTime" Precision="0" />
@@ -2278,28 +2268,21 @@ warning 6002: The table/view 'AllPointsTransport.APTAdmin.vwPopulateOriginDestin
           <Property Name="LastUpdated" Type="DateTime" Precision="3" />
           <Property Name="UpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="AgentCode">
-          <Key>
-            <PropertyRef Name="AgentCodeID" />
-          </Key>
-          <Property Name="AgentCodeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="AgentCode1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Description" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="ContactAgentCode">
-          <Key>
-            <PropertyRef Name="AgentCodeID" />
-            <PropertyRef Name="ContactID" />
-          </Key>
-          <Property Name="AgentCodeID" Type="Int32" Nullable="false" />
-          <Property Name="ContactID" Type="Int32" Nullable="false" />
-        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
     <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="AllPointsTransportDataModelStoreContainer" CdmEntityContainer="AllPointsTransportEntities">
+          <EntitySetMapping Name="AgentCodes">
+            <EntityTypeMapping TypeName="AllPointsTransportDataModel.AgentCode">
+              <MappingFragment StoreEntitySet="AgentCodes">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="AgentCode1" ColumnName="AgentCode" />
+                <ScalarProperty Name="AgentCodeID" ColumnName="AgentCodeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Contacts">
             <EntityTypeMapping TypeName="AllPointsTransportDataModel.Contact">
               <MappingFragment StoreEntitySet="Contacts">
@@ -2528,6 +2511,31 @@ warning 6002: The table/view 'AllPointsTransport.APTAdmin.vwPopulateOriginDestin
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Trucks">
+            <EntityTypeMapping TypeName="AllPointsTransportDataModel.Truck">
+              <MappingFragment StoreEntitySet="Trucks">
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="ReferralPct" ColumnName="ReferralPct" />
+                <ScalarProperty Name="Referral" ColumnName="Referral" />
+                <ScalarProperty Name="FSDeductionPct" ColumnName="FSDeductionPct" />
+                <ScalarProperty Name="TruckPayPct" ColumnName="TruckPayPct" />
+                <ScalarProperty Name="TitleOwner" ColumnName="TitleOwner" />
+                <ScalarProperty Name="Color" ColumnName="Color" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="LicensePlate" ColumnName="LicensePlate" />
+                <ScalarProperty Name="VIN" ColumnName="VIN" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="Make" ColumnName="Make" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="TruckNum" ColumnName="TruckNum" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="TruckID" ColumnName="TruckID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="WOLineItems">
             <EntityTypeMapping TypeName="AllPointsTransportDataModel.WOLineItem">
               <MappingFragment StoreEntitySet="WOLineItems">
@@ -2609,6 +2617,14 @@ warning 6002: The table/view 'AllPointsTransport.APTAdmin.vwPopulateOriginDestin
                 <ScalarProperty Name="Completed" ColumnName="Completed" />
                 <ScalarProperty Name="WorkOrderNo" ColumnName="WorkOrderNo" />
                 <ScalarProperty Name="WorkOrderID" ColumnName="WorkOrderID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ContactAgentCodes">
+            <EntityTypeMapping TypeName="AllPointsTransportDataModel.ContactAgentCode">
+              <MappingFragment StoreEntitySet="ContactAgentCodes">
+                <ScalarProperty Name="ContactID" ColumnName="ContactID" />
+                <ScalarProperty Name="AgentCodeID" ColumnName="AgentCodeID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2752,31 +2768,6 @@ warning 6002: The table/view 'AllPointsTransport.APTAdmin.vwPopulateOriginDestin
                 <ScalarProperty Name="BillingItem" ColumnName="BillingItem" />
                 <ScalarProperty Name="RowOrder" ColumnName="RowOrder" />
                 <ScalarProperty Name="TemplateName" ColumnName="TemplateName" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Trucks">
-            <EntityTypeMapping TypeName="AllPointsTransportDataModel.Truck">
-              <MappingFragment StoreEntitySet="Trucks">
-                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
-                <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
-                <ScalarProperty Name="ReferralPct" ColumnName="ReferralPct" />
-                <ScalarProperty Name="Referral" ColumnName="Referral" />
-                <ScalarProperty Name="FSDeductionPct" ColumnName="FSDeductionPct" />
-                <ScalarProperty Name="TruckPayPct" ColumnName="TruckPayPct" />
-                <ScalarProperty Name="TitleOwner" ColumnName="TitleOwner" />
-                <ScalarProperty Name="Color" ColumnName="Color" />
-                <ScalarProperty Name="State" ColumnName="State" />
-                <ScalarProperty Name="LicensePlate" ColumnName="LicensePlate" />
-                <ScalarProperty Name="VIN" ColumnName="VIN" />
-                <ScalarProperty Name="Model" ColumnName="Model" />
-                <ScalarProperty Name="Make" ColumnName="Make" />
-                <ScalarProperty Name="Year" ColumnName="Year" />
-                <ScalarProperty Name="TruckNum" ColumnName="TruckNum" />
-                <ScalarProperty Name="Active" ColumnName="Active" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -3134,23 +3125,6 @@ warning 6002: The table/view 'AllPointsTransport.APTAdmin.vwPopulateOriginDestin
                 <ScalarProperty Name="Company" ColumnName="Company" />
                 <ScalarProperty Name="Active" ColumnName="Active" />
                 <ScalarProperty Name="ContactID" ColumnName="ContactID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="AgentCodes">
-            <EntityTypeMapping TypeName="AllPointsTransportDataModel.AgentCode">
-              <MappingFragment StoreEntitySet="AgentCodes">
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="AgentCode1" ColumnName="AgentCode" />
-                <ScalarProperty Name="AgentCodeID" ColumnName="AgentCodeID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ContactAgentCodes">
-            <EntityTypeMapping TypeName="AllPointsTransportDataModel.ContactAgentCode">
-              <MappingFragment StoreEntitySet="ContactAgentCodes">
-                <ScalarProperty Name="ContactID" ColumnName="ContactID" />
-                <ScalarProperty Name="AgentCodeID" ColumnName="AgentCodeID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

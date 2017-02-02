@@ -27,14 +27,17 @@ namespace AllPointsTransport.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<AgentCode> AgentCodes { get; set; }
         public virtual DbSet<Contact> Contacts { get; set; }
         public virtual DbSet<DriverPay> DriverPays { get; set; }
         public virtual DbSet<Driver> Drivers { get; set; }
         public virtual DbSet<Payroll> Payrolls { get; set; }
         public virtual DbSet<TemplatesDriverPay> TemplatesDriverPays { get; set; }
         public virtual DbSet<TemplatesWO> TemplatesWOes { get; set; }
+        public virtual DbSet<Truck> Trucks { get; set; }
         public virtual DbSet<WOLineItem> WOLineItems { get; set; }
         public virtual DbSet<WorkOrder> WorkOrders { get; set; }
+        public virtual DbSet<ContactAgentCode> ContactAgentCodes { get; set; }
         public virtual DbSet<Employee> Employees { get; set; }
         public virtual DbSet<RowColor> RowColors { get; set; }
         public virtual DbSet<RowColorsDriver> RowColorsDrivers { get; set; }
@@ -42,7 +45,6 @@ namespace AllPointsTransport.Models
         public virtual DbSet<Setting> Settings { get; set; }
         public virtual DbSet<TaskManagement> TaskManagements { get; set; }
         public virtual DbSet<TemplatesWOLineItem> TemplatesWOLineItems { get; set; }
-        public virtual DbSet<Truck> Trucks { get; set; }
         public virtual DbSet<vwDispatch_New> vwDispatch_New { get; set; }
         public virtual DbSet<vwDispatch_Progress> vwDispatch_Progress { get; set; }
         public virtual DbSet<vwPopulateBillTo> vwPopulateBillToes { get; set; }
@@ -51,8 +53,6 @@ namespace AllPointsTransport.Models
         public virtual DbSet<vwPopulateDriver> vwPopulateDrivers { get; set; }
         public virtual DbSet<vwPopulateEquipmentProvider> vwPopulateEquipmentProviders { get; set; }
         public virtual DbSet<vwPopulateOriginDestination> vwPopulateOriginDestinations { get; set; }
-        public virtual DbSet<AgentCode> AgentCodes { get; set; }
-        public virtual DbSet<ContactAgentCode> ContactAgentCodes { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {

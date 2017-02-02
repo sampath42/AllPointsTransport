@@ -203,6 +203,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ContactsController.cs" />
     <Compile Include="Controllers\DispatchController.cs" />
+    <Compile Include="Controllers\DriversController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\TruckPayController.cs" />
     <Compile Include="Controllers\TrucksController.cs" />
@@ -401,7 +402,6 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Trucks\Index.cshtml" />
-    <Content Include="Views\Trucks\_TruckViewPartial.cshtml" />
     <Content Include="Views\WorkOrders\Index.cshtml" />
     <Content Include="Views\WorkOrders\_WorkOrderViewPartial.cshtml" />
     <Content Include="Views\WorkOrders\WorkOrderExternalEditFormView.cshtml" />
@@ -413,6 +413,9 @@
     <Content Include="Views\TruckPay\Index.cshtml" />
     <Content Include="Views\Contacts\Index.cshtml" />
     <Content Include="Views\Contacts\_ContactsGridViewPartial.cshtml" />
+    <Content Include="Views\Trucks\_GridView1Partial.cshtml" />
+    <Content Include="Views\Drivers\Index.cshtml" />
+    <Content Include="Views\Drivers\_DriversGridViewPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
